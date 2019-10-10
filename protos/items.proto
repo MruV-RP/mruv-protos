@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package mruv;
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+import "services.proto";
+
+//Items
+message CreateItemRequest {
+    Item item = 1;
+}
+message CreateItemResponse {
+    int64 itemId = 1;
+}
+
+message DestroyItemRequest {
+    int64 itemId = 1;
+}
+message DestroyItemResponse {
+    bool success = 1;
+}
+
+message UpdateItemRequest {
+    Item item = 1;
+}
+message UpdateItemResponse {
+    bool success = 1;
+}
+
+message GetItemRequest {
+    int64 itemId = 1;
+}
+message GetItemResponse {
+    Item item = 1;
+}
+
+message Item {
+    int64 id = 1;
+    string name = 2;
+}
+
+service MruVItemService {
+    rpc Create (CreateItemRequest) returns (CreateItemResponse) {
+        option (google.api.http) = {
+            post: "/items/v1"
+        };
+    }
+
+    rpc Destroy (DestroyItemRequest) returns (DestroyItemResponse) {
+        option (google.api.http) = {
+            delete: "/items/v1/{itemId}"
+        };
+    }
+
+    rpc Update (UpdateItemRequest) returns (UpdateItemResponse) {
+        option (google.api.http) = {
+            patch: "/items/v1/{item.id}"
+        };
+    }
+
+    rpc Get (GetItemRequest) returns (GetItemResponse) {
+        option (google.api.http) = {
+            get: "/items/v1/{itemId}"
+        };
+    }
+
+    //Service status
+    rpc GetServiceStatus (ServiceStatusRequest) returns (ServiceStatusResponse) {
+        option (google.api.http) = {
+            get: "/items/v1/status"
+        };
+    }
+
+    rpc GetServiceVersion (VersionRequest) returns (VersionResponse) {
+        option (google.api.http) = {
+            get: "/items/v1/version"
+        };
+    }
+}

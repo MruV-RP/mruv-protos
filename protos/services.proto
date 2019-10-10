@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package mruv;
+
+message ServiceStatusRequest {}
+message ServiceStatusResponse {
+    string status = 1;
+}
+
+message VersionRequest {}
+message VersionResponse {
+    string version = 1;
+    string buildDate = 2;
+    string commit = 3;
+    string osArch = 4;
+}

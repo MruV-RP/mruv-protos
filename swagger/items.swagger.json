@@ -1,0 +1,215 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "items.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/items/v1": {
+      "post": {
+        "operationId": "Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mruvCreateItemResponse"
+            }
+          }
+        },
+        "tags": [
+          "MruVItemService"
+        ]
+      }
+    },
+    "/items/v1/status": {
+      "get": {
+        "summary": "Service status",
+        "operationId": "GetServiceStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mruvServiceStatusResponse"
+            }
+          }
+        },
+        "tags": [
+          "MruVItemService"
+        ]
+      }
+    },
+    "/items/v1/version": {
+      "get": {
+        "operationId": "GetServiceVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mruvVersionResponse"
+            }
+          }
+        },
+        "tags": [
+          "MruVItemService"
+        ]
+      }
+    },
+    "/items/v1/{item.id}": {
+      "patch": {
+        "operationId": "Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mruvUpdateItemResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "item.id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "MruVItemService"
+        ]
+      }
+    },
+    "/items/v1/{itemId}": {
+      "get": {
+        "operationId": "Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mruvGetItemResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "MruVItemService"
+        ]
+      },
+      "delete": {
+        "operationId": "Destroy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mruvDestroyItemResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "MruVItemService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "mruvCreateItemResponse": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "mruvDestroyItemResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "mruvGetItemResponse": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/mruvItem"
+        }
+      }
+    },
+    "mruvItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "mruvServiceStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "mruvUpdateItemResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "mruvVersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "buildDate": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        },
+        "osArch": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "characters.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/characters/v1/status": {
+      "get": {
+        "operationId": "GetServiceStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mruvServiceStatusResponse"
+            }
+          }
+        },
+        "tags": [
+          "MruVCharactersService"
+        ]
+      }
+    },
+    "/characters/v1/version": {
+      "get": {
+        "operationId": "GetServiceVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mruvVersionResponse"
+            }
+          }
+        },
+        "tags": [
+          "MruVCharactersService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "mruvServiceStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "mruvVersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "buildDate": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        },
+        "osArch": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
