@@ -1,0 +1,7 @@
+os: linux
+
+services:
+  - docker
+
+script:
+- ./build.sh

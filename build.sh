@@ -1,12 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script is meant to build and compile every protocolbuffer for each
 # service declared in this repository (as defined by sub-directories).
 # It compiles using docker containers based on Namely's protoc image
 # seen here: https://github.com/namely/docker-protoc
 
+set -ex
+
 
 REPOPATH=${REPOPATH-/opt/protolangs}
-CURRENT_BRANCH=${CIRCLE_BRANCH-"branch-not-available"}
+CURRENT_BRANCH="master" #TODO: change to travis branch
 
 # Helper for adding a directory to the stack and echoing the result
 function enterDir {
@@ -44,10 +46,10 @@ function buildProtoForTypes {
 
       rm -rf $REPOPATH/$reponame
 
-      echo "Cloning repo: git@github.com:MruV-RP/$reponame.git"
+      echo "Cloning repo: https://github.com/MruV-RP/$reponame.git"
 
       # Clone the repository down and set the branch to the automated one
-      git clone git@github.com:MruV-RP/$reponame.git $REPOPATH/$reponame
+      git clone https://github.com/MruV-RP/$reponame.git $REPOPATH/$reponame
       setupBranch $REPOPATH/$reponame
 
       # Use the docker container for the language we care about and compile
@@ -108,3 +110,4 @@ function commitAndPush {
 }
 
 buildAll
+pause
