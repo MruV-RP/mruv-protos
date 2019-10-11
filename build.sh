@@ -7,7 +7,7 @@
 set -ex
 
 
-REPOPATH=${REPOPATH-/opt/protolangs}
+REPOPATH=${REPOPATH-/home/gtav/tmp}
 CURRENT_BRANCH="master" #TODO: change to travis branch
 
 # Helper for adding a directory to the stack and echoing the result
@@ -53,11 +53,11 @@ function buildProtoForTypes {
       setupBranch $REPOPATH/$reponame
 
       # Use the docker container for the language we care about and compile
-      docker run -v `pwd`:/defs namely/protoc-$lang
+      docker run -v `pwd`:/defs namely/protoc-all -d /defs -i /defs/services -l $lang
 
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
-      cp -R pb-$lang/* $REPOPATH/$reponame/
+      cp -R gen/pb-$lang/* $REPOPATH/$reponame/
 
       commitAndPush $REPOPATH/$reponame
     done < .protolangs
@@ -110,4 +110,3 @@ function commitAndPush {
 }
 
 buildAll
-pause
