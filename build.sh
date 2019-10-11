@@ -7,7 +7,7 @@
 set -ex
 
 MAIN_DIR=`pwd`
-REPOPATH=${REPOPATH-/home/gtav/tmp}
+REPOPATH=${REPOPATH-/tmp}
 CURRENT_BRANCH="master" #TODO: change to travis branch
 
 # Helper for adding a directory to the stack and echoing the result
@@ -41,17 +41,16 @@ function buildProtoForTypes {
   target=${1%/}
 
   if [ -f .protolangs ]; then
+    reponame="mruv-pb-$lang"
+    rm -rf $REPOPATH/$reponame
+
+    echo "Cloning repo: https://github.com/MruV-RP/$reponame.git"
+
+    # Clone the repository down and set the branch to the automated one
+    git clone https://github.com/MruV-RP/$reponame.git $REPOPATH/$reponame
+    setupBranch $REPOPATH/$reponame
+
     while read lang; do
-      reponame="mruv-pb-$lang"
-
-      rm -rf $REPOPATH/$reponame
-
-      echo "Cloning repo: https://github.com/MruV-RP/$reponame.git"
-
-      # Clone the repository down and set the branch to the automated one
-      git clone https://github.com/MruV-RP/$reponame.git $REPOPATH/$reponame
-      setupBranch $REPOPATH/$reponame
-
       # Use the docker container for the language we care about and compile
       docker run -v $MAIN_DIR:/defs namely/protoc-all -d /defs/$target -i /defs -l $lang
 
@@ -59,8 +58,9 @@ function buildProtoForTypes {
       # that we care about
       cp -R ../gen/pb-$lang/* $REPOPATH/$reponame/
 
-      commitAndPush $REPOPATH/$reponame
     done < .protolangs
+    
+    commitAndPush $REPOPATH/$reponame
   fi
 }
 
