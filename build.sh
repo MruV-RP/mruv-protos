@@ -6,7 +6,7 @@
 
 set -ex
 
-
+MAIN_DIR=`pwd`
 REPOPATH=${REPOPATH-/home/gtav/tmp}
 CURRENT_BRANCH="master" #TODO: change to travis branch
 
@@ -53,7 +53,7 @@ function buildProtoForTypes {
       setupBranch $REPOPATH/$reponame
 
       # Use the docker container for the language we care about and compile
-      docker run -v `pwd`:/defs namely/protoc-all -d /defs -i /defs -l $lang
+      docker run -v $MAIN_DIR:/defs namely/protoc-all -d /defs/$target -i /defs -l $lang
 
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
