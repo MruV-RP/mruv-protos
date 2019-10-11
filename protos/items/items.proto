@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package mruv;
 
+option go_package = "github.com/MruV-RP/mruv-pb-go/items";
+
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 import "common/health.proto";
 
@@ -10,11 +12,11 @@ message CreateItemRequest {
     Item item = 1;
 }
 message CreateItemResponse {
-    int64 itemId = 1;
+    int64 item_id = 1;
 }
 
 message DestroyItemRequest {
-    int64 itemId = 1;
+    int64 item_id = 1;
 }
 message DestroyItemResponse {
     bool success = 1;
@@ -28,7 +30,7 @@ message UpdateItemResponse {
 }
 
 message GetItemRequest {
-    int64 itemId = 1;
+    int64 item_id = 1;
 }
 message GetItemResponse {
     Item item = 1;
@@ -48,7 +50,7 @@ service MruVItemService {
 
     rpc Destroy (DestroyItemRequest) returns (DestroyItemResponse) {
         option (google.api.http) = {
-            delete: "/items/v1/{itemId}"
+            delete: "/items/v1/{item_id}"
         };
     }
 
@@ -60,7 +62,7 @@ service MruVItemService {
 
     rpc Get (GetItemRequest) returns (GetItemResponse) {
         option (google.api.http) = {
-            get: "/items/v1/{itemId}"
+            get: "/items/v1/{item_id}"
         };
     }
 

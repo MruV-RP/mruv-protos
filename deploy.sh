@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # This script is meant to build and compile every protocolbuffer for each
 # service declared in this repository (as defined by sub-directories).
-# It compiles using docker containers based on Namely's protoc image
 # seen here: https://github.com/namely/docker-protoc
 
 set -ex
@@ -42,7 +41,7 @@ function buildProtoForTypes {
 
   if [ -f .protolangs ]; then
     while read lang; do
-      reponame="mruv-pb-$lang"
+      reponame="mruv-pb-$target-$lang"
 
       rm -rf $REPOPATH/$reponame
 

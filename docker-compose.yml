@@ -1,24 +1,17 @@
 version: '3'
 
 services:
-  generate-docs-and-swagger:
+  generate:
     build: .
     volumes:
-      - ./protos:/protos:ro
-      - ./docs:/docs
-      - ./swagger:/swagger
+      - ./protos:/protos
+      - ./gen:/gen
     
   generate-csharp:
     image: namely/protoc-all
     volumes:
       - .:/defs
     command: "-d /defs/protos -l csharp"
-
-  generate-go:
-    image: namely/protoc-all
-    volumes:
-      - .:/defs
-    command: "-d /defs/protos -l go"
 
   generate-node:
     image: namely/protoc-all
@@ -32,8 +25,9 @@ services:
       - .:/defs
     command: "-d /defs/protos -l web"
 
+  # descriptor & lint & docs
   generate-descriptor-set:
     image: namely/protoc-all
     volumes:
       - .:/defs
-    command: "-d /defs/protos -l descriptor_set"
+    command: "-d /defs/protos -l descriptor_set --descr-include-imports --descr-include-source-info --with-docs markdown,docs.md --lint"

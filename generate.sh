@@ -1,4 +1,7 @@
 #!/bin/bash
-set -euo pipefail
+set -e
 
-protoc -I/opt/include -I/protos/ --swagger_out=logtostderr=true:/swagger --doc_out=/docs --doc_opt=markdown,docs.md /protos/*.proto
+mkdir -p /gen/swagger
+mkdir -p /gen/pb-go
+
+for x in /protos/**/*.proto; do protoc -I/opt/include --proto_path=/protos --swagger_out=logtostderr=true:/gen/swagger --go_out=plugins=grpc,paths=source_relative:/gen/pb-go $x; done

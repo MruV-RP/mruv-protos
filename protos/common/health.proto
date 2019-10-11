@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package mruv;
 
+option go_package = "github.com/MruV-RP/mruv-pb-go/health";
+
 message ServiceStatusRequest {}
 message ServiceStatusResponse {
     string status = 1;
@@ -10,7 +12,7 @@ message ServiceStatusResponse {
 message VersionRequest {}
 message VersionResponse {
     string version = 1;
-    string buildDate = 2;
+    string build_date = 2;
     string commit = 3;
-    string osArch = 4;
+    string os_arch = 4;
 }
