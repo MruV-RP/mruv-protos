@@ -3,7 +3,7 @@ syntax = "proto3";
 package mruv;
 
 import "google/api/annotations.proto";
-import "services.proto";
+import "common/health.proto";
 
 service MruVCharactersService {
     rpc GetServiceStatus(ServiceStatusRequest) returns (ServiceStatusResponse) {

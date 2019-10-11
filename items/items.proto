@@ -3,7 +3,7 @@ syntax = "proto3";
 package mruv;
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "services.proto";
+import "common/health.proto";
 
 //Items
 message CreateItemRequest {
