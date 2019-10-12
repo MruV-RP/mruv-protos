@@ -25,7 +25,7 @@ If you searching for generated Mruv gRPC API packages, you can find them in thee
 
 ## Hooks
 
-This repository uses git hooks for executing the generate & propagate process afer each commit.
+This repository uses git hooks for executing the generate & propagate process before pushing changes.
 To use this functionality, type:
 
 ```sh
