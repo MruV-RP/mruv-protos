@@ -11,20 +11,20 @@ CURRENT_BRANCH="master" #TODO: change to travis branch
 
 # Helper for adding a directory to the stack and echoing the result
 function enterDir {
-  echo "Entering $1"
+  echo -e "\e[32mEntering \e[92m$1\e[0m"
   pushd $1 > /dev/null
 }
 
 # Helper for popping a directory off the stack and echoing the result
 function leaveDir {
-  echo "Leaving `pwd`"
+  echo -e "\e[32mLeaving \e[92m`pwd`\e[0m"
   popd > /dev/null
 }
 
 # Enters the directory and starts the propagate process
 function propagateDir {
   currentDir="$1"
-  echo "Propagating directory \"$currentDir\""
+  echo -e "\e[32mPropagating directory \e[92m\"$currentDir\"\e[0m"
 
   enterDir $currentDir
 
@@ -41,7 +41,7 @@ function propagateFiles {
     if git-remote-url-reachable "https://github.com/MruV-RP/$reponame.git"; then
         rm -rf $REPOPATH/$reponame
 
-        echo "Cloning repo: https://github.com/MruV-RP/$reponame.git"
+        echo -e "\e[32mCloning repo: \e[92mhttps://github.com/MruV-RP/$reponame.git\e[0m"
 
         # Clone the repository down and set the branch to the automated one
         git clone https://github.com/MruV-RP/$reponame.git $REPOPATH/$reponame
@@ -58,7 +58,7 @@ function propagateFiles {
 # Finds all directories in the repository and iterates through them calling the
 # propagate process for each one
 function propagateAll {
-  echo "Propagating generated code"
+  echo -e "\e[32mPropagating generated code\e[0m"
   cd gen
   mkdir -p $REPOPATH
   for d in */; do
@@ -69,7 +69,7 @@ function propagateAll {
 function setupBranch {
   enterDir $1
 
-  echo "Creating branch"
+  echo -e "\e[32mCreating branch\e[0m"
 
   if ! git show-branch $CURRENT_BRANCH; then
     git branch $CURRENT_BRANCH
@@ -78,7 +78,7 @@ function setupBranch {
   git checkout $CURRENT_BRANCH
 
   if git ls-remote --heads --exit-code origin $CURRENT_BRANCH; then
-    echo "Branch exists on remote, pulling latest changes"
+    echo -e "\e[32mBranch exists on remote, pulling latest changes\e[0m"
     git pull origin $CURRENT_BRANCH
   fi
 
@@ -95,7 +95,7 @@ function commitAndPush {
     git commit -m "Auto Creation of Proto"
     git push origin HEAD
   else
-    echo "No changes detected for $1"
+    echo -e "\e[32mNo changes detected for $1\e[0m"
   fi
 
   leaveDir
@@ -106,4 +106,4 @@ function git-remote-url-reachable {
 }
 
 propagateAll
-echo "Propated files successfully"
+echo -e "\e[32mPropated files successfully\e[0m"
