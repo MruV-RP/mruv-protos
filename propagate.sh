@@ -3,7 +3,7 @@
 # service declared in this repository (as defined by sub-directories).
 # seen here: https://github.com/namely/docker-protoc
 
-set -ex
+set -e
 
 MAIN_DIR=`pwd`
 REPOPATH=${REPOPATH-/tmp}

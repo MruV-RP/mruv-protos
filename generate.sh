@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 
 mkdir -p /gen/pb-docs
 mkdir -p /gen/pb-swagger
