@@ -21,55 +21,48 @@ function leaveDir {
   popd > /dev/null
 }
 
-# Enters the directory and starts the build / compile process for the services
-# protobufs
-function buildDir {
+# Enters the directory and starts the propagate process
+function propagateDir {
   currentDir="$1"
-  echo "Building directory \"$currentDir\""
+  echo "Propagating directory \"$currentDir\""
 
   enterDir $currentDir
 
-  buildProtoForTypes $currentDir
+  propagateFiles $currentDir
 
   leaveDir
 }
 
-# Iterates through all of the languages listed in the services .protolangs file
-# and compiles them individually
-function buildProtoForTypes {
-  target=${1%/}
+function propagateFiles {
+    target=${1%/}
 
-  if [ -f .protolangs ]; then
-    while read lang; do
-      reponame="mruv-pb-$target-$lang"
+    reponame="mruv-$target"
 
-      rm -rf $REPOPATH/$reponame
+    if git-remote-url-reachable "https://github.com/MruV-RP/$reponame.git"; then
+        rm -rf $REPOPATH/$reponame
 
-      echo "Cloning repo: https://github.com/MruV-RP/$reponame.git"
+        echo "Cloning repo: https://github.com/MruV-RP/$reponame.git"
 
-      # Clone the repository down and set the branch to the automated one
-      git clone https://github.com/MruV-RP/$reponame.git $REPOPATH/$reponame
-      setupBranch $REPOPATH/$reponame
+        # Clone the repository down and set the branch to the automated one
+        git clone https://github.com/MruV-RP/$reponame.git $REPOPATH/$reponame
+        setupBranch $REPOPATH/$reponame
 
-      # Use the docker container for the language we care about and compile
-      docker run -v $MAIN_DIR:/defs namely/protoc-all -d /defs/$target -i /defs -l $lang
+        # Copy the generated files into the repository
+        # that we care about
+        cp -R ./* $REPOPATH/$reponame/
 
-      # Copy the generated files out of the pb-* path into the repository
-      # that we care about
-      cp -R ../gen/pb-$lang/* $REPOPATH/$reponame/
-
-      commitAndPush $REPOPATH/$reponame
-    done < .protolangs
-  fi
+        commitAndPush $REPOPATH/$reponame
+    fi
 }
 
 # Finds all directories in the repository and iterates through them calling the
-# compile process for each one
-function buildAll {
-  echo "Buidling service's protocol buffers"
+# propagate process for each one
+function propagateAll {
+  echo "Propagating generated code"
+  cd gen
   mkdir -p $REPOPATH
   for d in */; do
-    buildDir $d
+    propagateDir $d
   done
 }
 
@@ -108,4 +101,9 @@ function commitAndPush {
   leaveDir
 }
 
-buildAll
+function git-remote-url-reachable {
+    git ls-remote "$1" CHECK_GIT_REMOTE_URL_REACHABILITY >/dev/null 2>&1
+}
+
+propagateAll
+echo "Propated files successfully"
