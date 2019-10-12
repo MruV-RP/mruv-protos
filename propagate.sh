@@ -106,4 +106,4 @@ function git-remote-url-reachable {
 }
 
 propagateAll
-echo -e "\e[32mPropated files successfully\e[0m"
+echo -e "\e[32mThe files has been propagated successfully\e[0m"
