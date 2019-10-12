@@ -25,9 +25,9 @@ services:
       - .:/defs
     command: "-d /defs/protos -l web"
 
-  # descriptor & lint & docs
+  # descriptor & lint
   generate-descriptor-set:
     image: namely/protoc-all
     volumes:
       - .:/defs
-    command: "-d /defs/protos -l descriptor_set --descr-include-imports --descr-include-source-info --with-docs markdown,docs.md --lint"
+    command: "-d /defs/protos -l descriptor_set --descr-include-imports --descr-include-source-info --lint"
