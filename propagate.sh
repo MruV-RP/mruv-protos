@@ -56,7 +56,7 @@ function propagateFiles {
         # Copy the generated files into the repository
         # that we care about
         cp -R ./* $REPOPATH/$reponame/
-		echo $VERSION >> $REPOPATH/$reponame/VERSION.txt
+	echo $VERSION > $REPOPATH/$reponame/VERSION.txt
 
         commitAndPush $REPOPATH/$reponame
 	else
