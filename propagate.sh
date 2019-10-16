@@ -100,8 +100,10 @@ function commitAndPush {
   if ! git diff --exit-code > /dev/null; then
     git add .
     git commit -m "Auto Creation of Proto $VERSION"
-	git tag -a "v$VERSION" -m "Auto generated proto v$VERSION"
-    git push origin "v$VERSION"
+	if [ $CURRENT_BRANCH  = "master" ]; then
+		git tag -a "v$VERSION" -m "Auto generated proto v$VERSION"
+	fi
+    git push origin HEAD --tags
   else
     echo -e "\e[32mNo changes detected for $1\e[0m"
   fi
