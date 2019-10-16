@@ -7,7 +7,7 @@ set -e
 
 MAIN_DIR=`pwd`
 REPOPATH=${REPOPATH-/tmp}
-CURRENT_BRANCH="master"
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 VERSION=$1
 
 #Version parameter
