@@ -7,7 +7,13 @@ set -e
 
 MAIN_DIR=`pwd`
 REPOPATH=${REPOPATH-/tmp}
-CURRENT_BRANCH="master" #TODO: change to travis branch
+CURRENT_BRANCH="master"
+VERSION=$1
+
+#Version parameter
+if [[ ! $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+	echo "Version x.x.x parameter required." >&2; exit 1; 
+fi
 
 # Helper for adding a directory to the stack and echoing the result
 function enterDir {
@@ -50,6 +56,7 @@ function propagateFiles {
         # Copy the generated files into the repository
         # that we care about
         cp -R ./* $REPOPATH/$reponame/
+		echo $VERSION >> $REPOPATH/$reponame/VERSION.txt
 
         commitAndPush $REPOPATH/$reponame
     fi
@@ -92,8 +99,9 @@ function commitAndPush {
 
   if ! git diff --exit-code > /dev/null; then
     git add .
-    git commit -m "Auto Creation of Proto"
-    git push origin HEAD
+    git commit -m "Auto Creation of Proto $VERSION"
+	git tag -a "v$VERSION" -m "Auto generated proto v$VERSION"
+    git push origin "v$VERSION"
   else
     echo -e "\e[32mNo changes detected for $1\e[0m"
   fi
