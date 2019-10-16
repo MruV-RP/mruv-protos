@@ -60,7 +60,7 @@ function propagateFiles {
 
         commitAndPush $REPOPATH/$reponame
 	else
-        echo -e "\e[31mRepository \e[92mhttps://github.com/MruV-RP/$reponame.git is unreachable\e[0m"
+        echo -e "\e[31mRepository \e[91mhttps://github.com/MruV-RP/$reponame.git \e[31mis unreachable\e[0m"
     fi
 }
 
