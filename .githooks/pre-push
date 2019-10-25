@@ -1,4 +1,4 @@
 #!/bin/bash
 
 docker-compose up
-./propagate.sh $(cat VERSION.txt)
+./propagate.sh

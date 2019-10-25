@@ -8,10 +8,10 @@ set -e
 MAIN_DIR=`pwd`
 REPOPATH=${REPOPATH-/tmp}
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-VERSION=$1
+VERSION=$(git describe)
 
 #Version parameter
-if [[ ! $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+if [[ ! $VERSION =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 	echo "Version x.x.x parameter required." >&2; exit 1; 
 fi
 
@@ -56,7 +56,6 @@ function propagateFiles {
         # Copy the generated files into the repository
         # that we care about
         cp -R ./* $REPOPATH/$reponame/
-	echo $VERSION > $REPOPATH/$reponame/VERSION.txt
 
         commitAndPush $REPOPATH/$reponame
 	else
