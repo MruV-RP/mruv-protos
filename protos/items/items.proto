@@ -6,76 +6,175 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/items";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 import "common/health.proto";
+import "items/items_model.proto";
 
-//Items
-message CreateItemRequest {
-    Item item = 1;
-}
-message CreateItemResponse {
-    int64 item_id = 1;
-}
-
-message DestroyItemRequest {
-    int64 item_id = 1;
-}
-message DestroyItemResponse {
-    bool success = 1;
-}
-
-message UpdateItemRequest {
-    Item item = 1;
-}
-message UpdateItemResponse {
-    bool success = 1;
-}
-
-message GetItemRequest {
-    int64 item_id = 1;
-}
-message GetItemResponse {
-    Item item = 1;
-}
-
-message Item {
+// Requests messages
+message ItemID {
     int64 id = 1;
-    string name = 2;
+}
+message ItemTypeID {
+    int32 id = 1;
+}
+message ContainerID {
+    int32 id = 1;
+}
+
+message GetItemsRequest {
+    int32 limit = 1;
+}
+message GetItemsResponse {
+    repeated Item items = 1;
+}
+
+message GetItemTypesRequest {
+    int32 limit = 1;
+}
+message GetItemTypesResponse {
+    repeated ItemType item_types = 1;
+}
+
+message GetContainersRequest {
+    int32 limit = 1;
+}
+message GetContainersResponse {
+    repeated Container containers = 1;
+}
+
+message PutItemRequest {
+    ContainerID container_id = 1;
+    ItemID item_id = 2;
+    oneof where {
+        Position position = 3;
+        int32 slot = 4;
+    }
+}
+
+message TakeItemRequest {
+    ItemID id = 1;
+}
+message TakeItemResponse {
+    Item item = 1;
+}
+
+message GetContainerItemsResponse {
+    repeated Item items = 1;
+}
+
+message RemoveItemRequest {
+    ContainerID container_id = 1;
+    ItemID item_id = 2;
 }
 
 service MruVItemService {
-    rpc Create (CreateItemRequest) returns (CreateItemResponse) {
+    //CRUD items
+    rpc CreateItem (Item) returns (ItemID) {
         option (google.api.http) = {
-            post: "/items/v1"
+            post: "/v1/items"
+        };
+    }
+    rpc GetItem (ItemID) returns (Item) {
+        option (google.api.http) = {
+            get: "/v1/items/{id}"
+        };
+    }
+    rpc UpdateItem (Item) returns (ItemID) {
+        option (google.api.http) = {
+            patch: "/v1/items/{id}"
+        };
+    }
+    rpc DeleteItem (ItemID) returns (ItemID) {
+        option (google.api.http) = {
+            delete: "/v1/items/{id}"
+        };
+    }
+    rpc GetItems(GetItemsRequest) returns (GetItemsResponse) {
+        option (google.api.http) = {
+            get: "/v1/items"
         };
     }
 
-    rpc Destroy (DestroyItemRequest) returns (DestroyItemResponse) {
+    //CRUD itemsTypes
+    rpc CreateItemType (ItemType) returns (ItemTypeID) {
         option (google.api.http) = {
-            delete: "/items/v1/{item_id}"
+            post: "/v1/itemTypes"
+        };
+    }
+    rpc GetItemType (ItemTypeID) returns (ItemType) {
+        option (google.api.http) = {
+            get: "/v1/itemTypes/{id}"
+        };
+    }
+    rpc UpdateItemType (ItemType) returns (ItemTypeID) {
+        option (google.api.http) = {
+            patch: "/v1/itemTypes/{id}"
+        };
+    }
+    rpc DeleteItemType (ItemTypeID) returns (ItemTypeID) {
+        option (google.api.http) = {
+            delete: "/v1/itemTypes/{id}"
+        };
+    }
+    rpc GetItemTypes(GetItemTypesRequest) returns (GetItemTypesResponse) {
+        option (google.api.http) = {
+            get: "/v1/itemTypes"
         };
     }
 
-    rpc Update (UpdateItemRequest) returns (UpdateItemResponse) {
+    //CRUD containers
+    rpc CreateContainer (Container) returns (ContainerID) {
         option (google.api.http) = {
-            patch: "/items/v1/{item.id}"
+            post: "/v1/containers"
+        };
+    }
+    rpc GetContainer (ContainerID) returns (Container) {
+        option (google.api.http) = {
+            get: "/v1/containers/{id}"
+        };
+    }
+    rpc UpdateContainer (Container) returns (ContainerID) {
+        option (google.api.http) = {
+            patch: "/v1/containers/{id}"
+        };
+    }
+    rpc DeleteContainer (ContainerID) returns (ContainerID) {
+        option (google.api.http) = {
+            delete: "/v1/containers/{id}"
+        };
+    }
+    rpc GetContainers(GetContainersRequest) returns (GetContainersResponse) {
+        option (google.api.http) = {
+            get: "/v1/containers"
         };
     }
 
-    rpc Get (GetItemRequest) returns (GetItemResponse) {
+    //Container Methods
+    rpc GetContainerItems(ContainerID) returns (GetContainerItemsResponse) {
         option (google.api.http) = {
-            get: "/items/v1/{item_id}"
+            get: "/v1/containers/{id}/items"
+        };
+    }
+
+    rpc RemoveContainerItem(RemoveItemRequest) returns (Item) {
+        option (google.api.http) = {
+            delete: "/v1/containers/{container_id.id}/items/{item_id.id}"
+        };
+    }
+
+    rpc PutItem(PutItemRequest) returns (ItemID) {
+        option (google.api.http) = {
+            put: "/v1/containers/{container_id.id}/items/{item_id.id}"
         };
     }
 
     //Service status
     rpc GetServiceStatus (ServiceStatusRequest) returns (ServiceStatusResponse) {
         option (google.api.http) = {
-            get: "/items/v1/status"
+            get: "/v1/items/status"
         };
     }
-
     rpc GetServiceVersion (VersionRequest) returns (VersionResponse) {
         option (google.api.http) = {
-            get: "/items/v1/version"
+            get: "/v1/items/version"
         };
     }
 }

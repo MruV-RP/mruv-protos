@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package mruv;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/groups";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+import "common/health.proto";
+import "groups/groups_model.proto";
+
+message GroupID {
+    int32 id = 1;
+}
+
+message GetGroupsRequest {
+    int32 limit = 1;
+}
+message GetGroupsResponse {
+    repeated Group groups = 1;
+}
+
+service MruVGroupsService {
+    //CRUD items
+    rpc CreateGroup (Group) returns (GroupID) {
+        option (google.api.http) = {
+            post: "/v1/groups"
+        };
+    }
+    rpc GetGroup (GroupID) returns (Group) {
+        option (google.api.http) = {
+            get: "/v1/groups/{id}"
+        };
+    }
+    rpc UpdateGroup (Group) returns (GroupID) {
+        option (google.api.http) = {
+            patch: "/v1/groups/{id}"
+        };
+    }
+    rpc DeleteGroup (GroupID) returns (GroupID) {
+        option (google.api.http) = {
+            delete: "/v1/groups/{id}"
+        };
+    }
+    rpc GetGroups(GetGroupsRequest) returns (GetGroupsResponse) {
+        option (google.api.http) = {
+            get: "/v1/groups"
+        };
+    }
+
+    //Service status
+    rpc GetServiceStatus (ServiceStatusRequest) returns (ServiceStatusResponse) {
+        option (google.api.http) = {
+            get: "/v1/items/status"
+        };
+    }
+    rpc GetServiceVersion (VersionRequest) returns (VersionResponse) {
+        option (google.api.http) = {
+            get: "/v1/items/version"
+        };
+    }
+}

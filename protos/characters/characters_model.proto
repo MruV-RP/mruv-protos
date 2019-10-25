@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package mruv;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/characters";
+
+message Character {
+    int32 id = 1;
+    string first_name = 2;
+    string second_name = 3;
+    uint32 age = 4;
+    uint32 sex = 5;
+}
+
+message CharacterID {
+    int32 id = 1;
+}
+
+enum DeathType {
+    DEATH_TYPE_NONE = 0;
+    DEATH_TYPE_BW = 1;
+    DEATH_TYPE_BW_KILL = 2;
+    DEATH_TYPE_CK = 3;
+}

@@ -6,14 +6,55 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/characters";
 
 import "google/api/annotations.proto";
 import "common/health.proto";
+import "characters/characters_model.proto";
+
+//requests & response messages
+message DeathStreamRequest {
+    repeated DeathType death_types = 1;
+}
+
+message DeathStreamResponse {
+    Character character = 1;
+    DeathType death_type = 2;
+}
 
 service MruVCharactersService {
+    //CRUD
+    rpc Create (Character) returns (CharacterID) {
+        option (google.api.http) = {
+            post: "/v1/characters"
+        };
+    }
+    rpc Get (CharacterID) returns (Character) {
+        option (google.api.http) = {
+            get: "/v1/characters/{id}"
+        };
+    }
+    rpc Update (Character) returns (CharacterID) {
+        option (google.api.http) = {
+            patch: "/v1/characters/{id}"
+        };
+    }
+    rpc Destroy (CharacterID) returns (CharacterID) {
+        option (google.api.http) = {
+            delete: "/v1/characters/{id}"
+        };
+    }
+
+    //Deaths
+    rpc KillCharacter(CharacterID) returns (CharacterID) {
+        option (google.api.http) = {
+            delete: "/v1/characters/kill/{id}"
+        };
+    }
+    rpc DeathsStream(DeathStreamRequest) returns (stream DeathStreamResponse) { }
+
+    //Service status
     rpc GetServiceStatus(ServiceStatusRequest) returns (ServiceStatusResponse) {
         option (google.api.http) = {
             get: "/characters/v1/status"
         };
     }
-
     rpc GetServiceVersion(VersionRequest) returns (VersionResponse) {
         option (google.api.http) = {
             get: "/characters/v1/version"

@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package mruv;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/items";
+
+message ItemType {
+    int32 id = 1;
+    string name = 2;
+    string description = 3;
+    int32 base_weight = 4;
+    double base_volume = 5;
+    int32 stacks = 6;
+    string icon_uri = 7;
+}
+
+message Item {
+    int64 id = 1;
+    ItemType item_type = 2;
+    string name = 3;
+    int32 weight = 4;
+    double volume = 5;
+}
+
+
+message Container {
+    int32 id = 1;
+    Item container_item = 2;
+
+    SizeLimit size_limit = 3;
+    VolumeLimit volume_limit = 4;
+    WeightLimit weight_limit = 5;
+    NumberLimit number_limit = 6;
+    ItemTypeConstraint item_type_validation = 7;
+
+    repeated Item items = 8;
+}
+
+message SizeLimit {
+    double max_x = 1;
+    double max_y = 2;
+}
+
+message VolumeLimit {
+    double max_volume = 1;
+    double current_volume = 2;
+};
+
+message WeightLimit {
+    double max_weight = 1;
+    double current_weight = 2;
+};
+
+message NumberLimit {
+    int32 max_number = 1;
+    int32 current_number = 2;
+};
+
+message ItemTypeConstraint {
+    repeated ItemType valid_item_types = 1;
+}
+
+message Position {
+    double x = 2;
+    double y = 3;
+    double z = 4;
+    double rx = 5;
+    double ry = 6;
+    double rz = 7;
+}

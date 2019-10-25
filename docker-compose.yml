@@ -1,49 +1,33 @@
 version: '3'
 
 services:
-  lint:
-    image: uber/prototool:latest
-    volumes:
-      - .:/work
-    command: "prototool lint protos"
-
   generate:
     build: .
     volumes:
       - ./protos:/protos
       - ./gen:/gen
-    depends_on:
-      - lint
     
   generate-csharp:
     image: namely/protoc-all
     volumes:
       - .:/defs
     command: "-d /defs/protos -l csharp"
-    depends_on:
-      - lint
 
   generate-node:
     image: namely/protoc-all
     volumes:
       - .:/defs
     command: "--with-typescript -d /defs/protos -l node"
-    depends_on:
-      - lint
 
   generate-web:
     image: namely/protoc-all:1.22_0
     volumes:
       - .:/defs
     command: "-d /defs/protos -l web"
-    depends_on:
-      - lint
 
   # descriptor
   generate-descriptor-set:
     image: namely/protoc-all
     volumes:
       - .:/defs
-    command: "-d /defs/protos -l descriptor_set --descr-include-imports --descr-include-source-info"
-    depends_on:
-      - lint
+    command: "-d /defs/protos -l descriptor_set --descr-include-imports --descr-include-source-info --lint"
