@@ -35,7 +35,7 @@ service MruVCharactersService {
             patch: "/v1/characters/{id}"
         };
     }
-    rpc Destroy (CharacterID) returns (CharacterID) {
+    rpc Remove (CharacterID) returns (CharacterID) {
         option (google.api.http) = {
             delete: "/v1/characters/{id}"
         };

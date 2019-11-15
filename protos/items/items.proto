@@ -9,16 +9,6 @@ import "common/health.proto";
 import "items/items_model.proto";
 
 // Requests messages
-message ItemID {
-    int64 id = 1;
-}
-message ItemTypeID {
-    int32 id = 1;
-}
-message ContainerID {
-    int32 id = 1;
-}
-
 message GetItemsRequest {
     int32 limit = 1;
 }
@@ -44,8 +34,7 @@ message PutItemRequest {
     ContainerID container_id = 1;
     ItemID item_id = 2;
     oneof where {
-        Position position = 3;
-        int32 slot = 4;
+        int32 slot = 3;
     }
 }
 
@@ -63,6 +52,29 @@ message GetContainerItemsResponse {
 message RemoveItemRequest {
     ContainerID container_id = 1;
     ItemID item_id = 2;
+}
+
+message SortItemsRequest {
+    ContainerID container_id = 1;
+    string sort_by = 2;
+}
+message SortItemsResponse {
+    repeated Item items = 1;
+}
+
+message GetNearestItemsRequest {
+    Position player_position = 1;
+    ContainerID container_id = 2;
+}
+message GetNearestItemsResponse {
+    repeated InsideItem item = 1;
+}
+
+message UseItemRequest {
+    ItemID item_id = 1;
+}
+message UseItemResponse {
+    bool success = 1;
 }
 
 service MruVItemService {
@@ -164,6 +176,21 @@ service MruVItemService {
         option (google.api.http) = {
             put: "/v1/containers/{container_id.id}/items/{item_id.id}"
         };
+    }
+
+    //TODO: SortItemsStream
+    rpc SortItems(SortItemsRequest) returns (SortItemsResponse) {
+        option (google.api.http) = {
+            get: "/v1/containers/{container_id.id}/items/sort/{sort_by}"
+        };
+    }
+
+    //TODO: GetNearestItemsStream
+    rpc GetNearestItems(GetNearestItemsRequest) returns (GetNearestItemsResponse) {
+    }
+
+    rpc UseItem(UseItemRequest) returns (UseItemResponse) {
+
     }
 
     //Service status
