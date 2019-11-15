@@ -11,7 +11,7 @@ CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 VERSION=$(git describe)
 
 #Version parameter
-if [[ ! $VERSION =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+if [[ ! $VERSION =~ ^v?[0-9]+\.[0-9]+\.[0-9]+.*$ ]]; then
 	echo "Version x.x.x parameter required." >&2; exit 1; 
 fi
 
