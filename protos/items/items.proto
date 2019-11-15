@@ -7,6 +7,7 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/items";
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 import "common/health.proto";
 import "items/items_model.proto";
+import "common/spatial.proto";
 
 // Requests messages
 message GetItemsRequest {
