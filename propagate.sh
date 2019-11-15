@@ -8,7 +8,7 @@ set -e
 MAIN_DIR=`pwd`
 REPOPATH=${REPOPATH-/tmp}
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-VERSION=$(git describe)
+VERSION=$(git describe --tags)
 
 #Version parameter
 if [[ ! $VERSION =~ ^v?[0-9]+\.[0-9]+\.[0-9]+.*$ ]]; then
@@ -102,7 +102,7 @@ function commitAndPush {
     git add .
     git commit -m "Auto Creation of Proto $VERSION"
 	if [ $CURRENT_BRANCH  = "master" ]; then
-		git tag -a "v$VERSION" -m "Auto generated proto v$VERSION"
+		git tag -a "$VERSION" -m "Auto generated proto $VERSION"
 	fi
     git push origin HEAD --tags
   else
