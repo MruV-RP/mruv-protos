@@ -102,7 +102,7 @@ function commitAndPush {
     git add .
     git commit -m "Auto Creation of Proto $VERSION"
 	if [ $CURRENT_BRANCH  = "master" ]; then
-		git tag -a "$VERSION" -m "Auto generated proto $VERSION"
+		git tag $VERSION -a "$VERSION" -m "Auto generated proto $VERSION"
 	fi
     git push origin HEAD --tags
   else
