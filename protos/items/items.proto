@@ -188,10 +188,15 @@ service MruVItemService {
 
     //TODO: GetNearestItemsStream
     rpc GetNearestItems(GetNearestItemsRequest) returns (GetNearestItemsResponse) {
+        option (google.api.http) = {
+            get: "/v1/containers/{container_id.id}/items/nearest/x/{player_position.x}/y/{player_position.y}/z/{player_position.z}"
+        };
     }
 
     rpc UseItem(UseItemRequest) returns (UseItemResponse) {
-
+        option (google.api.http) = {
+            get: "/v1/items/{item_id.id}/use"
+        };
     }
 
     //Service status
