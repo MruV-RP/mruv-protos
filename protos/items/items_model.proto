@@ -12,10 +12,8 @@ message ItemType {
     string description = 3;
     float base_weight = 4;
     float base_volume = 5;
-    oneof model {
-        string model_name = 7;
-        int32 model_hash = 8;
-    }
+    string model_name = 6;
+    int32 model_hash = 7;
 }
 
 message ItemTypeID {
