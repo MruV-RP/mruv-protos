@@ -42,6 +42,10 @@ message ContainerType {
     repeated int32 valid_item_types = 8;
 }
 
+message ContainerTypeID {
+    int32 id = 1;
+}
+
 message Container {
     int32 id = 1;
     int32 type_id = 2;

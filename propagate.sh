@@ -8,11 +8,11 @@ set -e
 MAIN_DIR=`pwd`
 REPOPATH=${REPOPATH-/tmp}
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-VERSION=$(git describe --tags)
+VERSION=$(git describe --tags --abbrev=0 | sed -r 's/v(.*)-(.*)-(.*)/\1-build\2 /')
 
 #Version parameter
-if [[ ! $VERSION =~ ^v?[0-9]+\.[0-9]+\.[0-9]+.*$ ]]; then
-	echo "Version x.x.x parameter required." >&2; exit 1; 
+if [[ ! $VERSION =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+	echo "Version in format x.x.x required." >&2; exit 1;
 fi
 
 # Helper for adding a directory to the stack and echoing the result

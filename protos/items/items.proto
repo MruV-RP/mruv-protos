@@ -31,6 +31,10 @@ message GetContainersResponse {
     repeated Container containers = 1;
 }
 
+message GetContainerTypesRequest {
+    int32 limit = 1;
+}
+
 message PutItemRequest {
     ContainerID container_id = 1;
     ItemID item_id = 2;
@@ -90,11 +94,6 @@ service MruVItemService {
             get: "/v1/items/{id}"
         };
     }
-    rpc UpdateItem (Item) returns (ItemID) {
-        option (google.api.http) = {
-            patch: "/v1/items/{id}"
-        };
-    }
     rpc DeleteItem (ItemID) returns (ItemID) {
         option (google.api.http) = {
             delete: "/v1/items/{id}"
@@ -115,11 +114,6 @@ service MruVItemService {
     rpc GetItemType (ItemTypeID) returns (ItemType) {
         option (google.api.http) = {
             get: "/v1/itemTypes/{id}"
-        };
-    }
-    rpc UpdateItemType (ItemType) returns (ItemTypeID) {
-        option (google.api.http) = {
-            patch: "/v1/itemTypes/{id}"
         };
     }
     rpc DeleteItemType (ItemTypeID) returns (ItemTypeID) {
@@ -144,11 +138,6 @@ service MruVItemService {
             get: "/v1/containers/{id}"
         };
     }
-    rpc UpdateContainer (Container) returns (ContainerID) {
-        option (google.api.http) = {
-            patch: "/v1/containers/{id}"
-        };
-    }
     rpc DeleteContainer (ContainerID) returns (ContainerID) {
         option (google.api.http) = {
             delete: "/v1/containers/{id}"
@@ -157,6 +146,28 @@ service MruVItemService {
     rpc GetContainers(GetContainersRequest) returns (GetContainersResponse) {
         option (google.api.http) = {
             get: "/v1/containers"
+        };
+    }
+
+    //CRUD container types
+    rpc CreateContainerType (ContainerType) returns (ContainerTypeID) {
+        option (google.api.http) = {
+            post: "/v1/containerTypes"
+        };
+    }
+    rpc GetContainerType (ContainerTypeID) returns (ContainerType) {
+        option (google.api.http) = {
+            get: "/v1/containerTypes/{id}"
+        };
+    }
+    rpc DeleteContainerType (ContainerTypeID) returns (ContainerID) {
+        option (google.api.http) = {
+            delete: "/v1/containerTypes/{id}"
+        };
+    }
+    rpc GetContainerTypes(GetContainerTypesRequest) returns (stream ContainerType) {
+        option (google.api.http) = {
+            get: "/v1/containerTypes"
         };
     }
 
