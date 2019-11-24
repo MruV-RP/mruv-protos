@@ -34,6 +34,9 @@ message GetContainersResponse {
 message GetContainerTypesRequest {
     int32 limit = 1;
 }
+message GetContainerTypesResponse {
+    repeated ContainerType container_types = 1;
+}
 
 message PutItemRequest {
     ContainerID container_id = 1;
@@ -165,7 +168,7 @@ service MruVItemService {
             delete: "/v1/containerTypes/{id}"
         };
     }
-    rpc GetContainerTypes(GetContainerTypesRequest) returns (stream ContainerType) {
+    rpc GetContainerTypes(GetContainerTypesRequest) returns (GetContainerTypesResponse) {
         option (google.api.http) = {
             get: "/v1/containerTypes"
         };
