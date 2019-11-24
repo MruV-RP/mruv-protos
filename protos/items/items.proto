@@ -58,7 +58,7 @@ message GetContainerItemsRequest {
     int32 limit = 2;
 }
 message GetContainerItemsResponse {
-    repeated Item items = 1;
+    repeated InsideItem items = 1;
 }
 
 message RemoveItemRequest {
