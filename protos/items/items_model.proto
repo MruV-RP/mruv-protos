@@ -60,7 +60,9 @@ message ContainerID {
 
 message InsideItem {
     int32 container_id = 1;
-    int64 item_id = 2;
-    Position position = 3;
-    Rotation rotation = 4;
+    oneof item_or_id {
+        ItemID item_id = 2;
+        Item item = 3;
+    }
+    int32 position = 4;
 }
