@@ -181,7 +181,7 @@ service MruVItemService {
     //Container Methods
     rpc GetContainerItems(GetContainerItemsRequest) returns (GetContainerItemsResponse) {
         option (google.api.http) = {
-            get: "/v1/containers/{id}/items"
+            get: "/v1/containers/{container_id.id}/items"
         };
     }
 

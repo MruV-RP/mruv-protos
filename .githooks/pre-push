@@ -1,4 +1,3 @@
 #!/bin/bash
 
-docker-compose up
-./propagate.sh
+docker-compose up && ./propagate.sh
