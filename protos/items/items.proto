@@ -160,7 +160,7 @@ service MruVItemService {
             get: "/v1/containerTypes/{id}"
         };
     }
-    rpc DeleteContainerType (ContainerTypeID) returns (ContainerID) {
+    rpc DeleteContainerType (ContainerTypeID) returns (ContainerTypeID) {
         option (google.api.http) = {
             delete: "/v1/containerTypes/{id}"
         };
