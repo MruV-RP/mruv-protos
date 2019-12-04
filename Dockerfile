@@ -1,4 +1,4 @@
-FROM namely/protoc-all
+FROM namely/protoc-all:latest
 
 COPY generate.sh /generate.sh
 RUN chmod +x /generate.sh

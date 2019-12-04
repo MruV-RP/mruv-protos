@@ -6,7 +6,7 @@ services:
     volumes:
       - ./protos:/protos
       - ./gen:/gen
-    
+
   generate-csharp:
     image: namely/protoc-all
     volumes:

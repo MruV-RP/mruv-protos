@@ -4,8 +4,6 @@ package mruv;
 
 option go_package = "github.com/MruV-RP/mruv-pb-go/items";
 
-import "common/spatial.proto";
-
 message ItemType {
     int32 id = 1;
     string name = 2;
