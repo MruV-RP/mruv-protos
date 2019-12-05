@@ -9,86 +9,6 @@ import "common/health.proto";
 import "items/items_model.proto";
 import "common/spatial.proto";
 
-// Requests messages
-message GetItemsRequest {
-    int32 limit = 1;
-}
-message GetItemsResponse {
-    repeated Item items = 1;
-}
-
-message GetItemTypesRequest {
-    int32 limit = 1;
-}
-message GetItemTypesResponse {
-    repeated ItemType item_types = 1;
-}
-
-message GetContainersRequest {
-    int32 limit = 1;
-}
-message GetContainersResponse {
-    repeated Container containers = 1;
-}
-
-message GetContainerTypesRequest {
-    int32 limit = 1;
-}
-message GetContainerTypesResponse {
-    repeated ContainerType container_types = 1;
-}
-
-message PutItemRequest {
-    ContainerID container_id = 1;
-    ItemID item_id = 2;
-    oneof where {
-        int32 slot = 3;
-    }
-}
-
-message TakeItemRequest {
-    ItemID id = 1;
-}
-message TakeItemResponse {
-    Item item = 1;
-}
-
-message GetContainerItemsRequest {
-    ContainerID container_id = 1;
-    int32 limit = 2;
-}
-message GetContainerItemsResponse {
-    repeated InsideItem items = 1;
-}
-
-message RemoveItemRequest {
-    ContainerID container_id = 1;
-    ItemID item_id = 2;
-}
-
-message SortItemsRequest {
-    ContainerID container_id = 1;
-    string sort_by = 2;
-}
-message SortItemsResponse {
-    repeated Item items = 1;
-}
-
-message GetNearestItemsRequest {
-    Position player_position = 1;
-    ContainerID container_id = 2;
-}
-message GetNearestItemsResponse {
-    repeated InsideItem item = 1;
-}
-
-message UseItemRequest {
-    ItemID item_id = 1;
-}
-message UseItemResponse {
-    bool success = 1;
-}
-
 service MruVItemService {
     //CRUD items
     rpc CreateItem (Item) returns (ItemID) {
@@ -229,3 +149,85 @@ service MruVItemService {
         };
     }
 }
+
+
+// Requests messages
+message GetItemsRequest {
+    uint32 limit = 1;
+}
+message GetItemsResponse {
+    repeated Item items = 1;
+}
+
+message GetItemTypesRequest {
+    uint32 limit = 1;
+}
+message GetItemTypesResponse {
+    repeated ItemType item_types = 1;
+}
+
+message GetContainersRequest {
+    uint32 limit = 1;
+}
+message GetContainersResponse {
+    repeated Container containers = 1;
+}
+
+message GetContainerTypesRequest {
+    uint32 limit = 1;
+}
+message GetContainerTypesResponse {
+    repeated ContainerType container_types = 1;
+}
+
+message PutItemRequest {
+    ContainerID container_id = 1;
+    ItemID item_id = 2;
+    oneof where {
+        int32 slot = 3;
+    }
+}
+
+message TakeItemRequest {
+    ItemID id = 1;
+}
+message TakeItemResponse {
+    Item item = 1;
+}
+
+message GetContainerItemsRequest {
+    ContainerID container_id = 1;
+    uint32 limit = 2;
+}
+message GetContainerItemsResponse {
+    repeated InsideItem items = 1;
+}
+
+message RemoveItemRequest {
+    ContainerID container_id = 1;
+    ItemID item_id = 2;
+}
+
+message SortItemsRequest {
+    ContainerID container_id = 1;
+    string sort_by = 2;
+}
+message SortItemsResponse {
+    repeated Item items = 1;
+}
+
+message GetNearestItemsRequest {
+    Position player_position = 1;
+    ContainerID container_id = 2;
+}
+message GetNearestItemsResponse {
+    repeated InsideItem item = 1;
+}
+
+message UseItemRequest {
+    ItemID item_id = 1;
+}
+message UseItemResponse {
+    bool success = 1;
+}
+
