@@ -6,6 +6,7 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/items";
 
 import "validate/validate.proto";
 
+//Item type data structure
 message ItemType {
     ItemTypeID id = 1;
     string name = 2;
@@ -16,10 +17,12 @@ message ItemType {
     int32 model_hash = 7;
 }
 
+//Item type ID.
 message ItemTypeID {
     uint32 id = 1;
 }
 
+//Item data structure.
 message Item {
     ItemID id = 1;
     ItemTypeID item_type_id = 2;
@@ -27,10 +30,12 @@ message Item {
     float volume = 4;
 }
 
+//Item ID.
 message ItemID {
     uint64 id = 1;
 }
 
+//Container type data structure.
 message ContainerType {
     ContainerTypeID id = 1;
     ItemTypeID container_item_type_id = 2;
@@ -42,10 +47,12 @@ message ContainerType {
     repeated ItemTypeID valid_item_types = 8;
 }
 
+//Container type ID.
 message ContainerTypeID {
     uint32 id = 1;
 }
 
+//Container data structure.
 message Container {
     ContainerID id = 1;
     ContainerTypeID type_id = 2;
@@ -54,10 +61,12 @@ message Container {
     repeated InsideItem items = 5;
 }
 
+//Container ID.
 message ContainerID {
     uint32 id = 1;
 }
 
+//Item inside container data structure.
 message InsideItem {
     ContainerID container_id = 1;
     oneof item_or_id {
