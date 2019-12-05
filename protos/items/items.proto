@@ -9,140 +9,172 @@ import "common/health.proto";
 import "items/items_model.proto";
 import "common/spatial.proto";
 
+// The MruV items service provides procedures for managing items and containers
 service MruVItemService {
-    //CRUD items
+    //Create new item.
     rpc CreateItem (Item) returns (ItemID) {
         option (google.api.http) = {
             post: "/v1/items"
         };
     }
+
+    //Get item by id.
     rpc GetItem (ItemID) returns (Item) {
         option (google.api.http) = {
             get: "/v1/items/{id}"
         };
     }
+
+    //Delete item by id.
     rpc DeleteItem (ItemID) returns (ItemID) {
         option (google.api.http) = {
             delete: "/v1/items/{id}"
         };
     }
+
+    //Gets all items.
     rpc GetItems(GetItemsRequest) returns (GetItemsResponse) {
         option (google.api.http) = {
             get: "/v1/items"
         };
     }
 
-    //CRUD itemsTypes
+    //Create item type.
     rpc CreateItemType (ItemType) returns (ItemTypeID) {
         option (google.api.http) = {
             post: "/v1/itemTypes"
         };
     }
+
+    //Get item type by id.
     rpc GetItemType (ItemTypeID) returns (ItemType) {
         option (google.api.http) = {
             get: "/v1/itemTypes/{id}"
         };
     }
+
+    //Delete item type by id.
     rpc DeleteItemType (ItemTypeID) returns (ItemTypeID) {
         option (google.api.http) = {
             delete: "/v1/itemTypes/{id}"
         };
     }
+
+    //Gets all item types.
     rpc GetItemTypes(GetItemTypesRequest) returns (GetItemTypesResponse) {
         option (google.api.http) = {
             get: "/v1/itemTypes"
         };
     }
 
-    //CRUD containers
+    //Create container.
     rpc CreateContainer (Container) returns (ContainerID) {
         option (google.api.http) = {
             post: "/v1/containers"
         };
     }
+
+    //Get container by id.
     rpc GetContainer (ContainerID) returns (Container) {
         option (google.api.http) = {
             get: "/v1/containers/{id}"
         };
     }
+
+    //Delete container by id.
     rpc DeleteContainer (ContainerID) returns (ContainerID) {
         option (google.api.http) = {
             delete: "/v1/containers/{id}"
         };
     }
+
+    //Get all containers.
     rpc GetContainers(GetContainersRequest) returns (GetContainersResponse) {
         option (google.api.http) = {
             get: "/v1/containers"
         };
     }
 
-    //CRUD container types
+    //Create container type.
     rpc CreateContainerType (ContainerType) returns (ContainerTypeID) {
         option (google.api.http) = {
             post: "/v1/containerTypes"
         };
     }
+
+    //Get container type by id.
     rpc GetContainerType (ContainerTypeID) returns (ContainerType) {
         option (google.api.http) = {
             get: "/v1/containerTypes/{id}"
         };
     }
+
+    //Detele container type by id.
     rpc DeleteContainerType (ContainerTypeID) returns (ContainerTypeID) {
         option (google.api.http) = {
             delete: "/v1/containerTypes/{id}"
         };
     }
+
+    //Get all container types.
     rpc GetContainerTypes(GetContainerTypesRequest) returns (GetContainerTypesResponse) {
         option (google.api.http) = {
             get: "/v1/containerTypes"
         };
     }
 
-    //Container Methods
+    //Get items inside a container.
     rpc GetContainerItems(GetContainerItemsRequest) returns (GetContainerItemsResponse) {
         option (google.api.http) = {
             get: "/v1/containers/{container_id.id}/items"
         };
     }
 
-    rpc RemoveContainerItem(RemoveItemRequest) returns (Item) {
+    //Pull item from container.
+    rpc PullItem(PullItemRequest) returns (Item) {
         option (google.api.http) = {
             delete: "/v1/containers/{container_id.id}/items/{item_id.id}"
         };
     }
 
+    //Put item into container.
     rpc PutItem(PutItemRequest) returns (ItemID) {
         option (google.api.http) = {
             put: "/v1/containers/{container_id.id}/items/{item_id.id}"
         };
     }
 
-    //TODO: SortItemsStream
+    //Sort items inside container.
+    //This procedure change order of items inside container.
     rpc SortItems(SortItemsRequest) returns (SortItemsResponse) {
         option (google.api.http) = {
             get: "/v1/containers/{container_id.id}/items/sort/{sort_by}"
         };
     }
 
-    //TODO: GetNearestItemsStream
+    //Retrieves from the container the list of items nearest to the given position.
     rpc GetNearestItems(GetNearestItemsRequest) returns (GetNearestItemsResponse) {
         option (google.api.http) = {
             get: "/v1/containers/{container_id.id}/items/nearest/x/{player_position.x}/y/{player_position.y}/z/{player_position.z}"
         };
     }
 
+    //Trigger action associated with the item usage.
     rpc UseItem(UseItemRequest) returns (UseItemResponse) {
         option (google.api.http) = {
             get: "/v1/items/{item_id.id}/use"
         };
     }
 
-    //Service status
+
+    //Get service health status.
     rpc GetServiceStatus (ServiceStatusRequest) returns (ServiceStatusResponse) {
         option (google.api.http) = {
             get: "/v1/items/status"
         };
     }
+
+    //Get service current version.
     rpc GetServiceVersion (VersionRequest) returns (VersionResponse) {
         option (google.api.http) = {
             get: "/v1/items/version"
@@ -151,83 +183,127 @@ service MruVItemService {
 }
 
 
-// Requests messages
+// Request message for `MruVItemsService.GetItems`.
 message GetItemsRequest {
+    // Limit of the returned items.
     uint32 limit = 1;
-}
-message GetItemsResponse {
-    repeated Item items = 1;
 }
 
+// Response message for `MruVItemsService.GetItems`.
+message GetItemsResponse {
+    // List of items.
+    repeated Item items = 1;
+}
+// Request message for `MruVItemsService.GetItemTypes`.
 message GetItemTypesRequest {
+    // Limit of the returned item types.
     uint32 limit = 1;
 }
+
+//Response message for `MruVItemsService.GetItemTypes`.
 message GetItemTypesResponse {
+    //List of item types.
     repeated ItemType item_types = 1;
 }
 
+//Request message for `MruVItemsService.GetContainers`.
 message GetContainersRequest {
+    //Limit of the returned containers.
     uint32 limit = 1;
 }
+
+//Response message for `MruVItemsService.GetContainers`.
 message GetContainersResponse {
+    //List of containers.
     repeated Container containers = 1;
 }
 
+//Request message for `MruVItemsService.GetContainerTypes`.
 message GetContainerTypesRequest {
+    //Limit of the returned container types.
     uint32 limit = 1;
 }
+
+//Response message for `MruVItemsService.GetContainers`.
 message GetContainerTypesResponse {
+    //List of container types.
     repeated ContainerType container_types = 1;
 }
 
+//Request message for `MruVItemsService.PutItem`.
 message PutItemRequest {
+    //ID of container where to put item.
     ContainerID container_id = 1;
+
+    //ID of item we wan to put in.
     ItemID item_id = 2;
+
     oneof where {
+        //Position used for sorting items
         int32 slot = 3;
     }
 }
 
-message TakeItemRequest {
-    ItemID id = 1;
-}
-message TakeItemResponse {
-    Item item = 1;
-}
-
+//Request message for `MruVItemsService.GetContainerItems`.
 message GetContainerItemsRequest {
+    //ID of container with items.
     ContainerID container_id = 1;
+    //Limit of the returned items.
     uint32 limit = 2;
 }
+
+//Request message for `MruVItemsService.GetContainerItems`.
 message GetContainerItemsResponse {
+    //List of items inside containers.
     repeated InsideItem items = 1;
 }
 
-message RemoveItemRequest {
+//Request message for `MruVItemsService.PullItem`.
+message PullItemRequest {
+    //ID of the container from which we pull out a item.
     ContainerID container_id = 1;
+    //ID of the item we want to pull out.
     ItemID item_id = 2;
 }
 
+//Request message for `MruVItemsService.SortItems`.
 message SortItemsRequest {
+    //ID of the container which contain items.
     ContainerID container_id = 1;
+    //Sorting mode. TODO.
     string sort_by = 2;
 }
+
+//Response message for `MruVItemsService.SortItems`.
 message SortItemsResponse {
+    //List of items in given order.
     repeated Item items = 1;
 }
 
+//Request message for `MruVItemsService.GetNearestItems`.
 message GetNearestItemsRequest {
-    Position player_position = 1;
+    //Position from which to calculate the distance
+    Position position = 1;
+    //ID of container that contains items.
     ContainerID container_id = 2;
+    //The distance over which the items are ignored.
+    double distance_limit = 3;
 }
+
+//Response message for `MruVItemsService.GetNearestItems`.
 message GetNearestItemsResponse {
+    //List of items sorted from nearest to farthest.
     repeated InsideItem item = 1;
 }
 
+//Request message for `MruVItemsService.UseItem`.
 message UseItemRequest {
     ItemID item_id = 1;
 }
+
+//Response message for `MruVItemsService.UseItem`.
 message UseItemResponse {
+    //Is item usage was successful.
     bool success = 1;
 }
 
