@@ -155,7 +155,7 @@ service MruVItemService {
     //Retrieves from the container the list of items nearest to the given position.
     rpc GetNearestItems(GetNearestItemsRequest) returns (GetNearestItemsResponse) {
         option (google.api.http) = {
-            get: "/v1/containers/{container_id.id}/items/nearest/x/{player_position.x}/y/{player_position.y}/z/{player_position.z}"
+            get: "/v1/containers/{container_id.id}/items/nearest/x/{position.x}/y/{position.y}/z/{position.z}"
         };
     }
 

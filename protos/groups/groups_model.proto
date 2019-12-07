@@ -16,7 +16,9 @@ message Permission {
 
 message Group {
     int32 id = 1;
+    string name = 3;
+    string description = 4;
 
-    repeated Permission permissions = 3;
-    repeated User users = 4;
+    repeated Permission permissions = 5;
+    repeated User users = 6;
 }

@@ -20,7 +20,7 @@ services:
     command: "--with-typescript -d /defs/protos -l node"
 
   generate-web:
-    image: namely/protoc-all:1.22_0
+    image: namely/protoc-all
     volumes:
       - .:/defs
     command: "-d /defs/protos -l web"

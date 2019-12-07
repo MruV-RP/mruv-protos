@@ -42,9 +42,9 @@ service MruVCharactersService {
     }
 
     //Deaths
-    rpc KillCharacter(CharacterID) returns (CharacterID) {
+    rpc PermanentCharacterKill(CharacterID) returns (CharacterID) {
         option (google.api.http) = {
-            delete: "/v1/characters/kill/{id}"
+            delete: "/v1/characters/permanentKill/{id}"
         };
     }
     rpc DeathsStream(DeathStreamRequest) returns (stream DeathStreamResponse) { }
