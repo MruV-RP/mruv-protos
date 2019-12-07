@@ -34,14 +34,9 @@ To use this functionality, type:
 
 ## How this works
 
-KOD JEST GENEROWANY DO INNYCH REPOZYTORIÓW POPRZEZ TRAVISA (NA POCZĄTEK RĘCZNIE)
-Z INNYCH REPOZYTORIÓW TEŻ ODPALANE SĄ TRAVISY, KTÓRE GENERUJĄ ODPOWIEDNI KOD (C# - NUGET PACKAGE)
-
-PIPELINE:
-
-1. Wygeneruj kod za pomocą kontenerów namely/protoc-all do folderu ./gen/
-2. Wgraj kod na osobne repozytoria z folderów ./gen/* o nazwach mruv-[folder]
-3. Wygeneruj odpowiednie paczki za pomocą .travis'a w w.w. repozytoriach
+1. Generate code using namely/protoc-all docker image to `./gen/` directory. (docker-compose up)
+2. Merge and push new generated files from `./gen/*` to language specific repositories. Repository naming convention: `mruv-[directory]` (propagate.sh)
+3. On language specific repositories, automatically generate packages and draft releases
 
 ## Inspiration
 
