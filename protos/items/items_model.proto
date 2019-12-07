@@ -9,11 +9,23 @@ import "validate/validate.proto";
 //Item type data structure
 message ItemType {
     ItemTypeID id = 1;
-    string name = 2;
+
+    //Short name of item type.
+    string name = 2 ;
+
+    //Description of item type.
     string description = 3;
+
+    //Default weight of items created with that item type.
     float base_weight = 4;
+
+    //Default volume of items created with that item type.
     float base_volume = 5;
+
+    //GTA V model name.
     string model_name = 6;
+
+    //GTA V model hash.
     int32 model_hash = 7;
 }
 
@@ -25,8 +37,14 @@ message ItemTypeID {
 //Item data structure.
 message Item {
     ItemID id = 1;
+
+    //ID of an item type.
     ItemTypeID item_type_id = 2;
+
+    //Current weight of the item.
     float weight = 3;
+
+    //Current volume of the item.
     float volume = 4;
 }
 
@@ -38,10 +56,17 @@ message ItemID {
 //Container type data structure.
 message ContainerType {
     ContainerTypeID id = 1;
+
+    //ID of an item type.
     ItemTypeID container_item_type_id = 2;
 
+    //Max items in the container.
     uint32 max_number = 3;
+
+    //Max volume of items in the container.
     float max_volume = 4;
+
+    //Max weight of items in the container.
     float max_weight = 5;
 
     repeated ItemTypeID valid_item_types = 8;
@@ -55,9 +80,17 @@ message ContainerTypeID {
 //Container data structure.
 message Container {
     ContainerID id = 1;
+
+    //ID of an container type.
     ContainerTypeID type_id = 2;
+
+    //ID of container item representing container.
     ItemID item_id = 3;
+
+    //Number of items inside container.
     uint32 items_inside = 4;
+
+    //List of items inside container.
     repeated InsideItem items = 5;
 }
 
@@ -68,10 +101,15 @@ message ContainerID {
 
 //Item inside container data structure.
 message InsideItem {
+    //ID of container containing the item.
     ContainerID container_id = 1;
+
+    //ID of the item or the whole item.
     oneof item_or_id {
         ItemID item_id = 2;
         Item item = 3;
     }
+
+    //Position representing order in container. In ascending manner.
     int32 position = 4;
 }
