@@ -138,7 +138,7 @@ service MruVItemService {
     }
 
     //Put item into container.
-    rpc PutItem(PutItemRequest) returns (ItemID) {
+    rpc PutItem(PutItemRequest) returns (PutItemResponse) {
         option (google.api.http) = {
             put: "/v1/containers/{container_id.id}/items/{item_id.id}"
         };
@@ -244,6 +244,12 @@ message PutItemRequest {
     }
 }
 
+//Response message for `MruVItemsService.PutItem`
+message PutItemResponse {
+    //Container with items inside.
+    InsideItem inside_item = 1;
+}
+
 //Request message for `MruVItemsService.GetContainerItems`.
 message GetContainerItemsRequest {
     //ID of container with items.
@@ -263,6 +269,7 @@ message PullItemRequest {
     //ID of the container from which we pull out a item.
     ContainerID container_id = 1;
     //ID of the item we want to pull out.
+    //That item must be inside the container.
     ItemID item_id = 2;
 }
 
@@ -270,14 +277,14 @@ message PullItemRequest {
 message SortItemsRequest {
     //ID of the container which contain items.
     ContainerID container_id = 1;
-    //Sorting mode. TODO.
-    string sort_by = 2;
+    //Sorting mode.
+    SortingMode sort_by = 2;
 }
 
 //Response message for `MruVItemsService.SortItems`.
 message SortItemsResponse {
-    //List of items in given order.
-    repeated Item items = 1;
+    //Container with sorted items inside.
+    Container container = 1;
 }
 
 //Request message for `MruVItemsService.GetNearestItems`.
