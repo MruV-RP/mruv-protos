@@ -2,7 +2,7 @@
 # mruv-protos
 
 This repository contains protocol buffer files for MruV gRPC API.
-If you searching for generated Mruv gRPC API packages, you can find them in theese repositories:
+If you are searching for generated Mruv gRPC API packages, you can find them in these repositories:
 
 * [Go package](https://github.com/MruV-RP/mruv-pb-go)
 * [C# package](https://github.com/MruV-RP/mruv-pb-csharp)
