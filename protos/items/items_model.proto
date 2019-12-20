@@ -4,8 +4,6 @@ package mruv;
 
 option go_package = "github.com/MruV-RP/mruv-pb-go/items";
 
-import "validate/validate.proto";
-
 //Item type data structure
 message ItemType {
     ItemTypeID id = 1;
