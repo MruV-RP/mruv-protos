@@ -19,11 +19,11 @@ services:
       - .:/defs
     command: "--with-typescript -d /defs/protos -l node"
 
-  # generate-google:
-  #   image: namely/protoc-all:1.25_0
-  #   volumes:
-  #     - .:/defs
-  #   command: "--with-typescript -d /opt/include/google -l node"
+  generate-google:
+    image: namely/protoc-all:1.25_0
+    volumes:
+      - .:/defs
+    command: "--with-typescript -d /opt/include/google -l node"
 
   generate-web:
     image: namely/protoc-all:1.25_0
