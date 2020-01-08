@@ -29,7 +29,7 @@ services:
     image: namely/protoc-all:1.25_0
     volumes:
       - .:/defs
-    command: "--with-typescript -d /opt/include/google -l web"
+    command: "-d /opt/include/google -l web"
 
   generate-web:
     image: namely/protoc-all:1.25_0
