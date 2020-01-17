@@ -4,21 +4,27 @@ package mruv;
 
 option go_package = "github.com/MruV-RP/mruv-pb-go/groups";
 
-message User {
-    int32 id = 1;
-    string name = 2;
+import "accounts/accounts_model.proto";
+
+message PermissionID {
+    int64 id = 1;
 }
 
 message Permission {
-    string name = 1;
-    string role = 2;
+    PermissionID id = 1;
+    string name = 2;
+    string role = 3;
+}
+
+message GroupID {
+    int32 id = 1;
 }
 
 message Group {
-    int32 id = 1;
+    GroupID id = 1;
     string name = 3;
     string description = 4;
 
     repeated Permission permissions = 5;
-    repeated User users = 6;
+    repeated AccountID members = 6;
 }

@@ -20,22 +20,17 @@ message DeathStreamResponse {
 
 service MruVCharactersService {
     //CRUD
-    rpc Create (Character) returns (CharacterID) {
+    rpc CreateCharacter (Character) returns (CharacterID) {
         option (google.api.http) = {
             post: "/v1/characters"
         };
     }
-    rpc Get (CharacterID) returns (Character) {
+    rpc GetCharacter (CharacterID) returns (Character) {
         option (google.api.http) = {
             get: "/v1/characters/{id}"
         };
     }
-    rpc Update (Character) returns (CharacterID) {
-        option (google.api.http) = {
-            patch: "/v1/characters/{id}"
-        };
-    }
-    rpc Remove (CharacterID) returns (CharacterID) {
+    rpc RemoveCharacter (CharacterID) returns (CharacterID) {
         option (google.api.http) = {
             delete: "/v1/characters/{id}"
         };
@@ -52,12 +47,12 @@ service MruVCharactersService {
     //Service status
     rpc GetServiceStatus(ServiceStatusRequest) returns (ServiceStatusResponse) {
         option (google.api.http) = {
-            get: "/characters/v1/status"
+            get: "/v1/characters/status"
         };
     }
     rpc GetServiceVersion(VersionRequest) returns (VersionResponse) {
         option (google.api.http) = {
-            get: "/characters/v1/version"
+            get: "/v1/characters/version"
         };
     }
 }

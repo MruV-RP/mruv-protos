@@ -8,10 +8,6 @@ import "google/api/annotations.proto"; //from https://github.com/googleapis/goog
 import "common/health.proto";
 import "groups/groups_model.proto";
 
-message GroupID {
-    int32 id = 1;
-}
-
 message GetGroupsRequest {
     int32 limit = 1;
 }
@@ -20,7 +16,7 @@ message GetGroupsResponse {
 }
 
 service MruVGroupsService {
-    //CRUD items
+    //CRUD
     rpc CreateGroup (Group) returns (GroupID) {
         option (google.api.http) = {
             post: "/v1/groups"

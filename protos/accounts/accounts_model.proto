@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package mruv;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/characters";
+
+message AccountID {
+    int64 id = 1;
+}
+
+message Account {
+    AccountID id = 1;
+    string login = 2;
+    string nick = 3;
+    string email = 4;
+}

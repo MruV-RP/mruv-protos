@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package mruv;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/server";
+
+message ServerID {
+    int32 id = 1;
+}
+
+// Data that describe server
+message ServerInfo {
+    // Short name of the server
+    string name = 1;
+    // Host (ip) of the server
+    string host = 2;
+    // Port of the server
+    string port = 3;
+    // Platform, on which server is running
+    string platform = 4;
+}
+
+// State of the server
+message ServerStatus {
+    // Is server active and working
+    bool active = 1;
+    // How many players are registered on that server
+    int32 players = 2;
+}

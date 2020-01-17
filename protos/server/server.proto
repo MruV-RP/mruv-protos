@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package mruv;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/server";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+import "server/server_model.proto";
+
+// The MruV server service provides procedures for managing game platform server actions
+service MruVServerService {
+    // Register instance of server for further managing
+    rpc RegisterServer(RegisterServerRequest) returns (RegisterServerResponse);
+
+    // Get game server status
+    rpc GetServerStatus(ServerID) returns (ServerStatus);
+}
+
+// Request message for `MruVServerService`
+message RegisterServerRequest {
+
+}
+
+// Response message for `MruVServerService`
+message RegisterServerResponse {
+
+}
