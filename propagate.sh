@@ -5,30 +5,31 @@
 
 set -e
 
-MAIN_DIR=`pwd`
+MAIN_DIR=$(pwd)
 REPOPATH=${REPOPATH-/tmp}
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 VERSION=$(git describe --tags --abbrev=0 | sed -r 's/v(.*)-(.*)-(.*)/\1-build\2 /')
 
 #Version parameter
 if [[ ! $VERSION =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-	echo "Version in format x.x.x required." >&2; exit 1;
+  echo "Version in format x.x.x required." >&2
+  exit 1
 fi
 
 # Helper for adding a directory to the stack and echoing the result
-function enterDir {
+function enterDir() {
   echo -e "\e[32mEntering \e[92m$1\e[0m"
-  pushd $1 > /dev/null
+  pushd $1 >/dev/null
 }
 
 # Helper for popping a directory off the stack and echoing the result
-function leaveDir {
-  echo -e "\e[32mLeaving \e[92m`pwd`\e[0m"
-  popd > /dev/null
+function leaveDir() {
+  echo -e "\e[32mLeaving \e[92m$(pwd)\e[0m"
+  popd >/dev/null
 }
 
 # Enters the directory and starts the propagate process
-function propagateDir {
+function propagateDir() {
   currentDir="$1"
   echo -e "\e[32mPropagating directory \e[92m\"$currentDir\"\e[0m"
 
@@ -39,33 +40,33 @@ function propagateDir {
   leaveDir
 }
 
-function propagateFiles {
-    target=${1%/}
+function propagateFiles() {
+  target=${1%/}
 
-    reponame="mruv-$target"
+  reponame="mruv-$target"
 
-    if git-remote-url-reachable "https://github.com/MruV-RP/$reponame.git"; then
-        rm -rf $REPOPATH/$reponame
+  if git-remote-url-reachable "https://github.com/MruV-RP/$reponame.git"; then
+    rm -rf $REPOPATH/$reponame
 
-        echo -e "\e[32mCloning repo: \e[92mhttps://github.com/MruV-RP/$reponame.git\e[0m"
+    echo -e "\e[32mCloning repo: \e[92mhttps://github.com/MruV-RP/$reponame.git\e[0m"
 
-        # Clone the repository down and set the branch to the automated one
-        git clone https://github.com/MruV-RP/$reponame.git $REPOPATH/$reponame
-        setupBranch $REPOPATH/$reponame
+    # Clone the repository down and set the branch to the automated one
+    git clone https://github.com/MruV-RP/$reponame.git $REPOPATH/$reponame
+    setupBranch $REPOPATH/$reponame
 
-        # Copy the generated files into the repository
-        # that we care about
-        cp -R ./* $REPOPATH/$reponame/
+    # Copy the generated files into the repository
+    # that we care about
+    cp -R ./* $REPOPATH/$reponame/
 
-        commitAndPush $REPOPATH/$reponame
-	else
-        echo -e "\e[31mRepository \e[91mhttps://github.com/MruV-RP/$reponame.git \e[31mis unreachable\e[0m"
-    fi
+    commitAndPush $REPOPATH/$reponame
+  else
+    echo -e "\e[31mRepository \e[91mhttps://github.com/MruV-RP/$reponame.git \e[31mis unreachable\e[0m"
+  fi
 }
 
 # Finds all directories in the repository and iterates through them calling the
 # propagate process for each one
-function propagateAll {
+function propagateAll() {
   echo -e "\e[32mPropagating generated code\e[0m"
   cd gen
   mkdir -p $REPOPATH
@@ -74,7 +75,7 @@ function propagateAll {
   done
 }
 
-function setupBranch {
+function setupBranch() {
   enterDir $1
 
   echo -e "\e[32mCreating branch\e[0m"
@@ -93,17 +94,17 @@ function setupBranch {
   leaveDir
 }
 
-function commitAndPush {
+function commitAndPush() {
   enterDir $1
 
   git add -N .
 
-  if ! git diff --exit-code > /dev/null; then
+  if ! git diff --exit-code >/dev/null; then
     git add .
     git commit -m "Auto Creation of Proto $VERSION"
-	if [ $CURRENT_BRANCH  = "master" ]; then
-		git tag -a "$VERSION" -m "Auto generated proto $VERSION"
-	fi
+    if [ $CURRENT_BRANCH = "master" ]; then
+      git tag -a "$VERSION" -m "Auto generated proto $VERSION"
+    fi
     git push origin HEAD --tags
   else
     echo -e "\e[32mNo changes detected for $1\e[0m"
@@ -112,8 +113,8 @@ function commitAndPush {
   leaveDir
 }
 
-function git-remote-url-reachable {
-    git ls-remote "$1" CHECK_GIT_REMOTE_URL_REACHABILITY >/dev/null 2>&1
+function git-remote-url-reachable() {
+  git ls-remote "$1" CHECK_GIT_REMOTE_URL_REACHABILITY >/dev/null 2>&1
 }
 
 propagateAll
