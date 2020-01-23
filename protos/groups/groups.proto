@@ -29,7 +29,7 @@ service MruVGroupsService {
     }
     rpc UpdateGroup (Group) returns (GroupID) {
         option (google.api.http) = {
-            patch: "/v1/groups/{id}"
+            patch: "/v1/groups/{id.id}"
         };
     }
     rpc DeleteGroup (GroupID) returns (GroupID) {

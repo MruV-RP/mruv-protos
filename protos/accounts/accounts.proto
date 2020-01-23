@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package mruv;
 
-option go_package = "github.com/MruV-RP/mruv-pb-go/characters";
+option go_package = "github.com/MruV-RP/mruv-pb-go/accounts";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 import "accounts/accounts_model.proto";

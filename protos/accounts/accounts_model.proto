@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package mruv;
 
-option go_package = "github.com/MruV-RP/mruv-pb-go/characters";
+option go_package = "github.com/MruV-RP/mruv-pb-go/accounts";
 
 message AccountID {
     int64 id = 1;
