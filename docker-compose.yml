@@ -32,7 +32,7 @@ services:
   #   command: "-d /opt/include/google -l web"
 
   generate-web:
-    image: namely/protoc-all:1.25_0
+    image: namely/protoc-all:latest
     volumes:
       - .:/defs
     command: "-d /defs/protos -l web"
