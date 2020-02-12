@@ -8,13 +8,6 @@ import "google/api/annotations.proto"; //from https://github.com/googleapis/goog
 import "common/health.proto";
 import "groups/groups_model.proto";
 
-message GetGroupsRequest {
-    int32 limit = 1;
-}
-message GetGroupsResponse {
-    repeated Group groups = 1;
-}
-
 service MruVGroupsService {
     //CRUD
     rpc CreateGroup (Group) returns (GroupID) {
@@ -25,11 +18,6 @@ service MruVGroupsService {
     rpc GetGroup (GroupID) returns (Group) {
         option (google.api.http) = {
             get: "/v1/groups/{id}"
-        };
-    }
-    rpc UpdateGroup (Group) returns (GroupID) {
-        option (google.api.http) = {
-            patch: "/v1/groups/{id.id}"
         };
     }
     rpc DeleteGroup (GroupID) returns (GroupID) {
@@ -43,15 +31,39 @@ service MruVGroupsService {
         };
     }
 
+    rpc AddGroupMember(AddGroupMemberRequest) returns (AddGroupMemberResponse) {}
+    rpc RemoveGroupMember(RemoveGroupMemberRequest) returns (RemoveGroupMemberResponse) {}
+
     //Service status
     rpc GetServiceStatus (ServiceStatusRequest) returns (ServiceStatusResponse) {
         option (google.api.http) = {
-            get: "/v1/items/status"
+            get: "/v1/groups/status"
         };
     }
     rpc GetServiceVersion (VersionRequest) returns (VersionResponse) {
         option (google.api.http) = {
-            get: "/v1/items/version"
+            get: "/v1/groups/version"
         };
     }
+}
+
+message GetGroupsRequest {
+    int32 limit = 1;
+}
+message GetGroupsResponse {
+    repeated Group groups = 1;
+}
+
+message AddGroupMemberRequest {
+
+}
+message AddGroupMemberResponse {
+
+}
+
+message RemoveGroupMemberRequest {
+
+}
+message RemoveGroupMemberResponse {
+
 }

@@ -6,13 +6,13 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/accounts";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 import "accounts/accounts_model.proto";
+import "characters/characters_model.proto";
 
 service MruVAccountsService {
     rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse);
-
     rpc LogIn(LogInRequest) returns (LogInResponse);
-
     rpc GetAccount(AccountID) returns (Account);
+    rpc GetAccountCharacters(AccountID) returns (GetAccountCharactersResponse);
 }
 
 message RegisterAccountRequest {
@@ -34,4 +34,8 @@ message LogInRequest {
 message LogInResponse {
     bool success = 1;
     AccountID id = 2;
+}
+
+message GetAccountCharactersResponse {
+    repeated Character characters = 1;
 }
