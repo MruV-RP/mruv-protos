@@ -1,0 +1,176 @@
+syntax = "proto3";
+
+package mruv.devtools;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/devtools";
+
+import "google/api/annotations.proto";
+import "common/health.proto";
+import "devtools/devtools_model.proto";
+
+// The MruV developer tools service for mruv-devtools package.
+service MruVDevToolsService {
+    // Get saved positions.
+    rpc GetPositions(GetPositionsRequest) returns (GetPositionsResponse) {
+        option (google.api.http) = {
+            get: "/v1/devtools/positions"
+        };
+    }
+    
+    // Save position.
+    rpc SavePosition(SavePositionRequest) returns (SavePositionResponse) {
+        option (google.api.http) = {
+            post: "/v1/devtools/positions"
+        };
+    }
+
+    // Delete position.
+    rpc DeletePosition(DeletePositionRequest) returns (DeletePositionResponse) {
+        option (google.api.http) = {
+            delete: "/v1/devtools/position"
+        };
+    }
+
+    // Get saved outfit.
+    rpc GetOutfits(GetOutfitsRequest) returns (GetOutfitsResponse) {
+        option (google.api.http) = {
+            get: "/v1/devtools/outfits"
+        };
+    }
+
+    // Save outfit.
+    rpc SaveOutfit(SaveOutfitRequest) returns (SaveOutfitResponse) {
+        option (google.api.http) = {
+            post: "/v1/devtools/outfits"
+        };
+    }
+
+    // Get all saved animations.
+    rpc GetAnimations(GetAnimationsRequest) returns (GetAnimationsResponse) {
+        option (google.api.http) = {
+            get: "/v1/devtools/animations"
+        };
+    }
+
+    // Get saved animation by name.
+    rpc GetAnimation(GetAnimationRequest) returns (GetAnimationResponse) {
+        option (google.api.http) = {
+            get: "/v1/devtools/animations/{name}"
+        };
+    }
+
+    // Save animation.
+    rpc SaveAnimation(SaveAnimationRequest) returns (SaveAnimationResponse) {
+        option (google.api.http) = {
+            post: "/v1/devtools/animations"
+        };
+    }
+
+    //Get service status.
+    rpc GetServiceStatus(ServiceStatusRequest) returns (ServiceStatusResponse) {
+        option (google.api.http) = {
+            get: "/v1/devtools/status"
+        };
+    }
+    //Get service version.
+    rpc GetServiceVersion(VersionRequest) returns (VersionResponse) {
+        option (google.api.http) = {
+            get: "/v1/devtools/version"
+        };
+    }
+}
+
+//Get position request message.
+message GetPositionsRequest {
+    uint32 limit = 1;
+    string category = 2;
+    Player author = 3;
+}
+//Get position response message.
+message GetPositionsResponse {
+    message Row {
+        Position position = 1;
+        Player author = 2;
+    }
+
+    repeated Row positions = 1;
+}
+
+//Save position request message.
+message SavePositionRequest {
+    Position position = 1;
+}
+//Save position response message.
+message SavePositionResponse {
+    bool success = 1;
+}
+
+// Delete position request message.
+message DeletePositionRequest {
+    Position position = 1;
+}
+// Delete position response message.
+message DeletePositionResponse {
+    bool success = 1;
+}
+
+// Get outgits request message.
+message GetOutfitsRequest {
+    string name = 1;
+    string category = 2;
+    string author = 3;
+}
+// Get outfits response message.
+message GetOutfitsResponse {
+    message Row {
+        Outfit outfit = 1;
+        Player author = 2;
+    }
+
+    repeated Row outfits = 1;
+}
+
+// Save outfit request message.
+message SaveOutfitRequest {
+    Outfit outfit = 1;
+}
+// Save outfit response message.
+message SaveOutfitResponse {
+    bool success = 1;
+}
+
+// Get animations request message.
+message GetAnimationsRequest {
+    uint32 limit = 1;
+    string dict = 2;
+    string name = 3;
+}
+// Get animations response message.
+message GetAnimationsResponse {
+    message Row {
+        Animation animation = 1;
+        Player author = 2;
+    }
+
+    repeated Row animations = 1;
+}
+
+// Get animations request message.
+message GetAnimationRequest {
+    string dict = 1;
+    string name = 2;
+}
+// Get animation response message.
+message GetAnimationResponse {
+    Animation animation = 1;
+    Player author = 2;
+}
+
+// Save animation request message.
+message SaveAnimationRequest {
+    Animation animation = 1;
+}
+// Save animation response message.
+message SaveAnimationResponse {
+    bool success = 1;
+}

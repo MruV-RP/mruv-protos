@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package mruv.devtools;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/devtools";
+
+// Position structure.
+message Position {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+
+    // Short position name.
+    string name = 4;
+    // Description of the place which the position indicates.
+    string description = 5;
+}
+
+// GTA V player outfit structure.
+// You can find more information about RageMP outfits [here](https://wiki.rage.mp/index.php?title=Clothes "RageMP Clothes")
+message Outfit {
+    // Name of the outfit.
+    string name = 1;
+    // Category of the outfit.
+    string category = 2;
+}
+
+// GTA V animation structure.
+// You can find more information about RageMP outfits [here](https://wiki.rage.mp/index.php?title=Animations "RageMP Animations")
+message Animation {
+    // Animation dictionary name.
+    string dict = 1;
+    // Animation name.
+    string name = 2;
+    // Animation category, specified by author.
+    string readable_category = 3;
+
+    string category = 4;
+}
+
+// Player structure for storing authors of devtools saved records.
+message Player {
+    // Unique id.
+    int32 id = 1;
+    // Unique name.
+    string name = 2;
+    // Password hash.
+    string hash = 3;
+}
