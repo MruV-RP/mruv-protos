@@ -6,7 +6,7 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/items";
 
 //Item type data structure
 message ItemType {
-    ItemTypeID id = 1;
+    uint32 id = 1;
 
     //Short name of item type.
     string name = 2 ;
@@ -34,10 +34,10 @@ message ItemTypeID {
 
 //Item data structure.
 message Item {
-    ItemID id = 1;
+    uint32 id = 1;
 
     //ID of an item type.
-    ItemTypeID item_type_id = 2;
+    uint32 item_type_id = 2;
 
     //Current weight of the item.
     float weight = 3;
@@ -48,15 +48,15 @@ message Item {
 
 //Item ID.
 message ItemID {
-    uint64 id = 1;
+    uint32 id = 1;
 }
 
 //Container type data structure.
 message ContainerType {
-    ContainerTypeID id = 1;
+    uint32 id = 1;
 
     //ID of an item type.
-    ItemTypeID container_item_type_id = 2;
+    uint32 container_item_type_id = 2;
 
     //Max items in the container.
     uint32 max_number = 3;
@@ -67,7 +67,7 @@ message ContainerType {
     //Max weight of items in the container.
     float max_weight = 5;
 
-    repeated ItemTypeID valid_item_types = 8;
+    repeated int64 valid_item_types = 8;
 }
 
 //Container type ID.
@@ -77,13 +77,13 @@ message ContainerTypeID {
 
 //Container data structure.
 message Container {
-    ContainerID id = 1;
+    uint32 id = 1;
 
     //ID of an container type.
-    ContainerTypeID type_id = 2;
+    uint32 type_id = 2;
 
     //ID of container item representing container.
-    ItemID item_id = 3;
+    uint32 item_id = 3;
 
     //Number of items inside container.
     uint32 items_inside = 4;
@@ -100,11 +100,11 @@ message ContainerID {
 //Item inside container data structure.
 message InsideItem {
     //ID of container containing the item.
-    ContainerID container_id = 1;
+    uint32 container_id = 1;
 
     //ID of the item or the whole item.
     oneof item_or_id {
-        ItemID item_id = 2;
+        uint32 item_id = 2;
         Item item = 3;
     }
 
