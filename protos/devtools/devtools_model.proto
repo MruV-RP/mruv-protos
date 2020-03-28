@@ -41,7 +41,7 @@ message Animation {
 // Player structure for storing authors of devtools saved records.
 message Player {
     // Unique id.
-    int32 id = 1;
+    uint32 id = 1;
     // Unique name.
     string name = 2;
     // Password hash.

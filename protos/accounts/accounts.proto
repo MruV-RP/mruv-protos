@@ -22,7 +22,7 @@ message RegisterAccountRequest {
 
 message RegisterAccountResponse {
     bool success = 1;
-    AccountID id = 2;
+    uint32 account_id = 2;
 }
 
 message LogInRequest {
@@ -33,7 +33,7 @@ message LogInRequest {
 
 message LogInResponse {
     bool success = 1;
-    AccountID id = 2;
+    uint32 account_id = 2;
 }
 
 message GetAccountCharactersResponse {

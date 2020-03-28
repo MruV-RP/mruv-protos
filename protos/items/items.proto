@@ -126,21 +126,21 @@ service MruVItemService {
     //Get items inside a container.
     rpc GetContainerItems(GetContainerItemsRequest) returns (GetContainerItemsResponse) {
         option (google.api.http) = {
-            get: "/v1/containers/{container_id.id}/items"
+            get: "/v1/containers/{container_id}/items"
         };
     }
 
     //Pull item from container.
     rpc PullItem(PullItemRequest) returns (Item) {
         option (google.api.http) = {
-            delete: "/v1/containers/{container_id.id}/items/{item_id.id}"
+            delete: "/v1/containers/{container_id}/items/{item_id}"
         };
     }
 
     //Put item into container.
     rpc PutItem(PutItemRequest) returns (PutItemResponse) {
         option (google.api.http) = {
-            put: "/v1/containers/{container_id.id}/items/{item_id.id}"
+            put: "/v1/containers/{container_id}/items/{item_id}"
         };
     }
 
@@ -148,21 +148,21 @@ service MruVItemService {
     //This procedure change order of items inside container.
     rpc SortItems(SortItemsRequest) returns (SortItemsResponse) {
         option (google.api.http) = {
-            get: "/v1/containers/{container_id.id}/items/sort/{sort_by}"
+            get: "/v1/containers/{container_id}/items/sort/{sort_by}"
         };
     }
 
     //Retrieves from the container the list of items nearest to the given position.
     rpc GetNearestItems(GetNearestItemsRequest) returns (GetNearestItemsResponse) {
         option (google.api.http) = {
-            get: "/v1/containers/{container_id.id}/items/nearest/x/{position.x}/y/{position.y}/z/{position.z}"
+            get: "/v1/containers/{container_id}/items/nearest/x/{position.x}/y/{position.y}/z/{position.z}"
         };
     }
 
     //Trigger action associated with the item usage.
     rpc UseItem(UseItemRequest) returns (UseItemResponse) {
         option (google.api.http) = {
-            get: "/v1/items/{item_id.id}/use"
+            get: "/v1/items/{item_id}/use"
         };
     }
 
@@ -233,10 +233,10 @@ message GetContainerTypesResponse {
 //Request message for `MruVItemsService.PutItem`.
 message PutItemRequest {
     //ID of container where to put item.
-    ContainerID container_id = 1;
+    uint32 container_id = 1;
 
     //ID of item we wan to put in.
-    ItemID item_id = 2;
+    uint32 item_id = 2;
 
     oneof where {
         //Position used for sorting items
@@ -253,7 +253,7 @@ message PutItemResponse {
 //Request message for `MruVItemsService.GetContainerItems`.
 message GetContainerItemsRequest {
     //ID of container with items.
-    ContainerID container_id = 1;
+    uint32 container_id = 1;
     //Limit of the returned items.
     uint32 limit = 2;
 }
@@ -267,16 +267,16 @@ message GetContainerItemsResponse {
 //Request message for `MruVItemsService.PullItem`.
 message PullItemRequest {
     //ID of the container from which we pull out a item.
-    ContainerID container_id = 1;
+    uint32 container_id = 1;
     //ID of the item we want to pull out.
     //That item must be inside the container.
-    ItemID item_id = 2;
+    uint32 item_id = 2;
 }
 
 //Request message for `MruVItemsService.SortItems`.
 message SortItemsRequest {
     //ID of the container which contain items.
-    ContainerID container_id = 1;
+    uint32 container_id = 1;
     //Sorting mode.
     SortingMode sort_by = 2;
 }
@@ -292,7 +292,7 @@ message GetNearestItemsRequest {
     //Position from which to calculate the distance
     Position position = 1;
     //ID of container that contains items.
-    ContainerID container_id = 2;
+    uint32 container_id = 2;
     //The distance over which the items are ignored.
     double distance_limit = 3;
 }
@@ -305,7 +305,7 @@ message GetNearestItemsResponse {
 
 //Request message for `MruVItemsService.UseItem`.
 message UseItemRequest {
-    ItemID item_id = 1;
+    uint32 item_id = 1;
 }
 
 //Response message for `MruVItemsService.UseItem`.

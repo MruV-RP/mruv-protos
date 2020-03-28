@@ -5,7 +5,7 @@ package mruv;
 option go_package = "github.com/MruV-RP/mruv-pb-go/server";
 
 message ServerID {
-    int32 id = 1;
+    int64 id = 1;
 }
 
 // Data that describe server
