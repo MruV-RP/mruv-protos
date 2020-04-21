@@ -38,7 +38,7 @@ services:
     command: "-d /defs/protos -l web"
 
   generate-cpp:
-    image: namely/protoc-all:1.26_1
+    image: namely/protoc-all:latest
     volumes:
       - .:/defs
     command: "-d /defs/protos -l cpp"

@@ -51,7 +51,7 @@ function propagateFiles() {
     echo -e "\e[32mCloning repo: \e[92mhttps://github.com/MruV-RP/$reponame.git\e[0m"
 
     # Clone the repository down and set the branch to the automated one
-    git clone https://github.com/MruV-RP/$reponame.git $REPOPATH/$reponame
+    git clone git@github.com:MruV-RP/$reponame.git $REPOPATH/$reponame
     setupBranch $REPOPATH/$reponame
 
     # Copy the generated files into the repository
