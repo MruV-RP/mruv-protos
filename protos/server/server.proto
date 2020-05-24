@@ -1,27 +1,89 @@
 syntax = "proto3";
 
-package mruv;
+package mruv.server;
 
 option go_package = "github.com/MruV-RP/mruv-pb-go/server";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 import "server/server_model.proto";
 
-// The MruV server service provides procedures for managing game platform server actions
+// The MruV server service provides procedures for managing game platform server actions.
 service MruVServerService {
-    // Register instance of server for further managing
-    rpc RegisterServer(RegisterServerRequest) returns (RegisterServerResponse);
+    // Register instance of server for further managing.
+    rpc RegisterServer(ServerInfo) returns (ServerID) {
+        option (google.api.http) = {
+            post: "/v1/servers"
+        };
+    }
 
-    // Get game server status
-    rpc GetServerStatus(ServerID) returns (ServerStatus);
+    // Get all registered servers.
+    rpc GetRegisteredServers(GetRegisteredServersRequest) returns (GetRegisteredServersResponse) {
+        option (google.api.http) = {
+            get: "/v1/servers"
+        };
+    }
+
+    // Get game server status.
+    rpc GetServerInfo(ServerID) returns (ServerInfo) {
+        option (google.api.http) = {
+            get: "/v1/servers/{id}"
+        };
+    }
+
+    // Update game server status.
+    rpc UpdateServerStatus(UpdateServerStatusRequest) returns (UpdateServerStatusResponse) {
+        option (google.api.http) = {
+            patch: "/v1/servers/{id}/status"
+        };
+    }
+
+    // Stream of server events. Events are streamed back in real-time for chosen server.
+    rpc ServerEventsStream(ServerEventsStreamRequest) returns (stream ServerEvent) {}
+
 }
 
-// Request message for `MruVServerService`
-message RegisterServerRequest {
+// Request message for `MruVServerService.GetRegisteredServers`.
+message GetRegisteredServersRequest {
 
 }
 
-// Response message for `MruVServerService`
-message RegisterServerResponse {
+// Response message for `MruVServerService.GetRegisteredServers`.
+message GetRegisteredServersResponse {
+    repeated ServerInfo servers = 1;
+}
 
+// Request message for `MruVServerService.UpdateServerStatus`.
+message UpdateServerStatusRequest {
+    // Id of the server.
+    int64 id = 1;
+    // Status of the server.
+    ServerStatus status = 2;
+    // How many players are registered on that server.
+    int32 players = 3;
+}
+// Response message for `MruVServerService.UpdateServerStatus`.
+message UpdateServerStatusResponse {
+
+}
+
+// Request message for `MruVServerService.ServerEventsStream`.
+message ServerEventsStreamRequest {
+    // The ID of the server from which we want to receive events.
+    int64 id = 1;
+}
+
+// Server event.
+// Response message for `MruVServerService.ServerEventsStream`.
+message ServerEvent {
+    // Types of server events.
+    enum ServerEventType {
+        UNKNOWN = 0;
+        REGISTERED = 1;
+        SERVER_DOWN = 2;
+        SERVER_UP = 3;
+        PLAYERS_CHANGED = 4;
+    }
+
+    // Type of a server event.
+    ServerEventType type = 1;
 }
