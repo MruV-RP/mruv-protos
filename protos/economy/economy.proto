@@ -1,0 +1,152 @@
+syntax = "proto3";
+
+package mruv.economy;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/economy";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+service MruVEconomyService {
+    // Register price in economy system.
+    rpc RegisterProduct (RegisterProductRequest) returns (RegisterProductResponse) {
+        option (google.api.http) = {
+            post: "/v1/economy/product"
+        };
+    }
+
+    // Get product information.
+    rpc GetProduct (GetProductRequest) returns (GetProductResponse) {
+        option (google.api.http) = {
+            get: "/v1/economy/product/{name}"
+        };
+    }
+
+    // Update product information.
+    rpc UpdateProduct (UpdateProductRequest) returns (UpdateProductResponse) {
+        option (google.api.http) = {
+            patch: "/v1/economy/product/{name}"
+        };
+    }
+
+    // Update product price.
+    rpc UpdatePrice (UpdatePriceRequest) returns (UpdatePriceResponse) {
+        option (google.api.http) = {
+            patch: "/v1/economy/product/{name}/price"
+        };
+    }
+
+    // Get current value for registered price.
+    rpc GetPrice (GetPriceRequest) returns (GetPriceResponse) {
+        option (google.api.http) = {
+            get: "/v1/economy/product/{name}/price"
+        };
+    }
+
+    // Send information to the system, that the product has been purchased.
+    // This rpc call can affect a product price.
+    rpc BuyProduct (BuyProductRequest) returns (BuyProductResponse) {
+        option (google.api.http) = {
+            post: "/v1/economy/product/{name}/buy"
+        };
+    }
+
+    // Subscribe to events related to a product.
+    rpc WatchProduct (WatchProductRequest) returns (stream WatchProductResponse) {
+    }
+
+    // Subscribe to product price changes.
+    rpc WatchPrice(WatchPriceRequest) returns (stream WatchPriceResponse) {}
+}
+
+// Request message for rpc `RegisterProduct`.
+message RegisterProductRequest {
+    string name = 1;
+    string full_name = 2;
+    string description = 3;
+    int32 price_class = 4;
+    int32 price_ratio = 5;
+    int32 starting_price = 6;
+}
+// Response message for rpc `RegisterProduct`.
+message RegisterProductResponse {
+}
+
+// Request message for rpc `GetProduct`.
+message GetProductRequest {
+    string name = 1;
+}
+// Response message for rpc `GetProduct`.
+message GetProductResponse {
+    string name = 1;
+    string full_name = 2;
+    string description = 3;
+    int32 price_class = 4;
+    int32 price_ratio = 5;
+    int32 starting_price = 6;
+    int32 price = 7;
+}
+
+// Request message for rpc `UpdateProduct`.
+message UpdateProductRequest {
+    string name = 1;
+    string full_name = 2;
+    string description = 3;
+    int32 price_class = 4;
+    int32 price_ratio = 5;
+}
+// Response message for rpc `UpdateProduct`.
+message UpdateProductResponse {
+
+}
+
+// Request message for rpc `UpdatePrice`.
+message UpdatePriceRequest {
+    string name = 1;
+    int32 new_price = 2;
+}
+// Response message for rpc `UpdatePrice`.
+message UpdatePriceResponse {
+
+}
+
+// Request message for rpc `GetPrice`.
+message GetPriceRequest {
+    string name = 1;
+}
+// Response message for rpc `GetPrice`.
+message GetPriceResponse {
+    int32 price = 1;
+}
+
+// Request message for rpc `BuyProduct`.
+message BuyProductRequest {
+    string name = 1;
+}
+// Response message for rpc `BuyProduct`.
+message BuyProductResponse {
+
+}
+
+// Request message for rpc `WatchProduct`.
+message WatchProductRequest {
+    string name = 1;
+}
+// Response message for rpc `WatchProduct`.
+message WatchProductResponse {
+    enum ProductEvent {
+        UNKNOWN = 0;
+        PRICE_CHANGED = 1;
+        PRODUCT_BOUGHT = 2;
+        PRODUCT_INFO_UPDATED = 3;
+    }
+    ProductEvent event = 1;
+}
+
+// Request message for rpc `WatchPrice`.
+message WatchPriceRequest {
+    string name = 1;
+}
+// Response message for rpc `WatchPrice`.
+message WatchPriceResponse {
+    int32 price = 1;
+}
