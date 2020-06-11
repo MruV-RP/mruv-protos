@@ -38,6 +38,7 @@ service MruVServerService {
     }
 
     // Stream of server events. Events are streamed back in real-time for chosen server.
+    //TODO: Change name to: SubscribeServerEvents
     rpc ServerEventsStream(ServerEventsStreamRequest) returns (stream ServerEvent) {}
 
 }
