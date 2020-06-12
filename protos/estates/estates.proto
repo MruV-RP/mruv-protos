@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package mruv.estates;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/estates";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+service MruVEstateService {
+    // Create real estate.
+    rpc CreateEstate(CreateEstateRequest) returns (CreateEstateResponse) {
+        option (google.api.http) = {
+            post: "/v1/estates"
+        };
+    }
+
+    // Get real estate.
+    rpc GetEstate(GetEstateRequest) returns (GetEstateResponse) {
+        option (google.api.http) = {
+            get: "/v1/estates/{id}"
+        };
+    }
+
+    // Update real estate.
+    rpc UpdateEstate(UpdateEstateRequest) returns (UpdateEstateResponse) {
+        option (google.api.http) = {
+            patch: "/v1/estates/{id}"
+        };
+    }
+
+    // Delete real estate.
+    rpc DeleteEstate(DeleteEstateRequest) returns (DeleteEstateResponse) {
+        option (google.api.http) = {
+            delete: "/v1/estates/{id}"
+        };
+    }
+
+    // Get all created real estates.
+    rpc GetEstates(GetEstatesRequest) returns (GetEstatesResponse) {
+        option (google.api.http) = {
+            get: "/v1/estates"
+        };
+    }
+}
+
+message Estate {
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+
+    repeated int64 entrances = 4;
+    repeated int64 gates = 5;
+}
+
+
+
+// Request message for rpc `CreateEstate`.
+message CreateEstateRequest {
+
+}
+// Response message for rpc `CreateEstate`.
+message CreateEstateResponse {
+
+}
+
+// Request message for rpc `GetEstate`.
+message GetEstateRequest {
+
+}
+// Response message for rpc `GetEstate`.
+message GetEstateResponse {
+
+}
+
+// Request message for rpc `UpdateEstate`.
+message UpdateEstateRequest {
+
+}
+// Response message for rpc `UpdateEstate`.
+message UpdateEstateResponse {
+
+}
+
+// Request message for rpc `DeleteEstate`.
+message DeleteEstateRequest {
+
+}
+// Response message for rpc `DeleteEstate`.
+message DeleteEstateResponse {
+
+}
+
+// Request message for rpc `GetEstates`.
+message GetEstatesRequest {
+
+}
+// Response message for rpc `GetEstates`.
+message GetEstatesResponse {
+
+}

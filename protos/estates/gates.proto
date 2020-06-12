@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package mruv.estates;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/estates";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+
+service MruVGatesService {
+    // Create a gate or a moving objects objects group.
+    rpc CreateGate(CreateGateRequest) returns (CreateGateResponse) {
+        option (google.api.http) = {
+            post: "/v1/estates/{estate_id}/gates"
+        };
+    }
+
+    // Get a gate or a moving objects objects group.
+    rpc GetGate(GetGateRequest) returns (GetGateResponse) {
+        option (google.api.http) = {
+            get: "/v1/estate/{estate_id}/gates/{id}"
+        };
+    }
+
+    // Update a gate or a moving objects objects group.
+    rpc UpdateGate(UpdateGateRequest) returns (UpdateGateResponse) {
+        option (google.api.http) = {
+            patch: "/v1/estate/{estate_id}/gates/{id}"
+        };
+    }
+
+    // Delete a gate or a moving objects objects group.
+    rpc DeleteGate(DeleteGateRequest) returns (DeleteGateResponse) {
+        option (google.api.http) = {
+            delete: "/v1/estates/{estate_id}/gates/{id}"
+        };
+    }
+}
+
+message Gate {
+    int64 id = 1;
+    int64 estate_id = 2;
+
+
+}
+
+
+
+// Request message for rpc `CreateGate`.
+message CreateGateRequest {
+
+}
+// Response message for rpc `CreateGate`.
+message CreateGateResponse {
+
+}
+
+// Request message for rpc `GetGate`.
+message GetGateRequest {
+
+}
+// Response message for rpc `GetGate`.
+message GetGateResponse {
+
+}
+
+// Request message for rpc `UpdateGate`.
+message UpdateGateRequest {
+
+}
+// Response message for rpc `UpdateGate`.
+message UpdateGateResponse {
+
+}
+
+// Request message for rpc `DeleteGate`.
+message DeleteGateRequest {
+
+}
+// Response message for rpc `DeleteGate`.
+message DeleteGateResponse {
+
+}
