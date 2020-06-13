@@ -1,37 +1,52 @@
 syntax = "proto3";
 
-package mruv.estates;
+package mruv.entrances;
 
-option go_package = "github.com/MruV-RP/mruv-pb-go/estates";
+option go_package = "github.com/MruV-RP/mruv-pb-go/entrances";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 
+// The MruV entrances service provides procedures for managing an entrances to estates and teleportation to locations.
 service MruVEntrancesService {
     // Create an entrance to building or teleport to location.
     rpc CreateEntrance(CreateEntranceRequest) returns (CreateEntranceResponse) {
         option (google.api.http) = {
-            post: "/v1/estates/{estate_id}/entrance"
+            post: "/v1/entrances"
         };
     }
 
     // Get an entrance to building or a teleport to location.
     rpc GetEntrance(GetEntranceRequest) returns (GetEntranceResponse) {
         option (google.api.http) = {
-            get: "/v1/estates/{estate_id}/entrance/{id}"
+            get: "/v1/entrances/{id}"
         };
     }
 
     // Update an entrance to building or a teleport to location.
     rpc UpdateEntrance(UpdateEntranceRequest) returns (UpdateEntranceResponse) {
         option (google.api.http) = {
-            patch: "/v1/estates/{estate_id}/entrance/{id}"
+            patch: "/v1/entrances/{id}"
         };
     }
 
     // Delete an entrance to building or a teleport to location.
     rpc DeleteEntrance(DeleteEntranceRequest) returns (DeleteEntranceResponse) {
         option (google.api.http) = {
-            delete: "/v1/states/{estate_id}/entrance/{id}"
+            delete: "/v1/entrances/{id}"
+        };
+    }
+
+    // Lock entrance.
+    rpc LockEntrance(LockRequest) returns (LockResponse) {
+        option (google.api.http) = {
+            post: "/v1/entrances/{id}/lock"
+        };
+    }
+    
+    // Unload entrance.
+    rpc Unlock(UnlockRequest) returns (UnlockResponse) {
+        option (google.api.http) = {
+            post: "/v1/entrances/{id}/unlock"
         };
     }
 }
@@ -56,7 +71,7 @@ message CreateEntranceResponse {
 
 // Request message for rpc `GetEntrance`.
 message GetEntranceRequest {
-
+    int64 id = 1;
 }
 // Response message for rpc `GetEntrance`.
 message GetEntranceResponse {
@@ -65,7 +80,7 @@ message GetEntranceResponse {
 
 // Request message for rpc `UpdateEntrance`.
 message UpdateEntranceRequest {
-
+    int64 id = 1;
 }
 // Response message for rpc `UpdateEntrance`.
 message UpdateEntranceResponse {
@@ -74,9 +89,29 @@ message UpdateEntranceResponse {
 
 // Request message for rpc `DeleteEntrance`.
 message DeleteEntranceRequest {
-
+    int64 id = 1;
 }
 // Response message for rpc `DeleteEntrance`.
 message DeleteEntranceResponse {
+
+}
+
+// Request message for rpc `Lock`.
+message LockRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `Lock`.
+message LockResponse {
+
+}
+
+// Request message for rpc `Unlock`.
+message UnlockRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `Unlock`.
+message UnlockResponse {
 
 }

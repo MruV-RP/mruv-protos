@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package mruv.vehicles;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/vehicles";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+// The MruV vehicles service provides procedures for managing vehicles.
+service MruVVehiclesService {
+    // Create a vehicle.
+    rpc CreateVehicle(CreateVehicleRequest) returns (CreateVehicleResponse) {
+        option (google.api.http) = {
+            post: "/v1/vehicles"
+        };
+    }
+
+    // Get a vehicle.
+    rpc GetVehicle(GetVehicleRequest) returns (GetVehicleResponse) {
+        option (google.api.http) = {
+            get: "/v1/vehicles/{id}"
+        };
+    }
+
+    // Update a vehicle.
+    rpc UpdateVehicle(UpdateVehicleRequest) returns (UpdateVehicleResponse) {
+        option (google.api.http) = {
+            patch: "/v1/vehicles/{id}"
+        };
+    }
+
+    // Delete a vehicle.
+    rpc DeleteVehicle(DeleteVehicleRequest) returns (DeleteVehicleResponse) {
+        option (google.api.http) = {
+            delete: "/v1/vehicles/{id}"
+        };
+    }
+}
+
+// Request message for rpc `CreateVehicle`.
+message CreateVehicleRequest {
+
+}
+// Response message for rpc `CreateVehicle`.
+message CreateVehicleResponse {
+
+}
+
+// Request message for rpc `GetVehicle`.
+message GetVehicleRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `GetVehicle`.
+message GetVehicleResponse {
+
+}
+
+// Request message for rpc `UpdateVehicle`.
+message UpdateVehicleRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `UpdateVehicle`.
+message UpdateVehicleResponse {
+
+}
+
+// Request message for rpc `DeleteVehicle`.
+message DeleteVehicleRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `DeleteVehicle`.
+message DeleteVehicleResponse {
+
+}

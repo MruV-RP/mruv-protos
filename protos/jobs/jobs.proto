@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package mruv.jobs;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/jobs";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+// The MruV jobs service provides procedures for managing jobs.
+service MruVJobsService {
+    // Create a job.
+    rpc CreateJob(CreateJobRequest) returns (CreateJobResponse) {
+        option (google.api.http) = {
+            post: "/v1/jobs"
+        };
+    }
+
+    // Get a job.
+    rpc GetJob(GetJobRequest) returns (GetJobResponse) {
+        option (google.api.http) = {
+            get: "/v1/jobs/{id}"
+        };
+    }
+
+    // Update a job.
+    rpc UpdateJob(UpdateJobRequest) returns (UpdateJobResponse) {
+        option (google.api.http) = {
+            patch: "/v1/jobs/{id}"
+        };
+    }
+
+    // Delete a job.
+    rpc DeleteJob(DeleteJobRequest) returns (DeleteJobResponse) {
+        option (google.api.http) = {
+            delete: "/v1/jobs/{id}"
+        };
+    }
+}
+
+// Request message for rpc `CreateJob`.
+message CreateJobRequest {
+
+}
+// Response message for rpc `CreateJob`.
+message CreateJobResponse {
+
+}
+
+// Request message for rpc `GetJob`.
+message GetJobRequest {
+    int64 id = 1;
+}
+// Response message for rpc `GetJob`.
+message GetJobResponse {
+
+}
+
+// Request message for rpc `UpdateJob`.
+message UpdateJobRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `UpdateJob`.
+message UpdateJobResponse {
+
+}
+
+// Request message for rpc `DeleteJob`.
+message DeleteJobRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `DeleteJob`.
+message DeleteJobResponse {
+
+}

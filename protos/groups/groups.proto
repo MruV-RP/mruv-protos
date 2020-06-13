@@ -8,6 +8,7 @@ import "google/api/annotations.proto"; //from https://github.com/googleapis/goog
 import "common/health.proto";
 import "groups/groups_model.proto";
 
+// The MruV groups service provides procedures for managing groups.
 service MruVGroupsService {
     //CRUD
     rpc CreateGroup (Group) returns (GroupID) {

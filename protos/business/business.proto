@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package mruv.business;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/business";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+// The MruV business service provides procedures for managing businesses.
+service MruVBusinessService {
+    // Create a business.
+    rpc CreateBusiness(CreateBusinessRequest) returns (CreateBusinessResponse) {
+        option (google.api.http) = {
+            post: "/v1/business"
+        };
+    }
+
+    // Get a business.
+    rpc GetBusiness(GetBusinessRequest) returns (GetBusinessResponse) {
+        option (google.api.http) = {
+            get: "/v1/business/{id}"
+        };
+    }
+
+    // Update a business.
+    rpc UpdateBusiness(UpdateBusinessRequest) returns (UpdateBusinessResponse) {
+        option (google.api.http) = {
+            patch: "/v1/business/{id}"
+        };
+    }
+
+    // Delete a business.
+    rpc DeleteBusiness(DeleteBusinessRequest) returns (DeleteBusinessResponse) {
+        option (google.api.http) = {
+            delete: "/v1/business/{id}"
+        };
+    }
+}
+
+// Request message for rpc `CreateBusiness`.
+message CreateBusinessRequest {
+
+}
+// Response message for rpc `CreateBusiness`.
+message CreateBusinessResponse {
+
+}
+
+// Request message for rpc `GetBusiness`.
+message GetBusinessRequest {
+    int64 id =  1;
+}
+// Response message for rpc `GetBusiness`.
+message GetBusinessResponse {
+
+}
+
+// Request message for rpc `UpdateBusiness`.
+message UpdateBusinessRequest {
+    int64 id = 1;
+}
+// Response message for rpc `UpdateBusiness`.
+message UpdateBusinessResponse {
+
+}
+
+// Request message for rpc `DeleteBusiness`.
+message DeleteBusinessRequest {
+    int64 id = 1;
+}
+// Response message for rpc `DeleteBusiness`.
+message DeleteBusinessResponse {
+
+}
+

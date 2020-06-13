@@ -6,6 +6,7 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/economy";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 
+// The MruV economy service provides procedures for managing prices and economy.
 service MruVEconomyService {
     // Register price in economy system.
     rpc RegisterProduct (RegisterProductRequest) returns (RegisterProductResponse) {

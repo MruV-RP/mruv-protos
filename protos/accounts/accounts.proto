@@ -8,6 +8,7 @@ import "google/api/annotations.proto"; //from https://github.com/googleapis/goog
 import "accounts/accounts_model.proto";
 import "characters/characters_model.proto";
 
+// The MruV accounts service provides procedures for managing players accounts.
 service MruVAccountsService {
     rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse);
     rpc LogIn(LogInRequest) returns (LogInResponse);

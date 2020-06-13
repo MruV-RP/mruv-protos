@@ -1,38 +1,66 @@
 syntax = "proto3";
 
-package mruv.estates;
+package mruv.gates;
 
-option go_package = "github.com/MruV-RP/mruv-pb-go/estates";
+option go_package = "github.com/MruV-RP/mruv-pb-go/gates";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 
-
+// The MruV gates service provides procedures for managing gates and moving objects groups.
 service MruVGatesService {
     // Create a gate or a moving objects objects group.
     rpc CreateGate(CreateGateRequest) returns (CreateGateResponse) {
         option (google.api.http) = {
-            post: "/v1/estates/{estate_id}/gates"
+            post: "/v1/gates"
         };
     }
 
     // Get a gate or a moving objects objects group.
     rpc GetGate(GetGateRequest) returns (GetGateResponse) {
         option (google.api.http) = {
-            get: "/v1/estate/{estate_id}/gates/{id}"
+            get: "/v1/gates/{id}"
         };
     }
 
     // Update a gate or a moving objects objects group.
     rpc UpdateGate(UpdateGateRequest) returns (UpdateGateResponse) {
         option (google.api.http) = {
-            patch: "/v1/estate/{estate_id}/gates/{id}"
+            patch: "/v1/gates/{id}"
         };
     }
 
     // Delete a gate or a moving objects objects group.
     rpc DeleteGate(DeleteGateRequest) returns (DeleteGateResponse) {
         option (google.api.http) = {
-            delete: "/v1/estates/{estate_id}/gates/{id}"
+            delete: "/v1/gates/{id}"
+        };
+    }
+
+    // Lock a gate. Locked gate cannot be opened.
+    rpc Lock(LockRequest) returns (LockResponse) {
+        option (google.api.http) = {
+            post: "/v1/gates/{id}/lock"
+        };
+    }
+
+    // Unload a gate, so it can be open.
+    rpc Unlock(UnlockRequest) returns (UnlockResponse) {
+        option (google.api.http) = {
+            post: "/v1/gates/{id}/unlock"
+        };
+    }
+
+    // Opens a gate.
+    rpc Open(OpenRequest) returns (OpenResponse) {
+        option (google.api.http) = {
+            post: "/v1/gates/{id}/open"
+        };
+    }
+
+    // Close a gate.
+    rpc Close(CloseRequest) returns (CloseResponse) {
+        option (google.api.http) = {
+            post: "/v1/gates/{id}/close"
         };
     }
 }
@@ -57,15 +85,18 @@ message CreateGateResponse {
 
 // Request message for rpc `GetGate`.
 message GetGateRequest {
+    int64 id = 1;
 
 }
 // Response message for rpc `GetGate`.
 message GetGateResponse {
+    int64 id = 1;
 
 }
 
 // Request message for rpc `UpdateGate`.
 message UpdateGateRequest {
+    int64 id = 1;
 
 }
 // Response message for rpc `UpdateGate`.
@@ -75,9 +106,51 @@ message UpdateGateResponse {
 
 // Request message for rpc `DeleteGate`.
 message DeleteGateRequest {
+    int64 id = 1;
 
 }
 // Response message for rpc `DeleteGate`.
 message DeleteGateResponse {
 
 }
+
+// Request message for rpc `Lock`.
+message LockRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `Lock`.
+message LockResponse {
+
+}
+
+// Request message for rpc `Unlock`.
+message UnlockRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `Unlock`.
+message UnlockResponse {
+
+}
+
+// Request message for rpc `Open`.
+message OpenRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `Open`.
+message OpenResponse {
+
+}
+
+// Request message for rpc `Close`.
+message CloseRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `Close`.
+message CloseResponse {
+
+}
+

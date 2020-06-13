@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package mruv.houses;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/houses";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+// The MruV houses service provides procedures for managing houses.
+service MruVHousesService {
+    // Create a house.
+    rpc CreateHouse(CreateHouseRequest) returns (CreateHouseResponse) {
+        option (google.api.http) = {
+            post: "/v1/houses"
+        };
+    }
+
+    // Get a house.
+    rpc GetHouse(GetHouseRequest) returns (GetHouseResponse) {
+        option (google.api.http) = {
+            get: "/v1/houses/{id}"
+        };
+    }
+
+    // Update a house.
+    rpc UpdateHouse(UpdateHouseRequest) returns (UpdateHouseResponse) {
+        option (google.api.http) = {
+            patch: "/v1/houses/{id}"
+        };
+    }
+
+    // Delete a house.
+    rpc DeleteHouse(DeleteHouseRequest) returns (DeleteHouseResponse) {
+        option (google.api.http) = {
+            delete: "/v1/houses/{id}"
+        };
+    }
+}
+
+// Request message for rpc `CreateHouse`.
+message CreateHouseRequest {
+
+}
+// Response message for rpc `CreateHouse`.
+message CreateHouseResponse {
+
+}
+
+// Request message for rpc `GetHouse`.
+message GetHouseRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `GetHouse`.
+message GetHouseResponse {
+
+}
+
+// Request message for rpc `UpdateHouse`.
+message UpdateHouseRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `UpdateHouse`.
+message UpdateHouseResponse {
+
+}
+
+// Request message for rpc `DeleteHouse`.
+message DeleteHouseRequest {
+    int64 id = 1;
+
+}
+// Response message for rpc `DeleteHouse`.
+message DeleteHouseResponse {
+
+}

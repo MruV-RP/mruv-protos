@@ -6,6 +6,7 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/estates";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 
+// The MruV estate service provides procedures for managing buildings and other estates.
 service MruVEstateService {
     // Create real estate.
     rpc CreateEstate(CreateEstateRequest) returns (CreateEstateResponse) {
@@ -65,6 +66,7 @@ message CreateEstateResponse {
 
 // Request message for rpc `GetEstate`.
 message GetEstateRequest {
+    int64 id = 1;
 
 }
 // Response message for rpc `GetEstate`.
@@ -74,6 +76,7 @@ message GetEstateResponse {
 
 // Request message for rpc `UpdateEstate`.
 message UpdateEstateRequest {
+    int64 id = 1;
 
 }
 // Response message for rpc `UpdateEstate`.
@@ -83,6 +86,7 @@ message UpdateEstateResponse {
 
 // Request message for rpc `DeleteEstate`.
 message DeleteEstateRequest {
+    int64 id = 1;
 
 }
 // Response message for rpc `DeleteEstate`.
@@ -92,6 +96,7 @@ message DeleteEstateResponse {
 
 // Request message for rpc `GetEstates`.
 message GetEstatesRequest {
+    int64 id = 1;
 
 }
 // Response message for rpc `GetEstates`.

@@ -34,28 +34,28 @@ service MruVPunishmentsService {
     // Put player in an admin jail.
     rpc AdminJail (AdminJailRequest) returns (AdminJailResponse) {
         option (google.api.http) = {
-            post: "/v1/punishments/aj/{player}"
+            post: "/v1/punishments/aj/{character}"
         };
     }
 
     // Deactivate a specific player ban.
     rpc UnBan (UnBanRequest) returns (UnBanResponse) {
         option (google.api.http) = {
-            delete: "/v1/punishments/ban/{id}"
+            delete: "/v1/punishments/ban/{ban_id}"
         };
     }
 
     // Deactivate a specific player warning. If a player was banned by reaching the warning limit, a player will be unbanned.
     rpc UnWarn (UnWarnRequest) returns (UnWarnResponse) {
         option (google.api.http) = {
-            delete: "/v1/punishments/warn/{id}"
+            delete: "/v1/punishments/warn/{warn_id}"
         };
     }
 
     // Remove player from admin jail.
     rpc UnAdminJail (UnAdminJailRequest) returns (UnAdminJailResponse) {
         option (google.api.http) = {
-            delete: "/v1/punishments/unaj/{player}"
+            delete: "/v1/punishments/unaj/{character}"
         };
     }
 
@@ -76,28 +76,28 @@ service MruVPunishmentsService {
     // Get player admin jail time.
     rpc GetPlayerAdminJail (GetPlayerAdminJailRequest) returns (GetPlayerAdminJailResponse) {
         option (google.api.http) = {
-            get: "/v1/punishments/aj/{player}"
+            get: "/v1/punishments/aj/{character}"
         };
     }
 
     // Get ban info.
-    rpc GetBan (GetBanRequest) returns (Ban) {
+    rpc GetBan (GetBanRequest) returns (BanMessage) {
         option (google.api.http) = {
             get: "/v1/punishments/bans/{id}"
         };
     }
 
     // Get warn info.
-    rpc GetWarn (GetWarnRequest) returns (Warn) {
+    rpc GetWarn (GetWarnRequest) returns (WarnMessage) {
         option (google.api.http) = {
             get: "/v1/punishments/warns/{id}"
         };
     }
 
     // Get block info.
-    rpc GetBlock (GetBlockRequest) returns (Block) {
+    rpc GetBlock (GetBlockRequest) returns (BlockMessage) {
         option (google.api.http) = {
-            get: "/v1/punishments/blocks/{character}"
+            get: "/v1/punishments/blocks/{id}"
         };
     }
 
@@ -117,28 +117,28 @@ service MruVPunishmentsService {
     }
 
     // Subscribe to ban events.
-    rpc WatchBans(WatchBansRequest) returns (stream Ban) {}
+    rpc WatchBans(WatchBansRequest) returns (stream BanMessage) {}
 
     // Subscribe to block events.
-    rpc WatchBlocks(WatchBlocksRequest) returns (stream Block) {}
+    rpc WatchBlocks(WatchBlocksRequest) returns (stream BlockMessage) {}
 
     // Subscribe to warn events.
-    rpc WatchWarns(WatchWarnsRequest) returns (stream Warn) {}
+    rpc WatchWarns(WatchWarnsRequest) returns (stream WarnMessage) {}
 
     // Subscribe to admin jail events.
-    rpc WatchAdminJails(WatchAdminJailsRequest) returns (stream AdminJail) {}
+    rpc WatchAdminJails(WatchAdminJailsRequest) returns (stream AdminJailMessage) {}
 
     // Subscribe to unban events.
-    rpc WatchUnBans(WatchUnBansRequest) returns (stream UnBan) {}
+    rpc WatchUnBans(WatchUnBansRequest) returns (stream UnBanMessage) {}
 
     // Subscribe to unblock events.
-    rpc WatchUnBlocks(WatchUnBlocksRequest) returns (stream UnBlock) {}
+    rpc WatchUnBlocks(WatchUnBlocksRequest) returns (stream UnBlockMessage) {}
 
     // Subscribe to unwarn events.
-    rpc WatchUnWarns(WatchUnWarnsRequest) returns (stream UnWarn) {}
+    rpc WatchUnWarns(WatchUnWarnsRequest) returns (stream UnWarnMessage) {}
 
     // Subscribe to admin jail release events.
-    rpc WatchUnAdminJails(WatchUnAdminJailsRequest) returns (stream UnAdminJail) {}
+    rpc WatchUnAdminJails(WatchUnAdminJailsRequest) returns (stream UnAdminJailMessage) {}
 
     // Subscribe to player punishments and acquittals.
     rpc WatchPlayerPunishments(WatchPlayerPunishmentsRequest) returns (stream WatchPlayerPunishmentsResponse) {}
@@ -147,7 +147,7 @@ service MruVPunishmentsService {
     rpc WatchPunishments(WatchPunishmentsRequest) returns (stream WatchPunishmentsResponse) {}
 }
 
-message Ban {
+message BanMessage {
     int64 player = 1;
     int64 character = 2;
     string ip = 3;
@@ -171,7 +171,7 @@ message Ban {
     int64 unban_admin = 10;
 }
 
-message Warn {
+message WarnMessage {
     int64 player = 1;
     // A character, that was given a warning.
     int64 character = 2;
@@ -195,7 +195,7 @@ message Warn {
     int64 unwarn_admin = 9;
 }
 
-message Block {
+message BlockMessage {
     // A player, that owns a blocked character.
     int64 player = 1;
     // Blocked character.
@@ -217,7 +217,7 @@ message Block {
     int64 unblock_admin = 8;
 }
 
-message AdminJail {
+message AdminJailMessage {
     // A player, that owns a jailed character.
     int64 player = 1;
     // Character that has been jailed.
@@ -234,22 +234,22 @@ message AdminJail {
     int32 jail_time = 6;
 }
 
-message UnBan {
+message UnBanMessage {
     int64 player = 1;
     int64 ban_id = 2;
 }
 
-message UnBlock {
+message UnBlockMessage {
     int64 player = 1;
     int64 block_id = 2;
 }
 
-message UnWarn {
+message UnWarnMessage {
     int64 player = 1;
     int64 warn_id = 2;
 }
 
-message UnAdminJail {
+message UnAdminJailMessage {
     int64 player = 1;
     int64 character = 2;
 }
@@ -257,11 +257,10 @@ message UnAdminJail {
 enum PunishmentType {
     UNKNOWN = 0;
     BAN = 1;
-    BLOCk = 2;
+    BLOCK = 2;
     WARN = 3;
     ADMIN_JAIL = 4;
 }
-
 
 // Request message for rpc `Ban`.
 message BanRequest {
@@ -348,7 +347,7 @@ message UnWarnResponse {
 
 // Request message for rpc `UnAdminJail`.
 message UnAdminJailRequest {
-    int64 player = 1;
+    int64 character = 1;
 }
 // Response message for rpc `UnAdminJail`.
 message UnAdminJailResponse {
@@ -362,7 +361,7 @@ message GetPlayerBansRequest {
 }
 // Response message for rpc `GetPlayerBans`.
 message GetPlayerBansResponse {
-    repeated Ban bans = 1;
+    repeated BanMessage bans = 1;
 }
 
 // Request message for rpc `GetPlayerWarns`.
@@ -371,7 +370,7 @@ message GetPlayerWarnsRequest {
 }
 // Response message for rpc `GetPlayerWarns`.
 message GetPlayerWarnsResponse {
-    repeated Warn warns = 1;
+    repeated WarnMessage warns = 1;
 }
 
 // Request message for rpc `GetPlayerAdminJail`.
@@ -408,6 +407,7 @@ message GetBlockRequest {
 // Request message for rpc `IsPlayerBanned`.
 message IsPlayerBannedRequest {
     int64 player = 1;
+    string ip = 2;
 }
 // Response message for rpc `IsPlayerBanned`.
 message IsPlayerBannedResponse {
