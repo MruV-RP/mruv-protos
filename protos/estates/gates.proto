@@ -66,10 +66,8 @@ service MruVGatesService {
 }
 
 message Gate {
-    int64 id = 1;
-    int64 estate_id = 2;
-
-
+    uint32 id = 1;
+    uint32 estate_id = 2;
 }
 
 
@@ -85,18 +83,18 @@ message CreateGateResponse {
 
 // Request message for rpc `GetGate`.
 message GetGateRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `GetGate`.
 message GetGateResponse {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 
 // Request message for rpc `UpdateGate`.
 message UpdateGateRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `UpdateGate`.
@@ -106,7 +104,7 @@ message UpdateGateResponse {
 
 // Request message for rpc `DeleteGate`.
 message DeleteGateRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `DeleteGate`.
@@ -116,7 +114,7 @@ message DeleteGateResponse {
 
 // Request message for rpc `Lock`.
 message LockRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `Lock`.
@@ -126,7 +124,7 @@ message LockResponse {
 
 // Request message for rpc `Unlock`.
 message UnlockRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `Unlock`.
@@ -136,7 +134,7 @@ message UnlockResponse {
 
 // Request message for rpc `Open`.
 message OpenRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `Open`.
@@ -146,7 +144,7 @@ message OpenResponse {
 
 // Request message for rpc `Close`.
 message CloseRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `Close`.

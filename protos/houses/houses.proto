@@ -48,7 +48,7 @@ message CreateHouseResponse {
 
 // Request message for rpc `GetHouse`.
 message GetHouseRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `GetHouse`.
@@ -58,7 +58,7 @@ message GetHouseResponse {
 
 // Request message for rpc `UpdateHouse`.
 message UpdateHouseRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `UpdateHouse`.
@@ -68,7 +68,7 @@ message UpdateHouseResponse {
 
 // Request message for rpc `DeleteHouse`.
 message DeleteHouseRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `DeleteHouse`.

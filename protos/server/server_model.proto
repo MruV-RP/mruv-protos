@@ -5,7 +5,7 @@ package mruv.server;
 option go_package = "github.com/MruV-RP/mruv-pb-go/server";
 
 message ServerID {
-    int64 id = 1;
+    uint32 id = 1;
 }
 
 enum ServerStatus {
@@ -17,7 +17,7 @@ enum ServerStatus {
 // Data that describe server.
 message ServerInfo {
     // Id of the server.
-    int64 id = 1;
+    uint32 id = 1;
     // Short name of the server.
     string name = 2;
     // Host (ip) of the server.
@@ -29,5 +29,5 @@ message ServerInfo {
     // Status of the server.
     ServerStatus status = 6;
     // How many players are playing on the server.
-    int32 players = 7;
+    uint32 players = 7;
 }

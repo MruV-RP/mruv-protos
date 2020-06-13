@@ -56,11 +56,11 @@ message GetRegisteredServersResponse {
 // Request message for `MruVServerService.UpdateServerStatus`.
 message UpdateServerStatusRequest {
     // Id of the server.
-    int64 id = 1;
+    uint32 id = 1;
     // Status of the server.
     ServerStatus status = 2;
     // How many players are registered on that server.
-    int32 players = 3;
+    uint32 players = 3;
 }
 // Response message for `MruVServerService.UpdateServerStatus`.
 message UpdateServerStatusResponse {
@@ -70,7 +70,7 @@ message UpdateServerStatusResponse {
 // Request message for `MruVServerService.ServerEventsStream`.
 message ServerEventsStreamRequest {
     // The ID of the server from which we want to receive events.
-    int64 id = 1;
+    uint32 id = 1;
 }
 
 // Server event.

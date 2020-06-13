@@ -64,9 +64,9 @@ message RegisterProductRequest {
     string name = 1;
     string full_name = 2;
     string description = 3;
-    int32 price_class = 4;
-    int32 price_ratio = 5;
-    int32 starting_price = 6;
+    uint32 price_class = 4;
+    float price_ratio = 5;
+    uint32 starting_price = 6;
 }
 // Response message for rpc `RegisterProduct`.
 message RegisterProductResponse {
@@ -81,10 +81,10 @@ message GetProductResponse {
     string name = 1;
     string full_name = 2;
     string description = 3;
-    int32 price_class = 4;
-    int32 price_ratio = 5;
-    int32 starting_price = 6;
-    int32 price = 7;
+    uint32 price_class = 4;
+    float price_ratio = 5;
+    uint32 starting_price = 6;
+    uint32 price = 7;
 }
 
 // Request message for rpc `UpdateProduct`.
@@ -92,8 +92,8 @@ message UpdateProductRequest {
     string name = 1;
     string full_name = 2;
     string description = 3;
-    int32 price_class = 4;
-    int32 price_ratio = 5;
+    uint32 price_class = 4;
+    float price_ratio = 5;
 }
 // Response message for rpc `UpdateProduct`.
 message UpdateProductResponse {
@@ -103,7 +103,7 @@ message UpdateProductResponse {
 // Request message for rpc `UpdatePrice`.
 message UpdatePriceRequest {
     string name = 1;
-    int32 new_price = 2;
+    uint32 new_price = 2;
 }
 // Response message for rpc `UpdatePrice`.
 message UpdatePriceResponse {
@@ -116,7 +116,7 @@ message GetPriceRequest {
 }
 // Response message for rpc `GetPrice`.
 message GetPriceResponse {
-    int32 price = 1;
+    uint32 price = 1;
 }
 
 // Request message for rpc `BuyProduct`.
@@ -149,5 +149,5 @@ message WatchPriceRequest {
 }
 // Response message for rpc `WatchPrice`.
 message WatchPriceResponse {
-    int32 price = 1;
+    uint32 price = 1;
 }

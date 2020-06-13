@@ -48,7 +48,7 @@ message CreateJobResponse {
 
 // Request message for rpc `GetJob`.
 message GetJobRequest {
-    int64 id = 1;
+    uint32 id = 1;
 }
 // Response message for rpc `GetJob`.
 message GetJobResponse {
@@ -57,7 +57,7 @@ message GetJobResponse {
 
 // Request message for rpc `UpdateJob`.
 message UpdateJobRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `UpdateJob`.
@@ -67,7 +67,7 @@ message UpdateJobResponse {
 
 // Request message for rpc `DeleteJob`.
 message DeleteJobRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `DeleteJob`.

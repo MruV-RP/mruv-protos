@@ -48,7 +48,7 @@ message CreateVehicleResponse {
 
 // Request message for rpc `GetVehicle`.
 message GetVehicleRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `GetVehicle`.
@@ -58,7 +58,7 @@ message GetVehicleResponse {
 
 // Request message for rpc `UpdateVehicle`.
 message UpdateVehicleRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `UpdateVehicle`.
@@ -68,7 +68,7 @@ message UpdateVehicleResponse {
 
 // Request message for rpc `DeleteVehicle`.
 message DeleteVehicleRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `DeleteVehicle`.

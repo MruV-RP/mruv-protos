@@ -48,7 +48,7 @@ message CreateBusinessResponse {
 
 // Request message for rpc `GetBusiness`.
 message GetBusinessRequest {
-    int64 id =  1;
+    uint32 id =  1;
 }
 // Response message for rpc `GetBusiness`.
 message GetBusinessResponse {
@@ -57,7 +57,7 @@ message GetBusinessResponse {
 
 // Request message for rpc `UpdateBusiness`.
 message UpdateBusinessRequest {
-    int64 id = 1;
+    uint32 id = 1;
 }
 // Response message for rpc `UpdateBusiness`.
 message UpdateBusinessResponse {
@@ -66,7 +66,7 @@ message UpdateBusinessResponse {
 
 // Request message for rpc `DeleteBusiness`.
 message DeleteBusinessRequest {
-    int64 id = 1;
+    uint32 id = 1;
 }
 // Response message for rpc `DeleteBusiness`.
 message DeleteBusinessResponse {

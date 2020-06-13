@@ -48,7 +48,7 @@ message CreateOrganizationResponse {
 
 // Request message for rpc `GetOrganization`.
 message GetOrganizationRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `GetOrganization`.
@@ -58,7 +58,7 @@ message GetOrganizationResponse {
 
 // Request message for rpc `UpdateOrganization`.
 message UpdateOrganizationRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `UpdateOrganization`.
@@ -68,7 +68,7 @@ message UpdateOrganizationResponse {
 
 // Request message for rpc `DeleteOrganization`.
 message DeleteOrganizationRequest {
-    int64 id = 1;
+    uint32 id = 1;
 
 }
 // Response message for rpc `DeleteOrganization`.

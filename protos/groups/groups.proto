@@ -49,7 +49,7 @@ service MruVGroupsService {
 }
 
 message GetGroupsRequest {
-    int32 limit = 1;
+    uint32 limit = 1;
 }
 message GetGroupsResponse {
     repeated Group groups = 1;
