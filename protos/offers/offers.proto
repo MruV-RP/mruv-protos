@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package mruv.offers;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/offers";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+// The MruV offers service.
+service MruVOffersService {
+    // Create an offer.
+    rpc CreateOffer(CreateOfferRequest) returns (CreateOfferResponse) {
+        option (google.api.http) = {
+            post: "/v1/offers"
+        };
+    }
+    
+    // Get an offer.
+    rpc GetOffer(GetOfferRequest) returns (GetOfferResponse) {
+        option (google.api.http) = {
+            get: "/v1/offers/{id}"
+        };
+    }
+    
+    // Update an offer.
+    rpc UpdateOffer(UpdateOfferRequest) returns (UpdateOfferResponse) {
+        option (google.api.http) = {
+            patch: "/v1/offers/{id}"
+        };
+    }
+    
+    // Delete an offer.
+    rpc DeleteOffer(DeleteOfferRequest) returns (DeleteOfferResponse) {
+        option (google.api.http) = {
+            delete: "/v1/offers/{id}"
+        };
+    }
+}
+
+// Request message for rpc `CreateOffer`.
+message CreateOfferRequest {
+
+}
+// Response message for rpc `CreateOffer`.
+message CreateOfferResponse {
+
+}
+
+// Request message for rpc `GetOffer`.
+message GetOfferRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `GetOffer`.
+message GetOfferResponse {
+
+}
+
+// Request message for rpc `UpdateOffer`.
+message UpdateOfferRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `UpdateOffer`.
+message UpdateOfferResponse {
+
+}
+
+// Request message for rpc `DeleteOffer`.
+message DeleteOfferRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `DeleteOffer`.
+message DeleteOfferResponse {
+
+}
