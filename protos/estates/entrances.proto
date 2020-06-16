@@ -49,11 +49,41 @@ service MruVEntrancesService {
             post: "/v1/entrances/{id}/unlock"
         };
     }
+    
+    // Find gate that is closest to a specific position.
+    rpc FindNearestEntrance(FindNearestEntranceRequest) returns (FindNearestEntranceResponse) {
+        option (google.api.http) = {
+            get: "/v1/entrances/nearest"
+        };
+    }
+
+    // Enter an entrance
+    rpc Enter(EnterRequest) returns (EnterResponse) {
+        option (google.api.http) = {
+            post: "/v1/entrances/{id}/enter"
+        };
+    }
 }
 
 message Entrance {
     uint32 id = 1;
     uint32 estate_id = 2;
+
+    message EntranceDoor {
+        string name = 1;
+        string message = 2;
+        int32 icon = 3;
+        int32 marker = 4;
+        float x = 5;
+        float y = 6;
+        float z = 7;
+        int32 vw = 8;
+        int32 int = 9;
+        uint32 estate_id = 10;
+    }
+
+    EntranceDoor out = 3;
+    EntranceDoor in = 4;
 }
 
 
@@ -111,5 +141,28 @@ message UnlockRequest {
 }
 // Response message for rpc `Unlock`.
 message UnlockResponse {
+
+}
+
+// Request message for rpc `FindNearestEntrance`.
+message FindNearestEntranceRequest {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+
+    float max_distance = 4;
+}
+// Response message for rpc `FindNearestEntrance`.
+message FindNearestEntranceResponse {
+    uint32 id = 1;
+    float distance = 2;
+}
+
+// Request message for rpc `Enter`.
+message EnterRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `Enter`.
+message EnterResponse {
 
 }

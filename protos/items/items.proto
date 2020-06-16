@@ -11,163 +11,162 @@ import "common/spatial.proto";
 
 // The MruV items service provides procedures for managing items and containers
 service MruVItemService {
-    //Create new item.
+    // Create new item.
     rpc CreateItem (Item) returns (ItemID) {
         option (google.api.http) = {
             post: "/v1/items"
         };
     }
 
-    //Get item by id.
+    // Get item by id.
     rpc GetItem (ItemID) returns (Item) {
         option (google.api.http) = {
             get: "/v1/items/{id}"
         };
     }
 
-    //Delete item by id.
+    // Delete item by id.
     rpc DeleteItem (ItemID) returns (ItemID) {
         option (google.api.http) = {
             delete: "/v1/items/{id}"
         };
     }
 
-    //Gets all items.
-    rpc GetItems(GetItemsRequest) returns (GetItemsResponse) {
+    // Gets all items.
+    rpc GetItems (GetItemsRequest) returns (GetItemsResponse) {
         option (google.api.http) = {
             get: "/v1/items"
         };
     }
 
-    //Create item type.
+    // Create item type.
     rpc CreateItemType (ItemType) returns (ItemTypeID) {
         option (google.api.http) = {
             post: "/v1/itemTypes"
         };
     }
 
-    //Get item type by id.
+    // Get item type by id.
     rpc GetItemType (ItemTypeID) returns (ItemType) {
         option (google.api.http) = {
             get: "/v1/itemTypes/{id}"
         };
     }
 
-    //Delete item type by id.
+    // Delete item type by id.
     rpc DeleteItemType (ItemTypeID) returns (ItemTypeID) {
         option (google.api.http) = {
             delete: "/v1/itemTypes/{id}"
         };
     }
 
-    //Gets all item types.
-    rpc GetItemTypes(GetItemTypesRequest) returns (GetItemTypesResponse) {
+    // Gets all item types.
+    rpc GetItemTypes (GetItemTypesRequest) returns (GetItemTypesResponse) {
         option (google.api.http) = {
             get: "/v1/itemTypes"
         };
     }
 
-    //Create container.
+    // Create container.
     rpc CreateContainer (Container) returns (ContainerID) {
         option (google.api.http) = {
             post: "/v1/containers"
         };
     }
 
-    //Get container by id.
+    // Get container by id.
     rpc GetContainer (ContainerID) returns (Container) {
         option (google.api.http) = {
             get: "/v1/containers/{id}"
         };
     }
 
-    //Delete container by id.
+    // Delete container by id.
     rpc DeleteContainer (ContainerID) returns (ContainerID) {
         option (google.api.http) = {
             delete: "/v1/containers/{id}"
         };
     }
 
-    //Get all containers.
-    rpc GetContainers(GetContainersRequest) returns (GetContainersResponse) {
+    // Get all containers.
+    rpc GetContainers (GetContainersRequest) returns (GetContainersResponse) {
         option (google.api.http) = {
             get: "/v1/containers"
         };
     }
 
-    //Create container type.
+    // Create a container type.
     rpc CreateContainerType (ContainerType) returns (ContainerTypeID) {
         option (google.api.http) = {
             post: "/v1/containerTypes"
         };
     }
 
-    //Get container type by id.
+    // Get a container type by id.
     rpc GetContainerType (ContainerTypeID) returns (ContainerType) {
         option (google.api.http) = {
             get: "/v1/containerTypes/{id}"
         };
     }
 
-    //Detele container type by id.
+    // Delete a container type by id.
     rpc DeleteContainerType (ContainerTypeID) returns (ContainerTypeID) {
         option (google.api.http) = {
             delete: "/v1/containerTypes/{id}"
         };
     }
 
-    //Get all container types.
-    rpc GetContainerTypes(GetContainerTypesRequest) returns (GetContainerTypesResponse) {
+    // Get all container types.
+    rpc GetContainerTypes (GetContainerTypesRequest) returns (GetContainerTypesResponse) {
         option (google.api.http) = {
             get: "/v1/containerTypes"
         };
     }
 
-    //Get items inside a container.
-    rpc GetContainerItems(GetContainerItemsRequest) returns (GetContainerItemsResponse) {
+    // Get items inside a container.
+    rpc GetContainerItems (GetContainerItemsRequest) returns (GetContainerItemsResponse) {
         option (google.api.http) = {
             get: "/v1/containers/{container_id}/items"
         };
     }
 
-    //Pull item from container.
-    rpc PullItem(PullItemRequest) returns (Item) {
+    // Pull an item from container.
+    rpc PullItem (PullItemRequest) returns (Item) {
         option (google.api.http) = {
             delete: "/v1/containers/{container_id}/items/{item_id}"
         };
     }
 
-    //Put item into container.
-    rpc PutItem(PutItemRequest) returns (PutItemResponse) {
+    // Put an item into container.
+    rpc PutItem (PutItemRequest) returns (PutItemResponse) {
         option (google.api.http) = {
             put: "/v1/containers/{container_id}/items/{item_id}"
         };
     }
 
-    //Sort items inside container.
-    //This procedure change order of items inside container.
-    rpc SortItems(SortItemsRequest) returns (SortItemsResponse) {
+    // Sort items inside container.
+    // This procedure change order of items inside container.
+    rpc SortItems (SortItemsRequest) returns (SortItemsResponse) {
         option (google.api.http) = {
             get: "/v1/containers/{container_id}/items/sort/{sort_by}"
         };
     }
 
-    //Retrieves from the container the list of items nearest to the given position.
-    rpc GetNearestItems(GetNearestItemsRequest) returns (GetNearestItemsResponse) {
+    // Retrieves from the container the list of items nearest to the given position.
+    rpc GetNearestItems (GetNearestItemsRequest) returns (GetNearestItemsResponse) {
         option (google.api.http) = {
             get: "/v1/containers/{container_id}/items/nearest/x/{position.x}/y/{position.y}/z/{position.z}"
         };
     }
 
-    //Trigger action associated with the item usage.
-    rpc UseItem(UseItemRequest) returns (UseItemResponse) {
+    // Trigger action associated with the item usage.
+    rpc UseItem (UseItemRequest) returns (UseItemResponse) {
         option (google.api.http) = {
             get: "/v1/items/{item_id}/use"
         };
     }
 
-
-    //Get service health status.
+    // Get service health status.
     rpc GetServiceStatus (ServiceStatusRequest) returns (ServiceStatusResponse) {
         option (google.api.http) = {
             get: "/v1/items/status"
@@ -181,7 +180,6 @@ service MruVItemService {
         };
     }
 }
-
 
 // Request message for `MruVItemsService.GetItems`.
 message GetItemsRequest {

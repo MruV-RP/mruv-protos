@@ -63,13 +63,19 @@ service MruVGatesService {
             post: "/v1/gates/{id}/close"
         };
     }
+
+    // Find gate that is closest to a specific position.
+    rpc FindNearestGate(FindNearestGateRequest) returns (FindNearestGateResponse) {
+        option (google.api.http) = {
+            get: "/v1/gates/nearest"
+        };
+    }
 }
 
 message Gate {
     uint32 id = 1;
     uint32 estate_id = 2;
 }
-
 
 
 // Request message for rpc `CreateGate`.
@@ -150,5 +156,19 @@ message CloseRequest {
 // Response message for rpc `Close`.
 message CloseResponse {
 
+}
+
+// Request message for rpc `FindNearestGate`.
+message FindNearestGateRequest {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+
+    float max_distance = 4;
+}
+// Response message for rpc `FindNearestGate`.
+message FindNearestGateResponse {
+    uint32 id = 1;
+    float distance = 2;
 }
 

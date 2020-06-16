@@ -8,6 +8,7 @@ import "google/api/annotations.proto"; //from https://github.com/googleapis/goog
 import "characters/characters.proto";
 
 // The MruV accounts service provides procedures for managing players accounts.
+// This service is an additional/intermediary service between the ORY Kratos & ORY Hydra service.
 service MruVAccountsService {
     rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse);
     rpc LogIn(LogInRequest) returns (LogInResponse);

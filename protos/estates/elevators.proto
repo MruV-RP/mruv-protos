@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package mruv.elevators;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/elevators";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+// The MruV entrances service provides procedures for managing an elevators.
+// Elevators allow all players in the elevator area to move between building floors.
+// Floor change is processed in following steps:
+// 1. Someone chooses a floor
+// 1. Doors closing event is fired
+// 2. Doors closed event is fired.
+// 3. Everyone in a elevator are registered as players, that will be teleported to chosen floor.
+// 4. X seconds delay (elevator is moving)
+// 5. Teleport players to other floor elevator
+// 6. Doors opening
+// 7. Doors opened - end
+// You can define a one-man pseudo-elevator where only point 5 is executed.
+service MruVElevatorsService {
+    // Create an elevator.
+    rpc CreateElevator(CreateElevatorRequest) returns (CreateElevatorResponse) {
+        option (google.api.http) = {
+            post: "/v1/elevators"
+        };
+    }
+
+    // Get an elevator.
+    rpc GetElevator(GetElevatorRequest) returns (GetElevatorResponse) {
+        option (google.api.http) = {
+            get: "/v1/elevators/{id}"
+        };
+    }
+
+    // Update an elevator.
+    rpc UpdateElevator(UpdateElevatorRequest) returns (UpdateElevatorResponse) {
+        option (google.api.http) = {
+            patch: "/v1/elevators/{id}"
+        };
+    }
+
+    // Delete an elevator.
+    rpc DeleteElevator(DeleteElevatorRequest) returns (DeleteElevatorResponse) {
+        option (google.api.http) = {
+            delete: "/v1/elevators/{id}"
+        };
+    }
+
+    // Get available elevator floors.
+    rpc GetElevatorFloors(GetElevatorFloorsRequest) returns (GetElevatorFloorsResponse) {
+        option (google.api.http) = {
+            get: "/v1/elevators/{id}/floors"
+        };
+    }
+}
+
+// Request message for rpc `CreateElevator`.
+message CreateElevatorRequest {
+
+}
+// Response message for rpc `CreateElevator`.
+message CreateElevatorResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `GetElevator`.
+message GetElevatorRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `GetElevator`.
+message GetElevatorResponse {
+
+}
+
+// Request message for rpc `UpdateElevator`.
+message UpdateElevatorRequest {
+    uint32 id = 2;
+}
+// Response message for rpc `UpdateElevator`.
+message UpdateElevatorResponse {
+
+}
+
+// Request message for rpc `DeleteElevator`.
+message DeleteElevatorRequest {
+    uint32 id = 3;
+}
+// Response message for rpc `DeleteElevator`.
+message DeleteElevatorResponse {
+
+}
+
+// Request message for rpc `GetElevatorFloors`.
+message GetElevatorFloorsRequest {
+
+}
+// Response message for rpc `GetElevatorFloors`.
+message GetElevatorFloorsResponse {
+
+}

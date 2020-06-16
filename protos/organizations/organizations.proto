@@ -35,6 +35,21 @@ service MruVOrganizationsService {
             delete: "/v1/organizations/{id}"
         };
     }
+
+    // Assign an organization leader. Leader is a main administrator of a organization, have all rights to manage organization.
+    // If the organization leader already exists, the leader will be overwritten.
+    rpc AssignLeader(AssignLeaderRequest) returns (AssignLeaderResponse) {
+        option (google.api.http) = {
+            put: "/v1/organizations/{id}/leader"
+        };
+    }
+
+    //
+    rpc UnassignLeader(UnassignLeaderRequest) returns (UnassignLeaderResponse) {
+        option (google.api.http) = {
+            delete: "/v1/organizations/{id}/leader"
+        };
+    }
 }
 
 // Request message for rpc `CreateOrganization`.
@@ -73,5 +88,23 @@ message DeleteOrganizationRequest {
 }
 // Response message for rpc `DeleteOrganization`.
 message DeleteOrganizationResponse {
+
+}
+
+// Request message for rpc `AssignLeader`.
+message AssignLeaderRequest {
+
+}
+// Response message for rpc `AssignLeader`.
+message AssignLeaderResponse {
+
+}
+
+// Request message for rpc `UnassignLeader`.
+message UnassignLeaderRequest {
+
+}
+// Response message for rpc `UnassignLeader`.
+message UnassignLeaderResponse {
 
 }

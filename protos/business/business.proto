@@ -7,6 +7,9 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/business";
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 
 // The MruV business service provides procedures for managing businesses.
+// Business can be owned by a player or organisation. Every business have it's own group and products to sell.
+// Business can have rights to an estates.
+// Every business has its own type and depends on it, business provides different services.
 service MruVBusinessService {
     // Create a business.
     rpc CreateBusiness(CreateBusinessRequest) returns (CreateBusinessResponse) {
@@ -46,7 +49,14 @@ service MruVBusinessService {
     // Assign an estate to a business.
     rpc AssignEstate(AssignEstateRequest) returns (AssignEstateResponse) {
         option (google.api.http) = {
-            post: "/v1/business/{id}/estates"
+            post: "/v1/business/{business_id}/estates"
+        };
+    }
+
+    //
+    rpc UnassignEstate(UnassignEstateRequest) returns (UnassignEstateResponse) {
+        option (google.api.http) = {
+            delete: "/v1/business/{business_id}/estates/{estate_id}"
         };
     }
 
@@ -99,6 +109,9 @@ message Business {
 message CreateBusinessRequest {
     string name = 1;
     string description = 2;
+
+    // Purchase price in economy system.
+    uint32 product_id = 3;
 }
 // Response message for rpc `CreateBusiness`.
 message CreateBusinessResponse {
@@ -144,12 +157,22 @@ message AssignOwnerResponse {
 
 // Request message for rpc `AssignEstate`.
 message AssignEstateRequest {
-    uint32 id = 1;
+    uint32 business_id = 1;
     uint32 estate_id = 2;
 }
 // Response message for rpc `AssignEstate`.
 message AssignEstateResponse {
+    uint32 estate_count = 1;
+}
 
+// Request message for rpc `UnassignEstate`.
+message UnassignEstateRequest {
+    uint32 business_id = 1;
+    uint32 estate_id = 2;
+}
+// Response message for rpc `UnassignEstate`.
+message UnassignEstateResponse {
+    uint32 estate_count = 1;
 }
 
 // Request message for rpc `BuyBusiness`.

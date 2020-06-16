@@ -56,6 +56,34 @@ service MruVEstateService {
             delete: "/v1/estates/{estate_id}/gates/{gate_id}"
         };
     }
+
+    // Get all estate gates.
+    rpc GetEstateGates(GetEstateGatesRequest) returns (GetEstateGatesResponse) {
+        option (google.api.http) = {
+            get: "/v1/estate/{estate_id}/gates"
+        };
+    }
+
+    // Add an entrance to estate.
+    rpc AddEntrance(AddEntranceRequest) returns (AddEntranceResponse) {
+        option (google.api.http) = {
+            post: "/v1/estates/{estate_id}/entrances"
+        };
+    }
+
+    // Remove an entrance from estate.
+    rpc RemoveEntrance(RemoveEntranceRequest) returns (RemoveEntranceResponse) {
+        option (google.api.http) = {
+            delete: "/v1/estates/{estate_id}/entrances/{entrance_id}"
+        };
+    }
+
+    // Get all estate entrances.
+    rpc GetEstateEntrances(GetEstateEntrancesRequest) returns (GetEstateEntrancesResponse) {
+        option (google.api.http) = {
+            get: "/v1/estate/{estate_id}/entrances"
+        };
+    }
 }
 
 message Estate {
@@ -65,6 +93,7 @@ message Estate {
 
     repeated uint32 entrances = 4;
     repeated uint32 gates = 5;
+    repeated uint32 rooms = 6;
 }
 
 
@@ -123,7 +152,7 @@ message AddGateRequest {
 }
 // Response message for rpc `AddGate`.
 message AddGateResponse {
-
+    uint32 gate_count = 1;
 }
 
 // Request message for rpc `DeleteGate`.
@@ -133,5 +162,43 @@ message DeleteGateRequest {
 }
 // Response message for rpc `DeleteGate`.
 message DeleteGateResponse {
+    uint32 gate_count = 1;
+}
+
+// Request message for rpc `GetEstateGates`.
+message GetEstateGatesRequest {
+
+}
+// Response message for rpc `GetEstateGates`.
+message GetEstateGatesResponse {
+
+}
+
+// Request message for rpc `AddEntrance`.
+message AddEntranceRequest {
+    uint32 estate_id = 1;
+    uint32 entrance_id = 2;
+}
+// Response message for rpc `AddEntrance`.
+message AddEntranceResponse {
+    uint32 entrance_count = 1;
+}
+
+// Request message for rpc `RemoveEntrance`.
+message RemoveEntranceRequest {
+    uint32 estate_id = 1;
+    uint32 entrance_id = 2;
+}
+// Response message for rpc `RemoveEntrance`.
+message RemoveEntranceResponse {
+    uint32 entrance_count = 1;
+}
+
+// Request message for rpc `GetEstateEntrances`.
+message GetEstateEntrancesRequest {
+
+}
+// Response message for rpc `GetEstateEntrances`.
+message GetEstateEntrancesResponse {
 
 }

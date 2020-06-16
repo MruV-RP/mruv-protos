@@ -8,15 +8,6 @@ import "google/api/annotations.proto";
 import "common/health.proto";
 import "common/spatial.proto";
 
-//requests & response messages
-message DeathStreamRequest {
-    repeated DeathType death_types = 1;
-}
-
-message DeathStreamResponse {
-    Character character = 1;
-    DeathType death_type = 2;
-}
 
 service MruVCharactersService {
     // Create a character.
@@ -131,4 +122,13 @@ message DeleteCharacterRequest {
 // Response message for rpc `DeleteCharacter`.
 message DeleteCharacterResponse {
 
+}
+
+message DeathStreamRequest {
+    repeated DeathType death_types = 1;
+}
+
+message DeathStreamResponse {
+    Character character = 1;
+    DeathType death_type = 2;
 }
