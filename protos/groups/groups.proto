@@ -6,7 +6,6 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/groups";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
 import "common/health.proto";
-import "groups/groups_model.proto";
 
 // The MruV groups service provides procedures for managing groups.
 service MruVGroupsService {
@@ -47,6 +46,30 @@ service MruVGroupsService {
         };
     }
 }
+
+message PermissionID {
+    uint32 id = 1;
+}
+
+message Permission {
+    uint32 id = 1;
+    string name = 2;
+    string role = 3;
+}
+
+message GroupID {
+    uint32 id = 1;
+}
+
+message Group {
+    uint32 id = 1;
+    string name = 3;
+    string description = 4;
+
+    repeated Permission permissions = 5;
+    repeated uint32 members = 6;
+}
+
 
 message GetGroupsRequest {
     uint32 limit = 1;

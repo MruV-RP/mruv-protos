@@ -11,28 +11,35 @@ service MruVEconomyService {
     // Register price in economy system.
     rpc RegisterProduct (RegisterProductRequest) returns (RegisterProductResponse) {
         option (google.api.http) = {
-            post: "/v1/economy/product"
+            post: "/v1/economy/products"
         };
     }
 
     // Get product information.
     rpc GetProduct (GetProductRequest) returns (GetProductResponse) {
         option (google.api.http) = {
-            get: "/v1/economy/product/{name}"
+            get: "/v1/economy/products/{name}"
         };
     }
 
     // Update product information.
     rpc UpdateProduct (UpdateProductRequest) returns (UpdateProductResponse) {
         option (google.api.http) = {
-            patch: "/v1/economy/product/{name}"
+            patch: "/v1/economy/products/{name}"
+        };
+    }
+
+    //
+    rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse) {
+        option (google.api.http) = {
+            delete: "/v1/economy/products/{name}"
         };
     }
 
     // Update product price.
     rpc UpdatePrice (UpdatePriceRequest) returns (UpdatePriceResponse) {
         option (google.api.http) = {
-            patch: "/v1/economy/product/{name}/price"
+            patch: "/v1/economy/products/{name}/price"
         };
     }
 
@@ -70,11 +77,13 @@ message RegisterProductRequest {
 }
 // Response message for rpc `RegisterProduct`.
 message RegisterProductResponse {
+    uint32 id = 1;
 }
 
 // Request message for rpc `GetProduct`.
 message GetProductRequest {
-    string name = 1;
+    uint32 id = 1;
+    string name = 2;
 }
 // Response message for rpc `GetProduct`.
 message GetProductResponse {
@@ -89,11 +98,12 @@ message GetProductResponse {
 
 // Request message for rpc `UpdateProduct`.
 message UpdateProductRequest {
-    string name = 1;
-    string full_name = 2;
-    string description = 3;
-    uint32 price_class = 4;
-    float price_ratio = 5;
+    uint32 id = 1;
+    string name = 2;
+    string full_name = 3;
+    string description = 4;
+    uint32 price_class = 5;
+    float price_ratio = 6;
 }
 // Response message for rpc `UpdateProduct`.
 message UpdateProductResponse {
@@ -102,17 +112,29 @@ message UpdateProductResponse {
 
 // Request message for rpc `UpdatePrice`.
 message UpdatePriceRequest {
-    string name = 1;
-    uint32 new_price = 2;
+    uint32 id = 1;
+    string name = 2;
+    uint32 new_price = 3;
 }
 // Response message for rpc `UpdatePrice`.
 message UpdatePriceResponse {
 
 }
 
+// Request message for rpc `DeleteProduct`.
+message DeleteProductRequest {
+    uint32 id = 1;
+    string name = 2;
+}
+// Response message for rpc `DeleteProduct`.
+message DeleteProductResponse {
+
+}
+
 // Request message for rpc `GetPrice`.
 message GetPriceRequest {
-    string name = 1;
+    uint32 id = 1;
+    string name = 2;
 }
 // Response message for rpc `GetPrice`.
 message GetPriceResponse {
@@ -121,7 +143,8 @@ message GetPriceResponse {
 
 // Request message for rpc `BuyProduct`.
 message BuyProductRequest {
-    string name = 1;
+    uint32 id = 1;
+    string name = 2;
 }
 // Response message for rpc `BuyProduct`.
 message BuyProductResponse {
@@ -130,7 +153,8 @@ message BuyProductResponse {
 
 // Request message for rpc `WatchProduct`.
 message WatchProductRequest {
-    string name = 1;
+    uint32 id = 1;
+    string name = 2;
 }
 // Response message for rpc `WatchProduct`.
 message WatchProductResponse {
@@ -139,13 +163,15 @@ message WatchProductResponse {
         PRICE_CHANGED = 1;
         PRODUCT_BOUGHT = 2;
         PRODUCT_INFO_UPDATED = 3;
+        PRODUCT_DELETED = 4;
     }
     ProductEvent event = 1;
 }
 
 // Request message for rpc `WatchPrice`.
 message WatchPriceRequest {
-    string name = 1;
+    uint32 id = 1;
+    string name = 2;
 }
 // Response message for rpc `WatchPrice`.
 message WatchPriceResponse {

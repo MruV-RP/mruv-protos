@@ -35,15 +35,37 @@ service MruVOffersService {
             delete: "/v1/offers/{id}"
         };
     }
+
+    // Accept an offer and proceed transaction.
+    rpc AcceptOffer(AcceptOfferRequest) returns (AcceptOfferResponse) {
+        option (google.api.http) = {
+            post: "/v1/offers/{id}/accept"
+        };
+    }
+}
+
+enum OfferType {
+    UNKNOWN = 0;
+
 }
 
 // Request message for rpc `CreateOffer`.
 message CreateOfferRequest {
+    string name = 1;
+    string description = 2;
+    string offer = 3;
+
+    int64 end_date = 4;
+    uint32 price = 5;
+
+    OfferType offer_type = 6;
+    uint32 offer_entity_id = 7;
+
 
 }
 // Response message for rpc `CreateOffer`.
 message CreateOfferResponse {
-
+    uint32 id = 1;
 }
 
 // Request message for rpc `GetOffer`.
@@ -70,5 +92,14 @@ message DeleteOfferRequest {
 }
 // Response message for rpc `DeleteOffer`.
 message DeleteOfferResponse {
+
+}
+
+// Request message for rpc `AcceptOffer`.
+message AcceptOfferRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `AcceptOffer`.
+message AcceptOfferResponse {
 
 }

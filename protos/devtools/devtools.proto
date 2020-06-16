@@ -114,7 +114,7 @@ message DeletePositionResponse {
     bool success = 1;
 }
 
-// Get outgits request message.
+// Get outfits request message.
 message GetOutfitsRequest {
     string name = 1;
     string category = 2;

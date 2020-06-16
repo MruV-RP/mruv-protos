@@ -16,7 +16,7 @@ service MruVEstateService {
     }
 
     // Get real estate.
-    rpc GetEstate(GetEstateRequest) returns (GetEstateResponse) {
+    rpc GetEstate(GetEstateRequest) returns (Estate) {
         option (google.api.http) = {
             get: "/v1/estates/{id}"
         };
@@ -42,6 +42,20 @@ service MruVEstateService {
             get: "/v1/estates"
         };
     }
+
+    // Add a gate to an estate.
+    rpc AddGate(AddGateRequest) returns (AddGateResponse) {
+        option (google.api.http) = {
+            post: "/v1/estates/{estate_id}/gates"
+        };
+    }
+
+    // Delete a gate from estate.
+    rpc DeleteGate(DeleteGateRequest) returns (DeleteGateResponse) {
+        option (google.api.http) = {
+            delete: "/v1/estates/{estate_id}/gates/{gate_id}"
+        };
+    }
 }
 
 message Estate {
@@ -57,11 +71,12 @@ message Estate {
 
 // Request message for rpc `CreateEstate`.
 message CreateEstateRequest {
-
+    string name = 1;
+    string description = 2;
 }
 // Response message for rpc `CreateEstate`.
 message CreateEstateResponse {
-
+    uint32 id = 1;
 }
 
 // Request message for rpc `GetEstate`.
@@ -69,15 +84,12 @@ message GetEstateRequest {
     uint32 id = 1;
 
 }
-// Response message for rpc `GetEstate`.
-message GetEstateResponse {
-
-}
 
 // Request message for rpc `UpdateEstate`.
 message UpdateEstateRequest {
     uint32 id = 1;
-
+    string name = 2;
+    string description = 3;
 }
 // Response message for rpc `UpdateEstate`.
 message UpdateEstateResponse {
@@ -101,5 +113,25 @@ message GetEstatesRequest {
 }
 // Response message for rpc `GetEstates`.
 message GetEstatesResponse {
+
+}
+
+// Request message for rpc `AddGate`.
+message AddGateRequest {
+    uint32 estate_id = 1;
+    uint32 gate_id = 2;
+}
+// Response message for rpc `AddGate`.
+message AddGateResponse {
+
+}
+
+// Request message for rpc `DeleteGate`.
+message DeleteGateRequest {
+    uint32 estate_id = 1;
+    uint32 gate_id = 2;
+}
+// Response message for rpc `DeleteGate`.
+message DeleteGateResponse {
 
 }

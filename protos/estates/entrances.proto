@@ -37,7 +37,7 @@ service MruVEntrancesService {
     }
 
     // Lock entrance.
-    rpc LockEntrance(LockRequest) returns (LockResponse) {
+    rpc Lock(LockRequest) returns (LockResponse) {
         option (google.api.http) = {
             post: "/v1/entrances/{id}/lock"
         };

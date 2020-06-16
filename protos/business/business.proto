@@ -16,14 +16,14 @@ service MruVBusinessService {
     }
 
     // Get a business.
-    rpc GetBusiness(GetBusinessRequest) returns (GetBusinessResponse) {
+    rpc GetBusiness(GetBusinessRequest) returns (Business) {
         option (google.api.http) = {
             get: "/v1/business/{id}"
         };
     }
 
     // Update a business.
-    rpc UpdateBusiness(UpdateBusinessRequest) returns (UpdateBusinessResponse) {
+    rpc UpdateBusiness(UpdateBusinessRequest) returns (Business) {
         option (google.api.http) = {
             patch: "/v1/business/{id}"
         };
@@ -35,15 +35,74 @@ service MruVBusinessService {
             delete: "/v1/business/{id}"
         };
     }
+
+    // Assign a business owner.
+    rpc AssignOwner(AssignOwnerRequest) returns (AssignOwnerResponse) {
+        option (google.api.http) = {
+            post: "/v1/business/{id}/owner"
+        };
+    }
+    
+    // Assign an estate to a business.
+    rpc AssignEstate(AssignEstateRequest) returns (AssignEstateResponse) {
+        option (google.api.http) = {
+            post: "/v1/business/{id}/estates"
+        };
+    }
+
+    // Buy a business.
+    rpc BuyBusiness(BuyBusinessRequest) returns (BuyBusinessResponse) {
+        option (google.api.http) = {
+            post: "/v1/business/{id}/buy"
+        };
+    }
+
+    // Subscribe to business events.
+    rpc WatchBusiness(WatchBusinessRequest) returns (stream WatchBusinessResponse) {}
+
+    // Subscribe to all businesses events.
+    rpc WatchBusinesses(WatchBusinessesRequest) returns (stream WatchBusinessesResponse) {}
+}
+
+// Owner type.
+enum OwnerType {
+    UNKNOWN = 0;
+    PLAYER = 1;
+    GROUP = 2;
+    SYSTEM = 3;
+}
+
+// Business data structure.
+message Business {
+    string name = 1;
+    string description = 2;
+
+    // Estates that belongs to a business.
+    repeated int64 estate_ids = 3;
+
+    // Purchase price in economy system.
+    uint32 product_id = 4;
+
+    // Owner type of the business.
+    OwnerType owner_type = 5;
+    // Owner of the business.
+    uint32 owner_id = 6;
+
+    // Items that belongs to business.
+    repeated uint32 business_items = 7;
+
+    // Business group
+    uint32 business_group = 8;
 }
 
 // Request message for rpc `CreateBusiness`.
 message CreateBusinessRequest {
-
+    string name = 1;
+    string description = 2;
 }
 // Response message for rpc `CreateBusiness`.
 message CreateBusinessResponse {
-
+    uint32 id = 1;
 }
 
 // Request message for rpc `GetBusiness`.
@@ -73,3 +132,52 @@ message DeleteBusinessResponse {
 
 }
 
+// Request message for rpc `AssignOwner`.
+message AssignOwnerRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `AssignOwner`.
+message AssignOwnerResponse {
+    OwnerType owner_type = 5;
+    uint32 owner_id = 6;
+}
+
+// Request message for rpc `AssignEstate`.
+message AssignEstateRequest {
+    uint32 id = 1;
+    uint32 estate_id = 2;
+}
+// Response message for rpc `AssignEstate`.
+message AssignEstateResponse {
+
+}
+
+// Request message for rpc `BuyBusiness`.
+message BuyBusinessRequest {
+    uint32 id = 1;
+
+    OwnerType buyer_type = 5;
+    uint32 buyer_id = 6;
+}
+// Response message for rpc `BuyBusiness`.
+message BuyBusinessResponse {
+
+}
+
+// Request message for rpc `WatchBusiness`.
+message WatchBusinessRequest {
+
+}
+// Response message for rpc `WatchBusiness`.
+message WatchBusinessResponse {
+
+}
+
+// Request message for rpc `WatchBusinesses`.
+message WatchBusinessesRequest {
+
+}
+// Response message for rpc `WatchBusinesses`.
+message WatchBusinessesResponse {
+
+}

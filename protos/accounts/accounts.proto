@@ -5,8 +5,7 @@ package mruv;
 option go_package = "github.com/MruV-RP/mruv-pb-go/accounts";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "accounts/accounts_model.proto";
-import "characters/characters_model.proto";
+import "characters/characters.proto";
 
 // The MruV accounts service provides procedures for managing players accounts.
 service MruVAccountsService {
@@ -15,6 +14,18 @@ service MruVAccountsService {
     rpc GetAccount(AccountID) returns (Account);
     rpc GetAccountCharacters(AccountID) returns (GetAccountCharactersResponse);
 }
+
+message AccountID {
+    uint32 id = 1;
+}
+
+message Account {
+    uint32 id = 1;
+    string login = 2;
+    string nick = 3;
+    string email = 4;
+}
+
 
 message RegisterAccountRequest {
     Account account = 1;

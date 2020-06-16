@@ -6,7 +6,7 @@ option go_package = "github.com/MruV-RP/mruv-pb-go/characters";
 
 import "google/api/annotations.proto";
 import "common/health.proto";
-import "characters/characters_model.proto";
+import "common/spatial.proto";
 
 //requests & response messages
 message DeathStreamRequest {
@@ -19,29 +19,42 @@ message DeathStreamResponse {
 }
 
 service MruVCharactersService {
-    //CRUD
-    rpc CreateCharacter (Character) returns (CharacterID) {
+    // Create a character.
+    rpc CreateCharacter(CreateCharacterRequest) returns (CreateCharacterResponse) {
         option (google.api.http) = {
             post: "/v1/characters"
         };
     }
-    rpc GetCharacter (CharacterID) returns (Character) {
+
+    // Get a character.
+    rpc GetCharacter(GetCharacterRequest) returns (GetCharacterResponse) {
         option (google.api.http) = {
             get: "/v1/characters/{id}"
         };
     }
-    rpc RemoveCharacter (CharacterID) returns (CharacterID) {
+
+    // Update a character.
+    rpc UpdateCharacter(UpdateCharacterRequest) returns (UpdateCharacterResponse) {
+        option (google.api.http) = {
+            patch: "/v1/characters/{id}"
+        };
+    }
+
+    // Delete a character.
+    rpc DeleteCharacter(DeleteCharacterRequest) returns (DeleteCharacterResponse) {
         option (google.api.http) = {
             delete: "/v1/characters/{id}"
         };
     }
 
-    //Deaths
+    // Kill a character. A character that is killed cannot be played anymore.
     rpc PermanentCharacterKill(CharacterID) returns (CharacterID) {
         option (google.api.http) = {
             delete: "/v1/characters/permanentKill/{id}"
         };
     }
+
+    // Stream of deaths.
     rpc DeathsStream(DeathStreamRequest) returns (stream DeathStreamResponse) { }
 
     //Service status
@@ -55,4 +68,67 @@ service MruVCharactersService {
             get: "/v1/characters/version"
         };
     }
+}
+
+message Character {
+    uint32 id = 1;
+    uint32 owner_id = 2;
+    string first_name = 3;
+    string second_name = 4;
+    uint32 age = 5;
+    uint32 sex = 6;
+    Position position = 7;
+}
+
+message CharacterID {
+    uint32 id = 1;
+}
+
+enum DeathType {
+    DEATH_TYPE_NONE = 0;
+    DEATH_TYPE_BW = 1;
+    DEATH_TYPE_BW_KILL = 2;
+    DEATH_TYPE_CK = 3;
+}
+
+
+// Request message for rpc `CreateCharacter`.
+message CreateCharacterRequest {
+    uint32 id = 1;
+    uint32 owner_id = 2;
+    string first_name = 3;
+    string second_name = 4;
+    uint32 age = 5;
+    uint32 sex = 6;
+}
+// Response message for rpc `CreateCharacter`.
+message CreateCharacterResponse {
+
+}
+
+// Request message for rpc `GetCharacter`.
+message GetCharacterRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `GetCharacter`.
+message GetCharacterResponse {
+
+}
+
+// Request message for rpc `UpdateCharacter`.
+message UpdateCharacterRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `UpdateCharacter`.
+message UpdateCharacterResponse {
+
+}
+
+// Request message for rpc `DeleteCharacter`.
+message DeleteCharacterRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `DeleteCharacter`.
+message DeleteCharacterResponse {
+
 }
