@@ -167,7 +167,7 @@ message DeleteGateResponse {
 
 // Request message for rpc `GetEstateGates`.
 message GetEstateGatesRequest {
-
+    uint32 estate_id = 1;
 }
 // Response message for rpc `GetEstateGates`.
 message GetEstateGatesResponse {
@@ -196,7 +196,7 @@ message RemoveEntranceResponse {
 
 // Request message for rpc `GetEstateEntrances`.
 message GetEstateEntrancesRequest {
-
+    uint32 estate_id = 1;
 }
 // Response message for rpc `GetEstateEntrances`.
 message GetEstateEntrancesResponse {

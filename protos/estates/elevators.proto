@@ -75,7 +75,7 @@ message GetElevatorResponse {
 
 // Request message for rpc `UpdateElevator`.
 message UpdateElevatorRequest {
-    uint32 id = 2;
+    uint32 id = 1;
 }
 // Response message for rpc `UpdateElevator`.
 message UpdateElevatorResponse {
@@ -84,7 +84,7 @@ message UpdateElevatorResponse {
 
 // Request message for rpc `DeleteElevator`.
 message DeleteElevatorRequest {
-    uint32 id = 3;
+    uint32 id = 1;
 }
 // Response message for rpc `DeleteElevator`.
 message DeleteElevatorResponse {
@@ -93,7 +93,7 @@ message DeleteElevatorResponse {
 
 // Request message for rpc `GetElevatorFloors`.
 message GetElevatorFloorsRequest {
-
+    uint32 id = 1;
 }
 // Response message for rpc `GetElevatorFloors`.
 message GetElevatorFloorsResponse {

@@ -38,6 +38,13 @@ service MruVPunishmentsService {
         };
     }
 
+    // Mute player global chats.
+    rpc MuteGlobalChats(MuteGlobalChatsRequest) returns (MuteGlobalChatsResponse) {
+        option (google.api.http) = {
+            post: "/v1/punishments/mute/{account}"
+        };
+    }
+
     // Deactivate a specific player ban.
     rpc UnBan (UnBanRequest) returns (UnBanResponse) {
         option (google.api.http) = {
@@ -55,7 +62,14 @@ service MruVPunishmentsService {
     // Remove player from admin jail.
     rpc UnAdminJail (UnAdminJailRequest) returns (UnAdminJailResponse) {
         option (google.api.http) = {
-            delete: "/v1/punishments/unaj/{character}"
+            delete: "/v1/punishments/aj/{character}"
+        };
+    }
+
+    //
+    rpc UnMuteGlobalChats(UnMuteGlobalChatsRequest) returns (UnMuteGlobalChatsResponse) {
+        option (google.api.http) = {
+            delete: "/v1/punishments/mute/{account}"
         };
     }
 
@@ -140,11 +154,30 @@ service MruVPunishmentsService {
     // Subscribe to admin jail release events.
     rpc WatchUnAdminJails(WatchUnAdminJailsRequest) returns (stream UnAdminJailMessage) {}
 
-    // Subscribe to player punishments and acquittals.
+    // Subscribe to player punishments.
     rpc WatchPlayerPunishments(WatchPlayerPunishmentsRequest) returns (stream WatchPlayerPunishmentsResponse) {}
+
+    // Subscribe to player acquittals.
+    rpc WatchPlayerAcquittals(WatchPlayerAcquittalsRequest) returns (stream WatchPlayerAcquittalsResponse) {}
 
     // Subscribe to all punishments and acquittals events.
     rpc WatchPunishments(WatchPunishmentsRequest) returns (stream WatchPunishmentsResponse) {}
+}
+
+enum PunishmentType {
+    UNKNOWN_PUNISHMENT = 0;
+    BAN = 1;
+    BLOCK = 2;
+    WARN = 3;
+    ADMIN_JAIL = 4;
+}
+
+enum AcquittalsType {
+    UNKNOWN_ACQUITAL = 0;
+    UNBAN = 1;
+    UNBLOCK = 2;
+    UNWARN = 3;
+    UN_ADMIN_JAIL = 4;
 }
 
 message BanMessage {
@@ -254,14 +287,6 @@ message UnAdminJailMessage {
     uint32 character = 2;
 }
 
-enum PunishmentType {
-    UNKNOWN = 0;
-    BAN = 1;
-    BLOCK = 2;
-    WARN = 3;
-    ADMIN_JAIL = 4;
-}
-
 // Request message for rpc `Ban`.
 message BanRequest {
     uint32 player = 1;
@@ -327,6 +352,15 @@ message AdminJailResponse {
 
 }
 
+// Request message for rpc `MuteGlobalChats`.
+message MuteGlobalChatsRequest {
+    uint32 account = 1;
+}
+// Response message for rpc `MuteGlobalChats`.
+message MuteGlobalChatsResponse {
+
+}
+
 // Request message for rpc `UnBan`.
 message UnBanRequest {
     uint32 ban_id = 2;
@@ -351,6 +385,15 @@ message UnAdminJailRequest {
 }
 // Response message for rpc `UnAdminJail`.
 message UnAdminJailResponse {
+
+}
+
+// Request message for rpc `UnMuteGlobalChats`.
+message UnMuteGlobalChatsRequest {
+    uint32 account = 1;
+}
+// Response message for rpc `UnMuteGlobalChats`.
+message UnMuteGlobalChatsResponse {
 
 }
 
@@ -472,6 +515,15 @@ message WatchUnWarnsRequest {
 
 // Request message for rpc `WatchUnAdminJails`.
 message WatchUnAdminJailsRequest {
+
+}
+
+// Request message for rpc `WatchPlayerAcquittals`.
+message WatchPlayerAcquittalsRequest {
+
+}
+// Response message for rpc `WatchPlayerAcquittals`.
+message WatchPlayerAcquittalsResponse {
 
 }
 

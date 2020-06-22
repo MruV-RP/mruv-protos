@@ -93,7 +93,7 @@ message DeleteOrganizationResponse {
 
 // Request message for rpc `AssignLeader`.
 message AssignLeaderRequest {
-
+    uint32 id = 1;
 }
 // Response message for rpc `AssignLeader`.
 message AssignLeaderResponse {
@@ -102,7 +102,7 @@ message AssignLeaderResponse {
 
 // Request message for rpc `UnassignLeader`.
 message UnassignLeaderRequest {
-
+    uint32 id = 1;
 }
 // Response message for rpc `UnassignLeader`.
 message UnassignLeaderResponse {
