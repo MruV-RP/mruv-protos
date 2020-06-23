@@ -94,7 +94,7 @@ message CreateCharacterRequest {
 }
 // Response message for rpc `CreateCharacter`.
 message CreateCharacterResponse {
-
+    uint32 id = 1;
 }
 
 // Request message for rpc `GetCharacter`.
@@ -103,7 +103,13 @@ message GetCharacterRequest {
 }
 // Response message for rpc `GetCharacter`.
 message GetCharacterResponse {
-
+    uint32 id = 1;
+    uint32 owner_id = 2;
+    string first_name = 3;
+    string second_name = 4;
+    uint32 age = 5;
+    uint32 sex = 6;
+    Position position = 7;
 }
 
 // Request message for rpc `UpdateCharacter`.

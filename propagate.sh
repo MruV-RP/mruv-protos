@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# This script is meant to build and compile every protocolbuffer for each
-# service declared in this repository (as defined by sub-directories).
+# This script is meant to propagate generated from protocolbuffer files
 # seen here: https://github.com/namely/docker-protoc
 
 set -e
