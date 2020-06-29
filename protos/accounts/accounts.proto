@@ -12,6 +12,14 @@ import "characters/characters.proto";
 service MruVAccountsService {
     rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse);
     rpc LogIn(LogInRequest) returns (LogInResponse);
+
+    // Check, is account with specified login exists. If yes, it returns account id.
+    rpc IsAccountExists(IsAccountExistsRequest) returns (IsAccountExistsResponse) {
+        option (google.api.http) = {
+            get: "/v1/accounts/{login}/registered"
+        };
+    }
+
     rpc GetAccount(AccountID) returns (Account);
     rpc GetAccountCharacters(AccountID) returns (GetAccountCharactersResponse);
 }
@@ -51,4 +59,14 @@ message LogInResponse {
 
 message GetAccountCharactersResponse {
     repeated Character characters = 1;
+}
+
+// Request message for rpc `IsAccountExists`.
+message IsAccountExistsRequest {
+    string login = 1;
+}
+// Response message for rpc `IsAccountExists`.
+message IsAccountExistsResponse {
+    bool exists = 1;
+    uint32 id = 2;
 }
