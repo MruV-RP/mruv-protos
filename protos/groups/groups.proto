@@ -9,30 +9,125 @@ import "common/health.proto";
 
 // The MruV groups service provides procedures for managing groups.
 service MruVGroupsService {
-    //CRUD
-    rpc CreateGroup (Group) returns (GroupID) {
+    // Create a group.
+    rpc CreateGroup(CreateGroupRequest) returns (CreateGroupResponse) {
         option (google.api.http) = {
             post: "/v1/groups"
         };
     }
-    rpc GetGroup (GroupID) returns (Group) {
+
+    // Get a  group.
+    rpc GetGroup(GetGroupRequest) returns (GetGroupResponse) {
         option (google.api.http) = {
-            get: "/v1/groups/{id}"
+            get: "/v1/groups/{group_id}"
         };
     }
-    rpc DeleteGroup (GroupID) returns (GroupID) {
+
+    // Update a group.
+    rpc UpdateGroup(UpdateGroupRequest) returns (UpdateGroupResponse) {
         option (google.api.http) = {
-            delete: "/v1/groups/{id}"
+            patch: "/v1/groups/{group_id}"
         };
     }
+
+    // Delete a group.
+    rpc DeleteGroup(DeleteGroupRequest) returns (DeleteGroupResponse) {
+        option (google.api.http) = {
+            delete: "/v1/groups/{group_id}"
+        };
+    }
+
+    // Get all groups.
     rpc GetGroups(GetGroupsRequest) returns (GetGroupsResponse) {
         option (google.api.http) = {
             get: "/v1/groups"
         };
     }
 
-    rpc AddGroupMember(AddGroupMemberRequest) returns (AddGroupMemberResponse) {}
-    rpc RemoveGroupMember(RemoveGroupMemberRequest) returns (RemoveGroupMemberResponse) {}
+    // Assign an owner. Group can have only one owner. Owner can be a player, a group or an account.
+    rpc AssignOwner(AssignOwnerRequest) returns (AssignOwnerResponse) {
+        option (google.api.http) = {
+            put: "/v1/groups/{group_id}/owner"
+        };
+    }
+
+    // Get group owner.
+    rpc GetOwner(GetOwnerRequest) returns (GetOwnerResponse) {
+        option (google.api.http) = {
+            get: "/v1/groups/{group_id}/owner"
+        };
+    }
+
+
+    // Add a group member.
+    rpc AddMember(AddMemberRequest) returns (AddMemberResponse) {
+        option (google.api.http) = {
+            post: "/v1/groups/{group_id}/members/{member_id}"
+        };
+    }
+
+    // Get a group member.
+    rpc GetMembers(GetMembersRequest) returns (GetMembersResponse) {
+        option (google.api.http) = {
+            get: "/v1/groups/{group_id}/members"
+        };
+    }
+
+    // Remove a group member.
+    rpc RemoveMember(RemoveMemberRequest) returns (RemoveMemberResponse) {
+        option (google.api.http) = {
+            delete: "/v1/groups/{group_id}/members/{member_id}"
+        };
+    }
+
+    // Add a permission to a group.
+    rpc AddPermission(AddPermissionRequest) returns (AddPermissionResponse) {
+        option (google.api.http) = {
+            post: "/v1/groups/{group_id}/permissions"
+        };
+    }
+
+    // Get all group permissions.
+    rpc GetPermissions(GetPermissionsRequest) returns (GetPermissionsResponse) {
+        option (google.api.http) = {
+            get: "/v1/groups/{group_id}/permissions"
+        };
+    }
+
+    // Remove group permission.
+    rpc RemovePermission(RemovePermissionRequest) returns (RemovePermissionResponse) {
+        option (google.api.http) = {
+            delete: "/v1/groups/{group_id}/permissions"
+        };
+    }
+    
+    // Add a subgroup to a group.
+    rpc AddSubgroup(AddSubgroupRequest) returns (AddSubgroupResponse) {
+        option (google.api.http) = {
+            post: "/v1/groups/{group_id}/subgroups/{subgroup_id}"
+        };
+    }
+    
+    // Get all subgroups.
+    rpc GetSubgroups(GetSubgroupsRequest) returns (GetSubgroupsResponse) {
+        option (google.api.http) = {
+            get: "/v1/groups/{group_id}/subgroups"
+        };
+    }
+    
+    // Remove a subgroup from group.
+    rpc RemoveSubgroup(RemoveSubgroupRequest) returns (RemoveSubgroupResponse) {
+        option (google.api.http) = {
+            delete: "/v1/groups/{group_id}/subgroups/{subgroup_id}"
+        };
+    }
+
+    // Check is member of a group is permitted to do specific action.
+    rpc IsPermitted(IsPermittedRequest) returns (IsPermittedResponse) {
+        option (google.api.http) = {
+            get: "/v1/groups/members/{id}/permitted"
+        };
+    }
 
     //Service status
     rpc GetServiceStatus (ServiceStatusRequest) returns (ServiceStatusResponse) {
@@ -47,47 +142,190 @@ service MruVGroupsService {
     }
 }
 
-message PermissionID {
-    uint32 id = 1;
+// Owner types.
+enum OwnerType {
+    OWNER_TYPE_UNKNOWN = 0;
+    OWNER_TYPE_ACCOUNT = 1;
+    OWNER_TYPE_CHARACTER = 2;
+    OWNER_TYPE_GROUP = 3;
 }
 
-message Permission {
-    uint32 id = 1;
+// Member type.
+enum MemberType {
+    MEMBER_TYPE_UNKNOWN = 0;
+    MEMBER_TYPE_ACCOUNT = 1;
+    MEMBER_TYPE_CHARACTER = 2;
+}
+
+// Request message for rpc `CreateGroup`.
+message CreateGroupRequest {
+    string name = 1;
+}
+// Response message for rpc `CreateGroup`.
+message CreateGroupResponse {
+    uint32 group_id = 1;
+}
+
+// Request message for rpc `GetGroup`.
+message GetGroupRequest {
+    uint32 group_id = 1;
+}
+// Response message for rpc `GetGroup`.
+message GetGroupResponse {
+    string name = 1;
+}
+
+// Request message for rpc `UpdateGroup`.
+message UpdateGroupRequest {
+    uint32 group_id = 1;
     string name = 2;
-    string role = 3;
+}
+// Response message for rpc `UpdateGroup`.
+message UpdateGroupResponse {
+    
 }
 
-message GroupID {
-    uint32 id = 1;
+// Request message for rpc `DeleteGroup`.
+message DeleteGroupRequest {
+    uint32 group_id = 1;
+}
+// Response message for rpc `DeleteGroup`.
+message DeleteGroupResponse {
+    
 }
 
-message Group {
-    uint32 id = 1;
-    string name = 3;
-    string description = 4;
-
-    repeated Permission permissions = 5;
-    repeated uint32 members = 6;
-}
-
-
+// Request message for rpc `GetGroups`.
 message GetGroupsRequest {
-    uint32 limit = 1;
+
 }
+// Response message for rpc `GetGroups`.
 message GetGroupsResponse {
-    repeated Group groups = 1;
+    repeated GetGroupResponse groups = 1;
 }
 
-message AddGroupMemberRequest {
+// Request message for rpc `AssignOwner`.
+message AssignOwnerRequest {
+    uint32 group_id = 1;
+    OwnerType owner_type = 3;
+    uint32 owner_id = 2;
+}
+// Response message for rpc `AssignOwner`.
+message AssignOwnerResponse {
+    
+}
+
+// Request message for rpc `GetOwner`.
+message GetOwnerRequest {
+    uint32 group_id = 1;
+}
+// Response message for rpc `GetOwner`.
+message GetOwnerResponse {
+    uint32 owner_id = 1;
+    OwnerType owner_type = 2;
+}
+
+// Request message for rpc `AddMember`.
+message AddMemberRequest {
+    uint32 group_id = 1;
+    uint32 member_id = 2;
+}
+// Response message for rpc `AddMember`.
+message AddMemberResponse {
+}
+
+// Request message for rpc `GetMembers`.
+message GetMembersRequest {
+    uint32 group_id = 1;
+}
+// Response message for rpc `GetMembers`.
+message GetMembersResponse {
+    MemberType member_type = 1;
+    repeated uint32 member_ids = 2;
+}
+
+// Request message for rpc `RemoveMember`.
+message RemoveMemberRequest {
+    uint32 group_id = 1;
+    uint32 member_id = 2;
+}
+// Response message for rpc `RemoveMember`.
+message RemoveMemberResponse {
 
 }
-message AddGroupMemberResponse {
+
+// Request message for rpc `AddPermission`.
+message AddPermissionRequest {
+    uint32 group_id = 1;
+    string name = 2;
+    string definition = 3;
+}
+// Response message for rpc `AddPermission`.
+message AddPermissionResponse {
+    uint32 permission_id = 1;
+}
+
+// Request message for rpc `GetPermissions`.
+message GetPermissionsRequest {
+    uint32 group_id = 1;
+}
+// Response message for rpc `GetPermissions`.
+message GetPermissionsResponse {
+    message Permission {
+        uint32 id = 1;
+        string name = 2;
+        string definition = 3;
+    }
+
+    repeated Permission permissions = 1;
+}
+
+// Request message for rpc `RemovePermission`.
+message RemovePermissionRequest {
+    uint32 group_id = 1;
+    uint32 permission_id = 2;
+}
+// Response message for rpc `RemovePermission`.
+message RemovePermissionResponse {
 
 }
 
-message RemoveGroupMemberRequest {
+// Request message for rpc `AddSubgroup`.
+message AddSubgroupRequest {
+    uint32 group_id = 1;
+    uint32 subgroup_id = 2;
+}
+// Response message for rpc `AddSubgroup`.
+message AddSubgroupResponse {
 
 }
-message RemoveGroupMemberResponse {
+
+// Request message for rpc `GetSubgroups`.
+message GetSubgroupsRequest {
+    uint32 group_id = 1;
+}
+// Response message for rpc `GetSubgroups`.
+message GetSubgroupsResponse {
+    repeated uint32 subgroup_ids = 1;
+}
+
+// Request message for rpc `RemoveSubgroup`.
+message RemoveSubgroupRequest {
+    uint32 group_id = 1;
+    uint32 subgroup_id = 2;
+}
+// Response message for rpc `RemoveSubgroup`.
+message RemoveSubgroupResponse {
 
 }
+
+// Request message for rpc `IsPermitted`.
+message IsPermittedRequest {
+    uint32 member_id = 1;
+    MemberType member_type = 2;
+    string action = 3;
+}
+// Response message for rpc `IsPermitted`.
+message IsPermittedResponse {
+    bool permitted = 1;
+}
+
