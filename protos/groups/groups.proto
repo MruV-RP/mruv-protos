@@ -160,6 +160,7 @@ enum MemberType {
 // Request message for rpc `CreateGroup`.
 message CreateGroupRequest {
     string name = 1;
+    string description = 2;
 }
 // Response message for rpc `CreateGroup`.
 message CreateGroupResponse {
@@ -173,12 +174,14 @@ message GetGroupRequest {
 // Response message for rpc `GetGroup`.
 message GetGroupResponse {
     string name = 1;
+    string description = 2;
 }
 
 // Request message for rpc `UpdateGroup`.
 message UpdateGroupRequest {
     uint32 group_id = 1;
     string name = 2;
+    string description = 3;
 }
 // Response message for rpc `UpdateGroup`.
 message UpdateGroupResponse {
@@ -196,11 +199,18 @@ message DeleteGroupResponse {
 
 // Request message for rpc `GetGroups`.
 message GetGroupsRequest {
-
+    uint32 limit = 1;
+    uint32 begin_from = 2;
 }
 // Response message for rpc `GetGroups`.
 message GetGroupsResponse {
-    repeated GetGroupResponse groups = 1;
+    message Group {
+        uint32 id = 1;
+        string name = 2;
+        string description = 3;
+    }
+
+    repeated Group groups = 1;
 }
 
 // Request message for rpc `AssignOwner`.
