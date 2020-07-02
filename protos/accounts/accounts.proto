@@ -13,8 +13,8 @@ service MruVAccountsService {
     rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse);
     rpc LogIn(LogInRequest) returns (LogInResponse);
 
-    // Check, is account with specified login exists. If yes, it returns account id.
-    rpc IsAccountExists(IsAccountExistsRequest) returns (IsAccountExistsResponse) {
+    // Check, is account with specified login exist. If yes, it returns account id.
+    rpc IsAccountExist(IsAccountExistRequest) returns (IsAccountExistResponse) {
         option (google.api.http) = {
             get: "/v1/accounts/{login}/registered"
         };
@@ -61,12 +61,12 @@ message GetAccountCharactersResponse {
     repeated Character characters = 1;
 }
 
-// Request message for rpc `IsAccountExists`.
-message IsAccountExistsRequest {
+// Request message for rpc `IsAccountExist`.
+message IsAccountExistRequest {
     string login = 1;
 }
-// Response message for rpc `IsAccountExists`.
-message IsAccountExistsResponse {
+// Response message for rpc `IsAccountExist`.
+message IsAccountExistResponse {
     bool exists = 1;
     uint32 id = 2;
 }
