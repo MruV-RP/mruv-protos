@@ -125,7 +125,7 @@ service MruVGroupsService {
     // Check is member of a group is permitted to do specific action.
     rpc IsPermitted(IsPermittedRequest) returns (IsPermittedResponse) {
         option (google.api.http) = {
-            get: "/v1/groups/members/{id}/permitted"
+            get: "/v1/groups/members/{member_id}/permitted"
         };
     }
 
