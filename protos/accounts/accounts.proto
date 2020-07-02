@@ -5,13 +5,23 @@ package mruv;
 option go_package = "github.com/MruV-RP/mruv-pb-go/accounts";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "characters/characters.proto";
 
 // The MruV accounts service provides procedures for managing players accounts.
 // This service is an additional/intermediary service between the ORY Kratos & ORY Hydra service.
 service MruVAccountsService {
-    rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse);
-    rpc LogIn(LogInRequest) returns (LogInResponse);
+    // Register a new account.
+    rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse) {
+        option (google.api.http) = {
+            post: "/v1/accounts/register"
+        };
+    }
+
+    // Sign into an existing account.
+    rpc LogIn(LogInRequest) returns (LogInResponse) {
+        option (google.api.http) = {
+            post: "/v1/accounts/login"
+        };
+    }
 
     // Check, is account with specified login exist. If yes, it returns account id.
     rpc IsAccountExist(IsAccountExistRequest) returns (IsAccountExistResponse) {
@@ -20,45 +30,61 @@ service MruVAccountsService {
         };
     }
 
-    rpc GetAccount(AccountID) returns (Account);
-    rpc GetAccountCharacters(AccountID) returns (GetAccountCharactersResponse);
+    // Get an account.
+    rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
+        option (google.api.http) = {
+            get: "/v1/accounts/{login}"
+        };
+    }
+    
+    // Get an account characters.
+    rpc GetAccountCharacters(GetAccountCharactersRequest) returns (GetAccountCharactersResponse) {
+        option (google.api.http) = {
+            get: "/v1/accounts/{login}/characters"
+        };
+    }
 }
 
-message AccountID {
-    uint32 id = 1;
-}
-
-message Account {
-    uint32 id = 1;
-    string login = 2;
-    string nick = 3;
-    string email = 4;
-}
-
-
+// Request message for rpc `RegisterAccount`.
 message RegisterAccountRequest {
-    Account account = 1;
+    string login = 1;
     string password = 2;
+    string email = 3;
 }
-
+// Response message for rpc `RegisterAccount`.
 message RegisterAccountResponse {
     bool success = 1;
     uint32 account_id = 2;
 }
 
+// Request message for rpc `LogIn`.
 message LogInRequest {
     string login = 1;
     string password = 2;
-
 }
-
+// Response message for rpc `LogIn`.
 message LogInResponse {
     bool success = 1;
     uint32 account_id = 2;
 }
 
+// Request message for rpc `GetAccount`.
+message GetAccountRequest {
+    string login = 1;
+}
+// Response message for rpc `GetAccount`.
+message GetAccountResponse {
+    string login = 1;
+    string email = 2;
+}
+
+// Request message for rpc `GetAccountCharacters`.
+message GetAccountCharactersRequest {
+    string login = 1;
+}
+// Response message for rpc `GetAccountCharacters`.
 message GetAccountCharactersResponse {
-    repeated Character characters = 1;
+    repeated uint32 character_ids = 1;
 }
 
 // Request message for rpc `IsAccountExist`.
