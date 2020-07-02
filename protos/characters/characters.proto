@@ -44,6 +44,13 @@ service MruVCharactersService {
             delete: "/v1/characters/permanentKill/{id}"
         };
     }
+    
+    // Change player clothes.
+    rpc ChangeClothes(ChangeClothesRequest) returns (ChangeClothesResponse) {
+        option (google.api.http) = {
+            put: "/v1/character/{id}/clothes/{clothes_id}"
+        };
+    }
 
     // Stream of deaths.
     rpc DeathsStream(DeathStreamRequest) returns (stream DeathStreamResponse) { }
@@ -68,7 +75,12 @@ message Character {
     string second_name = 4;
     uint32 age = 5;
     uint32 sex = 6;
-    Position position = 7;
+
+    uint32 clothes_id = 7; //TODO: create clothes api
+
+    float x = 8;
+    float y = 9;
+    float z = 10;
 }
 
 message CharacterID {
@@ -109,7 +121,12 @@ message GetCharacterResponse {
     string second_name = 4;
     uint32 age = 5;
     uint32 sex = 6;
-    Position position = 7;
+
+    uint32 clothes_id = 7;
+
+    float x = 8;
+    float y = 9;
+    float z = 10;
 }
 
 // Request message for rpc `UpdateCharacter`.
@@ -127,6 +144,16 @@ message DeleteCharacterRequest {
 }
 // Response message for rpc `DeleteCharacter`.
 message DeleteCharacterResponse {
+
+}
+
+// Request message for rpc `ChangeClothes`.
+message ChangeClothesRequest {
+    uint32 id = 1;
+    uint32 clothes_id = 2;
+}
+// Response message for rpc `ChangeClothes`.
+message ChangeClothesResponse {
 
 }
 
