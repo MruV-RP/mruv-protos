@@ -1,0 +1,193 @@
+syntax = "proto3";
+
+package mruv.gates;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/gates";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+//The MruV objects service provides procedures for game objects.
+service MruVObjectsService {
+    // Create an object model.
+    rpc CreateObjectModel(CreateObjectModelRequest) returns (CreateObjectModelResponse) {
+        option (google.api.http) = {
+            post: "/v1/objectTypes"
+        };
+    }
+
+    // Get an object model.
+    rpc GetObjectModel(GetObjectModelRequest) returns (GetObjectModelResponse) {
+        option (google.api.http) = {
+            get: "/v1/objectTypes/{model}"
+        };
+    }
+
+    // Update an object model.
+    rpc UpdateObjectModel(UpdateObjectModelRequest) returns (UpdateObjectModelResponse) {
+        option (google.api.http) = {
+            patch: "/v1/objectTypes/{object_type.model}"
+        };
+    }
+
+    // Delete an object model.
+    rpc DeleteObjectModel(DeleteObjectModelRequest) returns (DeleteObjectModelResponse) {
+        option (google.api.http) = {
+            delete: "/v1/objectTypes/{model}"
+        };
+    }
+
+    // Create an object.
+    rpc CreateObject(CreateObjectRequest) returns (CreateObjectResponse) {
+        option (google.api.http) = {
+            post: "/v1/object"
+        };
+    }
+
+    // Get an object.
+    rpc GetObject(GetObjectRequest) returns (GetObjectResponse) {
+        option (google.api.http) = {
+            get: "/v1/object/{id}"
+        };
+    }
+
+    // Update an object.
+    rpc UpdateObject(UpdateObjectRequest) returns (UpdateObjectResponse) {
+        option (google.api.http) = {
+            patch: "/v1/objects/{id}"
+        };
+    }
+
+    // Delete an object.
+    rpc DeleteObject(DeleteObjectRequest) returns (DeleteObjectResponse) {
+        option (google.api.http) = {
+            delete: "/v1/objects/{id}"
+        };
+    }
+}
+
+// SA-MP Object type data structure.
+message ObjectModel {
+    uint32 model = 1;
+    string model_name = 2;
+    string name = 3;
+    string category = 13;
+    uint32 product_id = 4;
+
+    double length = 5;
+    double width = 6;
+    double height = 7;
+    double size = 8;
+
+    repeated string tags = 9;
+
+    bool has_collision = 10;
+    bool breaks_on_hit = 11;
+    bool has_animation = 12;
+
+    bool visible_by_time = 16;
+    uint32 visible_from = 17;
+    uint32 visible_to = 18;
+}
+
+// SA-MP Dynamic object data structure.
+message Object {
+    uint32 model = 1;
+    uint32 estate_id = 2;
+
+    float x = 3;
+    float y = 4;
+    float z = 5;
+
+    float rx = 6;
+    float ry = 7;
+    float rz = 8;
+
+    // Virtual world id for which object will be visible. Set -1 to be visible for all.
+    int32 world_id = 9;
+    // Interior id for which object will be visible. Set -1 to be visible for all.
+    int32 interior_id = 10;
+    // SA-MP player id for which object will be visible. Set -1 to be visible for all.
+    int32 player_id = 11; //TODO: change to character_id/account_id ?
+    // Dynamic area id for which object will be visible. Set -1 to be visible for all.
+    int32 area_id = 12;
+
+    // Default streamer setting is 300.0
+    float stream_distance = 13;
+    // Default streamer setting is 0.0 = default game draw distance
+    float draw_distance = 14;
+
+    int32 priority = 15;
+}
+
+// Request message for rpc `CreateObjectModel`.
+message CreateObjectModelRequest {
+    ObjectModel object_type = 1;
+}
+// Response message for rpc `CreateObjectModel`.
+message CreateObjectModelResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `GetObjectModel`.
+message GetObjectModelRequest {
+    uint32 model = 1;
+}
+// Response message for rpc `GetObjectModel`.
+message GetObjectModelResponse {
+    ObjectModel object_type = 1;
+}
+
+// Request message for rpc `UpdateObjectModel`.
+message UpdateObjectModelRequest {
+    ObjectModel object_type = 1;
+}
+// Response message for rpc `UpdateObjectModel`.
+message UpdateObjectModelResponse {
+
+}
+
+// Request message for rpc `DeleteObjectModel`.
+message DeleteObjectModelRequest {
+    uint32 model = 1;
+}
+// Response message for rpc `DeleteObjectModel`.
+message DeleteObjectModelResponse {
+
+}
+
+// Request message for rpc `CreateObject`.
+message CreateObjectRequest {
+    Object object = 1;
+}
+// Response message for rpc `CreateObject`.
+message CreateObjectResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `GetObject`.
+message GetObjectRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `GetObject`.
+message GetObjectResponse {
+    Object object = 1;
+}
+
+// Request message for rpc `UpdateObject`.
+message UpdateObjectRequest {
+    uint32 id = 1;
+    Object object = 2;
+}
+// Response message for rpc `UpdateObject`.
+message UpdateObjectResponse {
+
+}
+
+// Request message for rpc `DeleteObject`.
+message DeleteObjectRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `DeleteObject`.
+message DeleteObjectResponse {
+
+}

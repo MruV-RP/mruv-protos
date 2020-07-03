@@ -94,6 +94,8 @@ message Estate {
     repeated uint32 entrances = 4;
     repeated uint32 gates = 5;
     repeated uint32 rooms = 6;
+
+    uint32 product_id = 7;
 }
 
 

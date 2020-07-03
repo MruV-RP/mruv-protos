@@ -90,7 +90,7 @@ message Entrance {
 
 // Request message for rpc `CreateEntrance`.
 message CreateEntranceRequest {
-
+    Entrance entrance = 1;
 }
 // Response message for rpc `CreateEntrance`.
 message CreateEntranceResponse {
