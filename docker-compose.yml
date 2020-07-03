@@ -7,6 +7,12 @@ services:
       - ./protos:/protos
       - ./gen:/gen
 
+  generate-python:
+    image: namely/protoc-all:1.25_0
+    volumes:
+      - .:/defs
+    command: "-d /defs/protos -l python"
+
   generate-csharp:
     image: namely/protoc-all:1.25_0
     volumes:
