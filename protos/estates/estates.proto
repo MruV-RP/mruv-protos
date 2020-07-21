@@ -5,6 +5,8 @@ package mruv.estates;
 option go_package = "github.com/MruV-RP/mruv-pb-go/estates";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+import "entrances/entrances.proto";
+import "gates/gates.proto";
 
 // The MruV estate service provides procedures for managing buildings and other estates.
 service MruVEstateService {
@@ -51,7 +53,7 @@ service MruVEstateService {
     }
 
     // Delete a gate from estate.
-    rpc DeleteGate(DeleteGateRequest) returns (DeleteGateResponse) {
+    rpc RemoveGate(RemoveGateRequest) returns (RemoveGateResponse) {
         option (google.api.http) = {
             delete: "/v1/estates/{estate_id}/gates/{gate_id}"
         };
@@ -144,7 +146,7 @@ message GetEstatesRequest {
 }
 // Response message for rpc `GetEstates`.
 message GetEstatesResponse {
-
+    repeated Estate estates = 1;
 }
 
 // Request message for rpc `AddGate`.
@@ -154,17 +156,15 @@ message AddGateRequest {
 }
 // Response message for rpc `AddGate`.
 message AddGateResponse {
-    uint32 gate_count = 1;
 }
 
-// Request message for rpc `DeleteGate`.
-message DeleteGateRequest {
+// Request message for rpc `RemoveGate`.
+message RemoveGateRequest {
     uint32 estate_id = 1;
     uint32 gate_id = 2;
 }
-// Response message for rpc `DeleteGate`.
-message DeleteGateResponse {
-    uint32 gate_count = 1;
+// Response message for rpc `RemoveGate`.
+message RemoveGateResponse {
 }
 
 // Request message for rpc `GetEstateGates`.
@@ -173,7 +173,7 @@ message GetEstateGatesRequest {
 }
 // Response message for rpc `GetEstateGates`.
 message GetEstateGatesResponse {
-    repeated Estate estates = 1;
+    repeated mruv.gates.Gate gates = 1;
 }
 
 // Request message for rpc `AddEntrance`.
@@ -183,7 +183,6 @@ message AddEntranceRequest {
 }
 // Response message for rpc `AddEntrance`.
 message AddEntranceResponse {
-    uint32 entrance_count = 1;
 }
 
 // Request message for rpc `RemoveEntrance`.
@@ -193,7 +192,6 @@ message RemoveEntranceRequest {
 }
 // Response message for rpc `RemoveEntrance`.
 message RemoveEntranceResponse {
-    uint32 entrance_count = 1;
 }
 
 // Request message for rpc `GetEstateEntrances`.
@@ -202,5 +200,5 @@ message GetEstateEntrancesRequest {
 }
 // Response message for rpc `GetEstateEntrances`.
 message GetEstateEntrancesResponse {
-
+    repeated mruv.entrances.Entrance entrances = 1;
 }
