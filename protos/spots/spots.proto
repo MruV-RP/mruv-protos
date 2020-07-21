@@ -37,8 +37,8 @@ service MruVSpotsService {
     }
 }
 
-// Request message for rpc `CreateSpot`.
-message CreateSpotRequest {
+//Spot.
+message Spot {
     string name = 1;
     string message = 2;
     int32 icon = 3;
@@ -48,6 +48,12 @@ message CreateSpotRequest {
     float z = 7;
     int32 vw = 8;
     int32 int = 9;
+}
+
+
+// Request message for rpc `CreateSpot`.
+message CreateSpotRequest {
+    Spot spot = 1;
 }
 // Response message for rpc `CreateSpot`.
 message CreateSpotResponse {
@@ -60,29 +66,13 @@ message GetSpotRequest {
 }
 // Response message for rpc `GetSpot`.
 message GetSpotResponse {
-    string name = 1;
-    string message = 2;
-    int32 icon = 3;
-    int32 marker = 4;
-    float x = 5;
-    float y = 6;
-    float z = 7;
-    int32 vw = 8;
-    int32 int = 9;
+    Spot spot = 1;
 }
 
 // Request message for rpc `UpdateSpot`.
 message UpdateSpotRequest {
     uint32 id = 1;
-    string name = 2;
-    string message = 3;
-    int32 icon = 4;
-    int32 marker = 5;
-    float x = 6;
-    float y = 7;
-    float z = 8;
-    int32 vw = 9;
-    int32 int = 10;
+    Spot spot = 2;
 }
 // Response message for rpc `UpdateSpot`.
 message UpdateSpotResponse {

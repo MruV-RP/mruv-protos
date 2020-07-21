@@ -5,6 +5,7 @@ package mruv.entrances;
 option go_package = "github.com/MruV-RP/mruv-pb-go/entrances";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+import "spots/spots.proto";
 
 // The MruV entrances service provides procedures for managing an entrances to estates and teleportation to locations.
 service MruVEntrancesService {
@@ -65,32 +66,11 @@ service MruVEntrancesService {
     }
 }
 
-message Entrance {
-    uint32 id = 1;
-    uint32 estate_id = 2;
-
-    message EntranceDoor {
-        string name = 1;
-        string message = 2;
-        int32 icon = 3;
-        int32 marker = 4;
-        float x = 5;
-        float y = 6;
-        float z = 7;
-        int32 vw = 8;
-        int32 int = 9;
-        uint32 estate_id = 10;
-    }
-
-    EntranceDoor out = 3;
-    EntranceDoor in = 4;
-}
-
-
-
 // Request message for rpc `CreateEntrance`.
 message CreateEntranceRequest {
-    Entrance entrance = 1;
+    string name = 1;
+    mruv.spots.Spot out = 2;
+    mruv.spots.Spot in = 3;
 }
 // Response message for rpc `CreateEntrance`.
 message CreateEntranceResponse {
@@ -103,16 +83,19 @@ message GetEntranceRequest {
 }
 // Response message for rpc `GetEntrance`.
 message GetEntranceResponse {
-
+    string name = 1;
+    uint32 in_spot_id = 2;
+    uint32 out_spot_id = 3;
 }
 
 // Request message for rpc `UpdateEntrance`.
 message UpdateEntranceRequest {
     uint32 id = 1;
+    uint32 in_spot_id = 2;
+    uint32 out_spot_id = 3;
 }
 // Response message for rpc `UpdateEntrance`.
 message UpdateEntranceResponse {
-
 }
 
 // Request message for rpc `DeleteEntrance`.
