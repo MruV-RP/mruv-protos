@@ -90,8 +90,8 @@ message GetEntranceRequest {
 // Response message for rpc `GetEntrance`.
 message GetEntranceResponse {
     string name = 1;
-    uint32 in_spot_id = 2;
-    uint32 out_spot_id = 3;
+    mruv.spots.Spot in_spot = 2;
+    mruv.spots.Spot out_spot = 3;
 }
 
 // Request message for rpc `UpdateEntrance`.
