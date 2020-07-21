@@ -139,8 +139,8 @@ message DeleteEstateResponse {
 
 // Request message for rpc `GetEstates`.
 message GetEstatesRequest {
-    uint32 id = 1;
-
+    uint32 from = 1;
+    uint32 limit = 2;
 }
 // Response message for rpc `GetEstates`.
 message GetEstatesResponse {
@@ -173,7 +173,7 @@ message GetEstateGatesRequest {
 }
 // Response message for rpc `GetEstateGates`.
 message GetEstateGatesResponse {
-
+    repeated Estate estates = 1;
 }
 
 // Request message for rpc `AddEntrance`.

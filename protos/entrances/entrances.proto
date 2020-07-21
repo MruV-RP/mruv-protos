@@ -94,7 +94,7 @@ message CreateEntranceRequest {
 }
 // Response message for rpc `CreateEntrance`.
 message CreateEntranceResponse {
-
+    uint32 id = 1;
 }
 
 // Request message for rpc `GetEntrance`.

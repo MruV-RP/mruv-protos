@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package mruv.plots;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/plots";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+import "common/spatial.proto";
+
+// The MruV plots service provides procedures for managing buildings plots and other areas.
+service MruVPlotsService {
+    // Create a plot.
+    rpc CreatePlot(CreatePlotRequest) returns (CreatePlotResponse) {
+        option (google.api.http) = {
+            post: "/v1/plots"
+        };
+    }
+
+    // Get a plot.
+    rpc GetPlot(GetPlotRequest) returns (GetPlotResponse) {
+        option (google.api.http) = {
+            get: "/v1/plots/{id}"
+        };
+    }
+
+    // Update a plot.
+    rpc UpdatePlot(UpdatePlotRequest) returns (UpdatePlotResponse) {
+        option (google.api.http) = {
+            patch: "/v1/plots/{id}"
+        };
+    }
+
+    // Delete a plot.
+    rpc DeletePlot(DeletePlotRequest) returns (DeletePlotResponse) {
+        option (google.api.http) = {
+            delete: "/v1/plots/{id}"
+        };
+    }
+}
+
+// Request message for rpc `CreatePlot`.
+message CreatePlotRequest {
+    string name = 1;
+    string description = 2;
+    repeated Position points = 3;
+}
+// Response message for rpc `CreatePlot`.
+message CreatePlotResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `GetPlot`.
+message GetPlotRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `GetPlot`.
+message GetPlotResponse {
+    string name = 1;
+    string description = 2;
+    repeated Position points = 3;
+}
+
+// Request message for rpc `UpdatePlot`.
+message UpdatePlotRequest {
+    uint32 id = 1;
+    string name = 2;
+    string description = 3;
+}
+// Response message for rpc `UpdatePlot`.
+message UpdatePlotResponse {
+
+}
+
+// Request message for rpc `DeletePlot`.
+message DeletePlotRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `DeletePlot`.
+message DeletePlotResponse {
+
+}

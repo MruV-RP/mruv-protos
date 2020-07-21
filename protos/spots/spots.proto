@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package mruv.spots;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/spots";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+// The MruV spots service provides procedures for managing spots.
+service MruVSpotsService {
+    // Create a spot.
+    rpc CreateSpot(CreateSpotRequest) returns (CreateSpotResponse) {
+        option (google.api.http) = {
+            post: "/v1/spots"
+        };
+    }
+
+    // Get a spot.
+    rpc GetSpot(GetSpotRequest) returns (GetSpotResponse) {
+        option (google.api.http) = {
+            get: "/v1/spots/{id}"
+        };
+    }
+
+    // Update a spot.
+    rpc UpdateSpot(UpdateSpotRequest) returns (UpdateSpotResponse) {
+        option (google.api.http) = {
+            patch: "/v1/spots/{id}"
+        };
+    }
+
+    // Delete a spot.
+    rpc DeleteSpot(DeleteSpotRequest) returns (DeleteSpotResponse) {
+        option (google.api.http) = {
+            delete: "/v1/spots/{id}"
+        };
+    }
+}
+
+// Request message for rpc `CreateSpot`.
+message CreateSpotRequest {
+    string name = 1;
+    string message = 2;
+    int32 icon = 3;
+    int32 marker = 4;
+    float x = 5;
+    float y = 6;
+    float z = 7;
+    int32 vw = 8;
+    int32 int = 9;
+}
+// Response message for rpc `CreateSpot`.
+message CreateSpotResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `GetSpot`.
+message GetSpotRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `GetSpot`.
+message GetSpotResponse {
+    string name = 1;
+    string message = 2;
+    int32 icon = 3;
+    int32 marker = 4;
+    float x = 5;
+    float y = 6;
+    float z = 7;
+    int32 vw = 8;
+    int32 int = 9;
+}
+
+// Request message for rpc `UpdateSpot`.
+message UpdateSpotRequest {
+    uint32 id = 1;
+    string name = 2;
+    string message = 3;
+    int32 icon = 4;
+    int32 marker = 5;
+    float x = 6;
+    float y = 7;
+    float z = 8;
+    int32 vw = 9;
+    int32 int = 10;
+}
+// Response message for rpc `UpdateSpot`.
+message UpdateSpotResponse {
+
+}
+
+// Request message for rpc `DeleteSpot`.
+message DeleteSpotRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `DeleteSpot`.
+message DeleteSpotResponse {
+
+}
