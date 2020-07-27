@@ -1,0 +1,205 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package texture_studio;
+option go_package = "github.com/MruV-RP/mruv-pb-go/texturestudio";
+
+// Service to manage texture studio servers.
+service TextureStudioService {
+    // Create a new texture studio server.
+    rpc CreateServer(CreateServerRequest) returns (CreateServerResponse) {
+        option (google.api.http) = {
+            post: "/v1/texturestudio/server"
+        };
+    }
+
+    // Get texture studio server id for current user.
+    rpc MyServer(MyServerRequest) returns (MyServerResponse) {
+        option (google.api.http) = {
+            get: "/v1/texturestudio/server/my"
+        };
+    }
+
+    // Delete a texture studio server.
+    rpc DeleteServer(DeleteServerRequest) returns (DeleteServerResponse) {
+        option (google.api.http) = {
+            delete: "/v1/texturestudio/server/{id}"
+        };
+    }
+
+    // Start a texture studio server.
+    rpc StartServer(StartServerRequest) returns (StartServerResponse) {
+        option (google.api.http) = {
+            post: "/v1/texturestudio/server/{id}/start"
+        };
+    }
+
+    // Stop a texture studio server.
+    rpc StopServer(StopServerRequest) returns (StopServerResponse) {
+        option (google.api.http) = {
+            post: "/v1/texturestudio/server/{id}/stop"
+        };
+    }
+
+    // Restart a texture studio server.
+    rpc RestartServer(RestartServerRequest) returns (RestartServerResponse) {
+        option (google.api.http) = {
+            post: "/v1/texturestudio/server/{id}/restart"
+        };
+    }
+
+    // Get texture studio server status.
+    rpc ServerStatus(ServerStatusRequest) returns (ServerStatusResponse) {
+        option (google.api.http) = {
+            get: "/v1/texturestudio/server/{id}/status"
+        };
+    }
+
+    // Upload project to texture studio.
+    rpc UploadProject(UploadProjectRequest) returns (UploadProjectResponse) {
+        option (google.api.http) = {
+            post: "/v1/texturestudio/server/{server_id}/projects"
+            body: "*"
+        };
+    }
+
+    // Get texture-studio objects project.
+    rpc GetProject(GetProjectRequest) returns (GetProjectResponse) {
+        option (google.api.http) = {
+            get: "/v1/texturestudio/server/{server_id}/projects/{name}"
+        };
+    }
+
+    // Get all projects.
+    rpc GetProjects(GetProjectsRequest) returns (GetProjectsResponse) {
+        option (google.api.http) = {
+            get: "/v1/texturestudio/server/{server_id}/projects"
+        };
+    }
+
+    // Listen for project changes - if texture studio project has been created or modified, this will trigger an event.
+    rpc SubscribeToProjectsChanges(SubscribeToProjectsChangesRequest) returns (stream SubscribeToProjectsChangesResponse) {}
+}
+
+enum ServerStatus {
+    UNKNOWN_STATUS = 0;
+    ON = 1;
+    OFF = 2;
+}
+
+enum ProjectFormat {
+    UNKNOWN_FORMAT = 0;
+    DB_FILE = 1;
+    CREATE_OBJECT = 2;
+    CREATE_DYNAMIC_OBJECT = 3;
+}
+
+// Request message for rpc `CreateServer`.
+message CreateServerRequest {
+    uint32 owner_id = 1;
+}
+// Response message for rpc `CreateServer`.
+message CreateServerResponse {
+    uint32 id = 1;
+    uint32 port = 2;
+}
+
+// Request message for rpc `MyServer`.
+message MyServerRequest {
+
+}
+// Response message for rpc `MyServer`.
+message MyServerResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `DeleteServer`.
+message DeleteServerRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `DeleteServer`.
+message DeleteServerResponse {
+
+}
+
+// Request message for rpc `StartServer`.
+message StartServerRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `StartServer`.
+message StartServerResponse {
+
+}
+
+// Request message for rpc `StopServer`.
+message StopServerRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `StopServer`.
+message StopServerResponse {
+
+}
+
+// Request message for rpc `RestartServer`.
+message RestartServerRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `RestartServer`.
+message RestartServerResponse {
+
+}
+
+// Request message for rpc `ServerStatus`.
+message ServerStatusRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `ServerStatus`.
+message ServerStatusResponse {
+    uint32 port = 1;
+    ServerStatus status = 2;
+}
+
+// Request message for rpc `UploadProject`.
+message UploadProjectRequest {
+    uint32 server_id = 1;
+    string project_name = 2;
+    ProjectFormat project_format = 3;
+    oneof project {
+        string code = 4;
+        bytes file = 5;
+    }
+
+}
+// Response message for rpc `UploadProject`.
+message UploadProjectResponse {
+    bool success = 1;
+}
+
+// Request message for rpc `GetProject`.
+message GetProjectRequest {
+    uint32 server_id = 1;
+    string name = 2;
+}
+// Response message for rpc `GetProject`.
+message GetProjectResponse {
+    string code = 1;
+}
+
+// Request message for rpc `GetProjects`.
+message GetProjectsRequest {
+    uint32 server_id = 1;
+}
+// Response message for rpc `GetProjects`.
+message GetProjectsResponse {
+    repeated string names = 1;
+}
+
+// Request message for rpc `SubscribeToProjectsChanges`.
+message SubscribeToProjectsChangesRequest {
+    uint32 server_id = 1;
+}
+// Response message for rpc `SubscribeToProjectsChanges`.
+message SubscribeToProjectsChangesResponse {
+    string name = 1;
+}
