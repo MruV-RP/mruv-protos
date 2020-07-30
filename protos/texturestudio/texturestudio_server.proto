@@ -5,29 +5,8 @@ import "google/api/annotations.proto";
 package texture_studio;
 option go_package = "github.com/MruV-RP/mruv-pb-go/texturestudio";
 
-// Service to manage texture studio servers.
-service TextureStudioService {
-    // Create a new texture studio server.
-    rpc CreateServer(CreateServerRequest) returns (CreateServerResponse) {
-        option (google.api.http) = {
-            post: "/v1/texturestudio/server"
-        };
-    }
-
-    // Get texture studio server id for current user.
-    rpc MyServer(MyServerRequest) returns (MyServerResponse) {
-        option (google.api.http) = {
-            get: "/v1/texturestudio/server/my"
-        };
-    }
-
-    // Delete a texture studio server.
-    rpc DeleteServer(DeleteServerRequest) returns (DeleteServerResponse) {
-        option (google.api.http) = {
-            delete: "/v1/texturestudio/server/{id}"
-        };
-    }
-
+// Service to manage texture studio server.
+service TextureStudioServerService {
     // Start a texture studio server.
     rpc StartServer(StartServerRequest) returns (StartServerResponse) {
         option (google.api.http) = {
@@ -88,41 +67,6 @@ enum ServerStatus {
     OFF = 2;
 }
 
-enum ProjectFormat {
-    UNKNOWN_FORMAT = 0;
-    DB_FILE = 1;
-    CREATE_OBJECT = 2;
-    CREATE_DYNAMIC_OBJECT = 3;
-}
-
-// Request message for rpc `CreateServer`.
-message CreateServerRequest {
-    uint32 owner_id = 1;
-}
-// Response message for rpc `CreateServer`.
-message CreateServerResponse {
-    uint32 id = 1;
-    uint32 port = 2;
-}
-
-// Request message for rpc `MyServer`.
-message MyServerRequest {
-
-}
-// Response message for rpc `MyServer`.
-message MyServerResponse {
-    uint32 id = 1;
-}
-
-// Request message for rpc `DeleteServer`.
-message DeleteServerRequest {
-    uint32 id = 1;
-}
-// Response message for rpc `DeleteServer`.
-message DeleteServerResponse {
-
-}
-
 // Request message for rpc `StartServer`.
 message StartServerRequest {
     uint32 id = 1;
@@ -164,7 +108,6 @@ message ServerStatusResponse {
 message UploadProjectRequest {
     uint32 server_id = 1;
     string project_name = 2;
-    ProjectFormat project_format = 3;
     oneof project {
         string code = 4;
         bytes file = 5;
@@ -173,7 +116,6 @@ message UploadProjectRequest {
 }
 // Response message for rpc `UploadProject`.
 message UploadProjectResponse {
-    bool success = 1;
 }
 
 // Request message for rpc `GetProject`.

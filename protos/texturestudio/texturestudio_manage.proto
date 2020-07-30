@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package texture_studio;
+option go_package = "github.com/MruV-RP/mruv-pb-go/texturestudio";
+
+// Service to manage texture studio servers cluster.
+service TextureStudioManagerService {
+    // Create a new texture studio server.
+    rpc CreateServer(CreateServerRequest) returns (CreateServerResponse) {
+        option (google.api.http) = {
+            post: "/v1/texturestudio/servers"
+        };
+    }
+
+    // Get all existing servers
+    rpc GetServers(GetServersRequest) returns (GetServersResponse) {
+        option (google.api.http) = {
+            get: "/v1/texturestudio/servers"
+        };
+    }
+
+    // Get texture studio server id for current user.
+    rpc MyServer(MyServerRequest) returns (MyServerResponse) {
+        option (google.api.http) = {
+            get: "/v1/texturestudio/servers/my"
+        };
+    }
+
+    // Change owner of texture studio server.
+    rpc TransferOwnership(TransferOwnershipRequest) returns (TransferOwnershipResponse) {
+        option (google.api.http) = {
+            patch: "/v1/texturestudio/servers/{server_id}"
+        };
+    }
+
+    // Delete a texture studio server.
+    rpc DeleteServer(DeleteServerRequest) returns (DeleteServerResponse) {
+        option (google.api.http) = {
+            delete: "/v1/texturestudio/servers/{id}"
+        };
+    }
+}
+
+// Request message for rpc `CreateServer`.
+message CreateServerRequest {
+    uint32 owner_id = 1;
+}
+// Response message for rpc `CreateServer`.
+message CreateServerResponse {
+    uint32 id = 1;
+    uint32 port = 2;
+}
+
+// Request message for rpc `GetServers`.
+message GetServersRequest {
+
+}
+// Response message for rpc `GetServers`.
+message GetServersResponse {
+    repeated uint32 id = 1;
+}
+
+// Request message for rpc `MyServer`.
+message MyServerRequest {
+
+}
+// Response message for rpc `MyServer`.
+message MyServerResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `TransferOwnership`.
+message TransferOwnershipRequest {
+    uint32 server_id = 1;
+    uint32 owner_id = 2;
+}
+// Response message for rpc `TransferOwnership`.
+message TransferOwnershipResponse {
+
+}
+
+// Request message for rpc `DeleteServer`.
+message DeleteServerRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `DeleteServer`.
+message DeleteServerResponse {
+
+}
