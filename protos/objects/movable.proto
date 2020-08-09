@@ -1,0 +1,152 @@
+syntax = "proto3";
+
+package mruv.objects;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/objects";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+import "objects/objects.proto";
+
+//The MruV objects service provides procedures for movable game objects.
+service MruVMovableObjectsService {
+    // Create a movable object.
+    rpc CreateMovableObject(CreateMovableObjectRequest) returns (CreateMovableObjectResponse) {
+        option (google.api.http) = {
+            post: "/v1/movableObjects"
+        };
+    }
+
+    // Get a movable object.
+    rpc GetMovableObject(GetMovableObjectRequest) returns (GetMovableObjectResponse) {
+        option (google.api.http) = {
+            get: "/v1/movableObjects"
+        };
+    }
+
+    // Update a movable object.
+    rpc UpdateMovableObject(UpdateMovableObjectRequest) returns (UpdateMovableObjectResponse) {
+        option (google.api.http) = {
+            patch: "/v1/movableObjects"
+        };
+    }
+
+    // Delete a movable object.
+    rpc DeleteMovableObject(DeleteMovableObjectRequest) returns (DeleteMovableObjectResponse) {
+        option (google.api.http) = {
+            delete: "/v1/movableObjects"
+        };
+    }
+
+    // Move an object to other state.
+    rpc MoveObject(MoveObjectRequest) returns (MoveObjectResponse) {
+        option (google.api.http) = {
+            post: "/v1/movableObjects/moves"
+        };
+    }
+
+    // Move an object to next state.
+    rpc MoveObjectNext(MoveObjectNextRequest) returns (MoveObjectNextResponse) {
+        option (google.api.http) = {
+            post: "/v1/movableObjects/moves/next"
+        };
+    }
+
+    // Move an object to previous state.
+    rpc MoveObjectPrevious(MoveObjectPreviousRequest) returns (MoveObjectPreviousResponse) {
+        option (google.api.http) = {
+            post: "/v1/movableObjects/moves/previous"
+        };
+    }
+}
+
+// Position and rotation state of moving object.
+message State {
+    string name = 1;
+    float x = 2;
+    float y = 3;
+    float z = 4;
+
+    float rx = 5;
+    float ry = 6;
+    float rz = 7;
+}
+
+// A movable object.
+message MovableObject {
+    Object object = 1;
+    // List of states that an object can take.
+    repeated State states = 2;
+}
+
+// Request message for rpc `CreateMovableObject`.
+message CreateMovableObjectRequest {
+    Object object = 1;
+    // List of states that an object can take.
+    repeated State states = 2;
+}
+// Response message for rpc `CreateMovableObject`.
+message CreateMovableObjectResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `GetMovableObject`.
+message GetMovableObjectRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `GetMovableObject`.
+message GetMovableObjectResponse {
+    Object object = 1;
+    repeated State states = 2;
+    uint32 current_state_id = 3;
+    string current_state_name = 4;
+}
+
+// Request message for rpc `UpdateMovableObject`.
+message UpdateMovableObjectRequest {
+    uint32 id = 1;
+    // 0 for no changes.
+    uint32 object_id = 2;
+    repeated State states = 3;
+}
+// Response message for rpc `UpdateMovableObject`.
+message UpdateMovableObjectResponse {
+
+}
+
+// Request message for rpc `DeleteMovableObject`.
+message DeleteMovableObjectRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `DeleteMovableObject`.
+message DeleteMovableObjectResponse {
+
+}
+
+// Request message for rpc `MoveObject`.
+message MoveObjectRequest {
+    uint32 state = 1;
+}
+// Response message for rpc `MoveObject`.
+message MoveObjectResponse {
+
+}
+
+// Request message for rpc `MoveObjectNext`.
+message MoveObjectNextRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `MoveObjectNext`.
+message MoveObjectNextResponse {
+    uint32 state_id = 1;
+    string state_name = 2;
+}
+
+// Request message for rpc `MoveObjectPrevious`.
+message MoveObjectPreviousRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `MoveObjectPrevious`.
+message MoveObjectPreviousResponse {
+    uint32 state_id = 1;
+    string state_name = 2;
+}

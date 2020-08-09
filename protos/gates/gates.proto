@@ -5,6 +5,7 @@ package mruv.gates;
 option go_package = "github.com/MruV-RP/mruv-pb-go/gates";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+import "objects/movable.proto";
 
 // The MruV gates service provides procedures for managing gates and moving objects groups.
 service MruVGatesService {
@@ -73,18 +74,18 @@ service MruVGatesService {
 }
 
 message Gate {
-    uint32 id = 1;
-    uint32 estate_id = 2;
 }
 
 
 // Request message for rpc `CreateGate`.
 message CreateGateRequest {
-
+    string name = 1;
+    // List of objects to move on gate close/open. Every object should have only 2 states: opened, closed.
+    repeated objects.MovableObject gate_objects = 2;
 }
 // Response message for rpc `CreateGate`.
 message CreateGateResponse {
-
+    uint32 id = 1;
 }
 
 // Request message for rpc `GetGate`.
@@ -94,14 +95,17 @@ message GetGateRequest {
 }
 // Response message for rpc `GetGate`.
 message GetGateResponse {
-    uint32 id = 1;
-
+    string name = 1;
+    // List of objects to move on gate close/open. Every object should have only 2 states: opened, closed.
+    repeated objects.MovableObject gate_objects = 2;
+    bool opened = 3;
+    bool locked = 4;
 }
 
 // Request message for rpc `UpdateGate`.
 message UpdateGateRequest {
     uint32 id = 1;
-
+    string name = 2;
 }
 // Response message for rpc `UpdateGate`.
 message UpdateGateResponse {
@@ -121,7 +125,6 @@ message DeleteGateResponse {
 // Request message for rpc `Lock`.
 message LockRequest {
     uint32 id = 1;
-
 }
 // Response message for rpc `Lock`.
 message LockResponse {
@@ -141,7 +144,6 @@ message UnlockResponse {
 // Request message for rpc `Open`.
 message OpenRequest {
     uint32 id = 1;
-
 }
 // Response message for rpc `Open`.
 message OpenResponse {
@@ -151,7 +153,6 @@ message OpenResponse {
 // Request message for rpc `Close`.
 message CloseRequest {
     uint32 id = 1;
-
 }
 // Response message for rpc `Close`.
 message CloseResponse {
