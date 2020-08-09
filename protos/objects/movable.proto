@@ -62,6 +62,7 @@ service MruVMovableObjectsService {
 // Position and rotation state of moving object.
 message State {
     string name = 1;
+
     float x = 2;
     float y = 3;
     float z = 4;
@@ -69,6 +70,8 @@ message State {
     float rx = 5;
     float ry = 6;
     float rz = 7;
+
+    float transition_speed = 8;
 }
 
 // A movable object.

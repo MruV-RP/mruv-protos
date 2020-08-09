@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package mruv.objects;
+
+option go_package = "github.com/MruV-RP/mruv-pb-go/objects";
+
+import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+
+//The MruV objects service provides procedures for game object models.
+service MruVObjectModelsService {
+    // Create an object model.
+    rpc CreateObjectModel(CreateObjectModelRequest) returns (CreateObjectModelResponse) {
+        option (google.api.http) = {
+            post: "/v1/objectTypes"
+        };
+    }
+
+    // Get an object model.
+    rpc GetObjectModel(GetObjectModelRequest) returns (GetObjectModelResponse) {
+        option (google.api.http) = {
+            get: "/v1/objectTypes/{model}"
+        };
+    }
+
+    // Update an object model.
+    rpc UpdateObjectModel(UpdateObjectModelRequest) returns (UpdateObjectModelResponse) {
+        option (google.api.http) = {
+            patch: "/v1/objectTypes/{object_type.model}"
+        };
+    }
+
+    // Delete an object model.
+    rpc DeleteObjectModel(DeleteObjectModelRequest) returns (DeleteObjectModelResponse) {
+        option (google.api.http) = {
+            delete: "/v1/objectTypes/{model}"
+        };
+    }
+}
+
+// SA-MP Object type data structure.
+message ObjectModel {
+    uint32 model = 1;
+    string model_name = 2;
+    string name = 3;
+    string category = 4;
+
+    double length = 5;
+    double width = 6;
+    double height = 7;
+
+    // if no size specified, it will be calculated based on length, width and height
+    double size = 8;
+
+    repeated string tags = 9;
+
+    bool has_collision = 10;
+    bool breaks_on_hit = 11;
+    bool has_animation = 12;
+
+    bool visible_by_time = 16;
+    uint32 visible_from = 17;
+    uint32 visible_to = 18;
+}
+
+// Request message for rpc `CreateObjectModel`.
+message CreateObjectModelRequest {
+    ObjectModel object_type = 1;
+}
+// Response message for rpc `CreateObjectModel`.
+message CreateObjectModelResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `GetObjectModel`.
+message GetObjectModelRequest {
+    uint32 model = 1;
+}
+// Response message for rpc `GetObjectModel`.
+message GetObjectModelResponse {
+    ObjectModel object_type = 1;
+}
+
+// Request message for rpc `UpdateObjectModel`.
+message UpdateObjectModelRequest {
+    ObjectModel object_type = 1;
+}
+// Response message for rpc `UpdateObjectModel`.
+message UpdateObjectModelResponse {
+
+}
+
+// Request message for rpc `DeleteObjectModel`.
+message DeleteObjectModelRequest {
+    uint32 model = 1;
+}
+// Response message for rpc `DeleteObjectModel`.
+message DeleteObjectModelResponse {
+
+}
