@@ -58,6 +58,7 @@ message GetPlotResponse {
     string name = 1;
     string description = 2;
     repeated Position points = 3;
+    double area = 4;
 }
 
 // Request message for rpc `UpdatePlot`.
