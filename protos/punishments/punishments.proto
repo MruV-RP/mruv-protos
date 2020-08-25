@@ -52,6 +52,13 @@ service MruVPunishmentsService {
         };
     }
 
+    // Deactivate a character block.
+    rpc UnBlock(UnBlockRequest) returns (UnBlockResponse) {
+        option (google.api.http) = {
+            delete: "/v1/punishments/blocks/{block_id}"
+        };
+    }
+
     // Deactivate a specific player warning. If a player was banned by reaching the warning limit, a player will be unbanned.
     rpc UnWarn (UnWarnRequest) returns (UnWarnResponse) {
         option (google.api.http) = {
@@ -363,16 +370,27 @@ message MuteGlobalChatsResponse {
 
 // Request message for rpc `UnBan`.
 message UnBanRequest {
-    uint32 ban_id = 2;
+    uint32 ban_id = 1;
+    string reason = 2;
 }
 // Response message for rpc `UnBan`.
 message UnBanResponse {
+}
+
+// Request message for rpc `UnBlock`.
+message UnBlockRequest {
+    uint32 block_id = 1;
+    string reason = 2;
+}
+// Response message for rpc `UnBlock`.
+message UnBlockResponse {
 
 }
 
 // Request message for rpc `UnWarn`.
 message UnWarnRequest {
-    uint32 warn_id = 2;
+    uint32 warn_id = 1;
+    string reason = 2;
 }
 // Response message for rpc `UnWarn`.
 message UnWarnResponse {
