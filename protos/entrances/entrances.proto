@@ -58,10 +58,17 @@ service MruVEntrancesService {
         };
     }
 
-    // Enter an entrance
+    // Enter an entrance (player teleport from in spot position to out spot position).
     rpc Enter(EnterRequest) returns (EnterResponse) {
         option (google.api.http) = {
             post: "/v1/entrances/{id}/enter"
+        };
+    }
+
+    // Exit from entrance (player teleport from out spot position to in spot position).
+    rpc Exit(ExitRequest) returns (ExitResponse) {
+        option (google.api.http) = {
+            post: "/v1/entrances/{id}/exit"
         };
     }
 }
@@ -145,6 +152,8 @@ message FindNearestEntranceRequest {
 message FindNearestEntranceResponse {
     uint32 id = 1;
     float distance = 2;
+    // Is found entrance position is in spot (out spot otherwise)
+    bool inside = 3;
 }
 
 // Request message for rpc `Enter`.
@@ -153,5 +162,14 @@ message EnterRequest {
 }
 // Response message for rpc `Enter`.
 message EnterResponse {
+
+}
+
+// Request message for rpc `Exit`.
+message ExitRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `Exit`.
+message ExitResponse {
 
 }
