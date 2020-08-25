@@ -104,7 +104,7 @@ message GetGateRequest {
 message GetGateResponse {
     string name = 1;
     // List of objects to move on gate close/open. Every object should have only 2 states: opened, closed.
-    repeated uint32 gate_movable_objects = 2;
+    repeated objects.MovableObject movable_objects = 2;
     spots.Spot spot = 3;
     bool opened = 4;
     bool locked = 5;
