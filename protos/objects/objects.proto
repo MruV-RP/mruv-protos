@@ -64,6 +64,8 @@ message Object {
     float draw_distance = 13;
 
     int32 priority = 15;
+
+    uint32 estate_id = 16;
 }
 
 // Request message for rpc `CreateObject`.
