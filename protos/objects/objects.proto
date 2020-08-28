@@ -8,31 +8,80 @@ import "google/api/annotations.proto"; //from https://github.com/googleapis/goog
 
 //The MruV objects service provides procedures for game objects.
 service MruVObjectsService {
-        // Create an object.
-    rpc CreateObject(CreateObjectRequest) returns (CreateObjectResponse) {
+    // Create an object.
+    rpc CreateObject (CreateObjectRequest) returns (CreateObjectResponse) {
         option (google.api.http) = {
-            post: "/v1/object"
+            post: "/v1/objects"
         };
     }
 
     // Get an object.
-    rpc GetObject(GetObjectRequest) returns (GetObjectResponse) {
+    rpc GetObject (GetObjectRequest) returns (GetObjectResponse) {
         option (google.api.http) = {
-            get: "/v1/object/{id}"
+            get: "/v1/objects/{id}"
         };
     }
 
     // Update an object.
-    rpc UpdateObject(UpdateObjectRequest) returns (UpdateObjectResponse) {
+    rpc UpdateObject (UpdateObjectRequest) returns (UpdateObjectResponse) {
         option (google.api.http) = {
             patch: "/v1/objects/{id}"
         };
     }
 
     // Delete an object.
-    rpc DeleteObject(DeleteObjectRequest) returns (DeleteObjectResponse) {
+    rpc DeleteObject (DeleteObjectRequest) returns (DeleteObjectResponse) {
         option (google.api.http) = {
             delete: "/v1/objects/{id}"
+        };
+    }
+
+    // Add a material to existing object.
+    rpc AddObjectMaterial (AddObjectMaterialRequest) returns (AddObjectMaterialResponse) {
+        option (google.api.http) = {
+            put: "/v1/objects/{object_id}/materials"
+        };
+    }
+
+    // Get all object materials.
+    rpc GetObjectMaterials (GetObjectMaterialsRequest) returns (GetObjectMaterialsResponse) {
+        option (google.api.http) = {
+            get: "/v1/objects/{object_id}/materials"
+        };
+    }
+
+    // Delete a material assigned to an object.
+    rpc DeleteObjectMaterial (DeleteObjectMaterialRequest) returns (DeleteObjectMaterialResponse) {
+        option (google.api.http) = {
+            delete: "/v1/objects/{object_id}/materials/{index}"
+        };
+    }
+
+    // Add a material text to existing object.
+    rpc AddObjectMaterialText (AddObjectMaterialTextRequest) returns (AddObjectMaterialTextResponse) {
+        option (google.api.http) = {
+            put: "/v1/objects/{object_id}/materialTexts"
+        };
+    }
+
+    // Get all object material texts.
+    rpc GetObjectMaterialTexts (GetObjectMaterialTextsRequest) returns (GetObjectMaterialTextsResponse) {
+        option (google.api.http) = {
+            get: "/v1/objects/{object_id}/materialTexts"
+        };
+    }
+
+    // Delete a material text assigned to an object.
+    rpc DeleteObjectMaterialText (DeleteObjectMaterialTextRequest) returns (DeleteObjectMaterialTextResponse) {
+        option (google.api.http) = {
+            delete: "/v1/objects/{object_id}/materialTexts"
+        };
+    }
+
+    // Fetch all existing objects.
+    rpc FetchAll (FetchAllRequest) returns (FetchAllResponse) {
+        option (google.api.http) = {
+            get: "/v1/objects"
         };
     }
 }
@@ -66,6 +115,59 @@ message Object {
     int32 priority = 15;
 
     uint32 estate_id = 16;
+
+    map<uint32, Material> materials = 17;
+    map<uint32, MaterialText> material_texts = 18;
+}
+
+enum MaterialSize {
+    OBJECT_MATERIAL_SIZE_0 = 0;
+    OBJECT_MATERIAL_SIZE_32X32 = 10;
+    OBJECT_MATERIAL_SIZE_64X32 = 20;
+    OBJECT_MATERIAL_SIZE_64X64 = 30;
+    OBJECT_MATERIAL_SIZE_128X32 = 40;
+    OBJECT_MATERIAL_SIZE_128X64 = 50;
+    OBJECT_MATERIAL_SIZE_128X128 = 60;
+    OBJECT_MATERIAL_SIZE_256X32 = 70;
+    OBJECT_MATERIAL_SIZE_256X64 = 80;
+    OBJECT_MATERIAL_SIZE_256X128 = 90;
+    OBJECT_MATERIAL_SIZE_256X256 = 100;
+    OBJECT_MATERIAL_SIZE_512X64 = 110;
+    OBJECT_MATERIAL_SIZE_512X128 = 120;
+    OBJECT_MATERIAL_SIZE_512X256 = 130;
+    OBJECT_MATERIAL_SIZE_512X512 = 140;
+}
+
+// Replace the texture of an object with the texture from another model in the game.
+message Material {
+    // The modelid on which the replacement texture is located. Use 0 for alpha. Use -1 to change the material color without altering the texture.
+    int32 model_id = 1;
+    // The name of the txd file which contains the replacement texture (use "none" if not required)
+    string txd_name = 2;
+    // The name of the texture to use as the replacement (use "none" if not required)
+    string texture_name = 3;
+    // The object color to set, as an integer or hex in ARGB color format. Using 0 keeps the existing material color.
+    int32 material_color = 4;
+}
+
+// Replace the texture of an object with text.
+message MaterialText {
+    // The text to show on the object (MAX 2048 characters).
+    string text = 1;
+    // The size of the material (default: 256x128).
+    MaterialSize material_size = 2;
+    // The font to use (default: Arial).
+    string font_face = 3;
+    // The size of the text (default: 24) (MAX 255).
+    uint32 font_size = 4;
+    // Bold text. Set to 1 for bold, 0 for not (default: 1).
+    bool bold = 5;
+    // The color of the text, in ARGB format (default: White).
+    int32 font_color = 6;
+    // The background color, in ARGB format (default: None (transparent)).
+    int32 back_color = 7;
+    // The alignment of the text (default: left).
+    int32 text_alignment = 8;
 }
 
 // Request message for rpc `CreateObject`.
@@ -103,4 +205,78 @@ message DeleteObjectRequest {
 // Response message for rpc `DeleteObject`.
 message DeleteObjectResponse {
 
+}
+
+// Request message for rpc `AddObjectMaterial`.
+message AddObjectMaterialRequest {
+    uint32 object_id = 1;
+    // The material index on the object to change (0 to 15)
+    uint32 index = 2;
+    Material material = 3;
+}
+// Response message for rpc `AddObjectMaterial`.
+message AddObjectMaterialResponse {
+
+}
+
+// Request message for rpc `GetObjectMaterials`.
+message GetObjectMaterialsRequest {
+    uint32 object_id = 1;
+}
+// Response message for rpc `GetObjectMaterials`.
+message GetObjectMaterialsResponse {
+    // Map of materials, key - material index (0-15)
+    map<uint32, Material> materials = 1;
+}
+
+// Request message for rpc `DeleteObjectMaterial`.
+message DeleteObjectMaterialRequest {
+    uint32 object_id = 1;
+    // The material index on the object to delete (0 to 15).
+    uint32 index = 2;
+}
+// Response message for rpc `DeleteObjectMaterial`.
+message DeleteObjectMaterialResponse {
+
+}
+
+// Request message for rpc `AddObjectMaterialText`.
+message AddObjectMaterialTextRequest {
+    uint32 object_id = 1;
+    // The object's material index to replace with text (0 to 15).
+    uint32 index = 2;
+    MaterialText material_text = 3;
+}
+// Response message for rpc `AddObjectMaterialText`.
+message AddObjectMaterialTextResponse {
+
+}
+
+// Request message for rpc `GetObjectMaterialTexts`.
+message GetObjectMaterialTextsRequest {
+    uint32 object_id = 1;
+}
+// Response message for rpc `GetObjectMaterialTexts`.
+message GetObjectMaterialTextsResponse {
+    // Map of material texts, key - material index (0-15).
+    map<uint32, MaterialText> material_texts = 1;
+}
+
+// Request message for rpc `DeleteObjectMaterialText`.
+message DeleteObjectMaterialTextRequest {
+    uint32 object_id = 1;
+    // The object's material index to delete (0 to 15).
+    uint32 index = 2;
+}
+// Response message for rpc `DeleteObjectMaterialText`.
+message DeleteObjectMaterialTextResponse {
+
+}
+
+// Request message for rpc `FetchAll`.
+message FetchAllRequest {
+}
+// Response message for rpc `FetchAll`.
+message FetchAllResponse {
+    repeated Object objects = 1;
 }
