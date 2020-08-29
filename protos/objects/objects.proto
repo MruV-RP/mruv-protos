@@ -169,8 +169,6 @@ message Material {
     string texture_name = 3;
     // The object color to set, as an integer or hex in ARGB color format. Using 0 keeps the existing material color.
     int32 material_color = 4;
-    // Estate to with removed object belong.
-    uint32 estate_id = 5;
 }
 
 // Replace the texture of an object with text.
@@ -205,6 +203,8 @@ message RemovedBuilding {
     float z = 4;
     // The radius around the specified point to remove objects with the specified model.
     float radius = 5;
+    // Estate to with removed object belong.
+    uint32 estate_id = 6;
 }
 
 // Request message for rpc `CreateObject`.
