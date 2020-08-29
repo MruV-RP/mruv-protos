@@ -78,6 +78,27 @@ service MruVObjectsService {
         };
     }
 
+    // Removes a object from GTA SA map.
+    rpc AddRemoveBuilding(AddRemoveBuildingRequest) returns (AddRemoveBuildingResponse) {
+        option (google.api.http) = {
+            post: "/v1/objects/removed"
+        };
+    }
+
+    // Get all removed objects.
+    rpc GetRemovedBuildings(GetRemovedBuildingsRequest) returns (GetRemovedBuildingsResponse) {
+        option (google.api.http) = {
+            get: "/v1/objects/removed"
+        };
+    }
+
+    // Delete removed buildings.
+    rpc DeleteRemoveBuilding(DeleteRemoveBuildingRequest) returns (DeleteRemoveBuildingResponse) {
+        option (google.api.http) = {
+            delete: "/v1/objects/removed/{id}"
+        };
+    }
+
     // Fetch all existing objects.
     rpc FetchAll (FetchAllRequest) returns (FetchAllResponse) {
         option (google.api.http) = {
@@ -148,6 +169,8 @@ message Material {
     string texture_name = 3;
     // The object color to set, as an integer or hex in ARGB color format. Using 0 keeps the existing material color.
     int32 material_color = 4;
+    // Estate to with removed object belong.
+    uint32 estate_id = 5;
 }
 
 // Replace the texture of an object with text.
@@ -168,6 +191,20 @@ message MaterialText {
     int32 back_color = 7;
     // The alignment of the text (default: left).
     int32 text_alignment = 8;
+}
+
+// Removes a standard San Andreas model for a single player within a specified range.
+message RemovedBuilding {
+    // The model to remove.
+    uint32 model = 1;
+    // The X coordinate around which the objects will be removed.
+    float x = 2;
+    // The Y coordinate around which the objects will be removed.
+    float y = 3;
+    // The Z coordinate around which the objects will be removed.
+    float z = 4;
+    // The radius around the specified point to remove objects with the specified model.
+    float radius = 5;
 }
 
 // Request message for rpc `CreateObject`.
@@ -270,6 +307,34 @@ message DeleteObjectMaterialTextRequest {
 }
 // Response message for rpc `DeleteObjectMaterialText`.
 message DeleteObjectMaterialTextResponse {
+
+}
+
+// Request message for rpc `AddRemoveBuilding`.
+message AddRemoveBuildingRequest {
+    RemovedBuilding removed_building = 1;
+}
+// Response message for rpc `AddRemoveBuilding`.
+message AddRemoveBuildingResponse {
+    uint32 id = 1;
+}
+
+// Request message for rpc `GetRemovedBuildings`.
+message GetRemovedBuildingsRequest {
+    // optional filter for estate id
+    uint32 estate_id = 1;
+}
+// Response message for rpc `GetRemovedBuildings`.
+message GetRemovedBuildingsResponse {
+    repeated RemovedBuilding removed_building = 1;
+}
+
+// Request message for rpc `DeleteRemoveBuilding`.
+message DeleteRemoveBuildingRequest {
+    uint32 id = 1;
+}
+// Response message for rpc `DeleteRemoveBuilding`.
+message DeleteRemoveBuildingResponse {
 
 }
 
