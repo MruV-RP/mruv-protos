@@ -109,7 +109,7 @@ service MruVObjectsService {
 
 // SA-MP Dynamic object data structure.
 message Object {
-    uint32 model = 1;
+    int32 model = 1;
 
     float x = 2;
     float y = 3;

@@ -35,11 +35,18 @@ service MruVObjectModelsService {
             delete: "/v1/objectTypes/{model}"
         };
     }
+
+    // Get all models.
+    rpc FetchAll(FetchAllRequest) returns (stream FetchAllResponse) {
+        option (google.api.http) = {
+            get: "/v1/objectTypes"
+        };
+    }
 }
 
 // SA-MP Object type data structure.
 message ObjectModel {
-    uint32 model = 1;
+    int32 model = 1;
     string model_name = 2;
     string name = 3;
     string category = 4;
@@ -73,7 +80,7 @@ message CreateObjectModelResponse {
 
 // Request message for rpc `GetObjectModel`.
 message GetObjectModelRequest {
-    uint32 model = 1;
+    int32 model = 1;
 }
 // Response message for rpc `GetObjectModel`.
 message GetObjectModelResponse {
@@ -91,9 +98,18 @@ message UpdateObjectModelResponse {
 
 // Request message for rpc `DeleteObjectModel`.
 message DeleteObjectModelRequest {
-    uint32 model = 1;
+    int32 model = 1;
 }
 // Response message for rpc `DeleteObjectModel`.
 message DeleteObjectModelResponse {
 
+}
+
+// Request message for rpc `FetchAll`.
+message FetchAllRequest {
+    uint32 chunk_size = 1;
+}
+// Response message for rpc `FetchAll`.
+message FetchAllResponse {
+    map<int32, ObjectModel> models = 1;
 }
