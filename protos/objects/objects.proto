@@ -326,7 +326,7 @@ message GetRemovedBuildingsRequest {
 }
 // Response message for rpc `GetRemovedBuildings`.
 message GetRemovedBuildingsResponse {
-    repeated RemovedBuilding removed_building = 1;
+    repeated RemovedBuilding removed_buildings = 1;
 }
 
 // Request message for rpc `DeleteRemoveBuilding`.
