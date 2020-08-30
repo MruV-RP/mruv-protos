@@ -100,7 +100,7 @@ service MruVObjectsService {
     }
 
     // Fetch all existing objects.
-    rpc FetchAll (FetchAllRequest) returns (FetchAllResponse) {
+    rpc FetchAll (FetchAllRequest) returns (stream FetchAllResponse) {
         option (google.api.http) = {
             get: "/v1/objects"
         };
@@ -340,8 +340,9 @@ message DeleteRemoveBuildingResponse {
 
 // Request message for rpc `FetchAll`.
 message FetchAllRequest {
+    uint32 chunk_size = 1;
 }
 // Response message for rpc `FetchAll`.
 message FetchAllResponse {
-    repeated Object objects = 1;
+    map<int32, Object> objects = 1;
 }
