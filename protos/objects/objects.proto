@@ -100,7 +100,7 @@ service MruVObjectsService {
     }
 
     // Fetch all existing objects.
-    rpc FetchAll (FetchAllObjectsRequest) returns (stream FetchAllObjectsResponse) {
+    rpc FetchAllObjects(FetchAllObjectsRequest) returns (stream FetchAllObjectsResponse) {
         option (google.api.http) = {
             get: "/v1/objects"
         };

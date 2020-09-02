@@ -59,7 +59,7 @@ service MruVMovableObjectsService {
     }
 
     //
-    rpc FetchAll(FetchAllMovableObjectsRequest) returns (stream FetchAllMovableObjectsResponse) { }
+    rpc FetchAllMovableObjects(FetchAllMovableObjectsRequest) returns (stream FetchAllMovableObjectsResponse) { }
 }
 
 // Position and rotation state of moving object.

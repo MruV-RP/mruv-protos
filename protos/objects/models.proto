@@ -37,7 +37,7 @@ service MruVObjectModelsService {
     }
 
     // Get all models.
-    rpc FetchAll(FetchAllModelsRequest) returns (stream FetchAllModelsResponse) {
+    rpc FetchAllModels(FetchAllModelsRequest) returns (stream FetchAllModelsResponse) {
         option (google.api.http) = {
             get: "/v1/objectTypes"
         };
