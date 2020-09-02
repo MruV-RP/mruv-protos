@@ -38,6 +38,12 @@ service MruVPlotsService {
     }
 }
 
+message Plot {
+    string name = 1;
+    string description = 2;
+    repeated Position points = 3;
+}
+
 // Request message for rpc `CreatePlot`.
 message CreatePlotRequest {
     string name = 1;

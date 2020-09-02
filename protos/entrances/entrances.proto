@@ -71,6 +71,9 @@ service MruVEntrancesService {
             post: "/v1/entrances/{id}/exit"
         };
     }
+
+    //
+    rpc FetchAll(FetchAllEntrancesRequest) returns (stream FetchAllEntrancesResponse) { }
 }
 
 message Entrance {
@@ -172,4 +175,13 @@ message ExitRequest {
 // Response message for rpc `Exit`.
 message ExitResponse {
 
+}
+
+// Request message for rpc `FetchAllEntrances`.
+message FetchAllEntrancesRequest {
+    uint32 chunk_size = 1;
+}
+// Response message for rpc `FetchAllEntrances`.
+message FetchAllEntrancesResponse {
+    map<uint32, Entrance> entrances = 1;
 }

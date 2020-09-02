@@ -35,6 +35,9 @@ service MruVSpotsService {
             delete: "/v1/spots/{id}"
         };
     }
+
+    // Fetch all spots.
+    rpc FetchAll(FetchAllSpotsRequest) returns (stream FetchAllSpotsResponse) { }
 }
 
 //Spot.
@@ -86,4 +89,13 @@ message DeleteSpotRequest {
 // Response message for rpc `DeleteSpot`.
 message DeleteSpotResponse {
 
+}
+
+// Request message for rpc `FetchAllSpots`.
+message FetchAllSpotsRequest {
+    uint32 chunk_size = 1;
+}
+// Response message for rpc `FetchAllSpots`.
+message FetchAllSpotsResponse {
+    map<uint32, Spot> spots = 1;
 }

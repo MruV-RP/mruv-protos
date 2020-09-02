@@ -19,21 +19,21 @@ service MruVMovableObjectsService {
     // Get a movable object.
     rpc GetMovableObject(GetMovableObjectRequest) returns (GetMovableObjectResponse) {
         option (google.api.http) = {
-            get: "/v1/movableObjects"
+            get: "/v1/movableObjects/{id}"
         };
     }
 
     // Update a movable object.
     rpc UpdateMovableObject(UpdateMovableObjectRequest) returns (UpdateMovableObjectResponse) {
         option (google.api.http) = {
-            patch: "/v1/movableObjects"
+            patch: "/v1/movableObjects/{id}"
         };
     }
 
     // Delete a movable object.
     rpc DeleteMovableObject(DeleteMovableObjectRequest) returns (DeleteMovableObjectResponse) {
         option (google.api.http) = {
-            delete: "/v1/movableObjects"
+            delete: "/v1/movableObjects/{id}"
         };
     }
 
@@ -57,6 +57,9 @@ service MruVMovableObjectsService {
             post: "/v1/movableObjects/moves/previous"
         };
     }
+
+    //
+    rpc FetchAll(FetchAllMovableObjectsRequest) returns (stream FetchAllMovableObjectsResponse) { }
 }
 
 // Position and rotation state of moving object.
@@ -152,4 +155,13 @@ message MoveObjectPreviousRequest {
 message MoveObjectPreviousResponse {
     uint32 state_id = 1;
     string state_name = 2;
+}
+
+// Request message for rpc `FetchAllMovableObjects`.
+message FetchAllMovableObjectsRequest {
+    uint32 chunk_size = 1;
+}
+// Response message for rpc `FetchAllMovableObjects`.
+message FetchAllMovableObjectsResponse {
+    map<uint32, MovableObject> movable_objects = 1;
 }

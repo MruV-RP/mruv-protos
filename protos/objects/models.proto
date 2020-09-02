@@ -37,7 +37,7 @@ service MruVObjectModelsService {
     }
 
     // Get all models.
-    rpc FetchAll(FetchAllRequest) returns (stream FetchAllResponse) {
+    rpc FetchAll(FetchAllModelsRequest) returns (stream FetchAllModelsResponse) {
         option (google.api.http) = {
             get: "/v1/objectTypes"
         };
@@ -106,10 +106,10 @@ message DeleteObjectModelResponse {
 }
 
 // Request message for rpc `FetchAll`.
-message FetchAllRequest {
+message FetchAllModelsRequest {
     uint32 chunk_size = 1;
 }
 // Response message for rpc `FetchAll`.
-message FetchAllResponse {
+message FetchAllModelsResponse {
     map<int32, ObjectModel> models = 1;
 }

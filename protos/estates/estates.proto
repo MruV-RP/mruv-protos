@@ -5,6 +5,7 @@ package mruv.estates;
 option go_package = "github.com/MruV-RP/mruv-pb-go/estates";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
+import "objects/objects.proto";
 import "entrances/entrances.proto";
 import "gates/gates.proto";
 
@@ -86,6 +87,9 @@ service MruVEstateService {
             get: "/v1/estate/{estate_id}/entrances"
         };
     }
+
+    // Get full estates data
+    rpc FetchAll (FetchAllEstatesRequest) returns (stream FetchAllEstatesResponse) { }
 }
 
 message Estate {
@@ -100,7 +104,19 @@ message Estate {
     uint32 product_id = 7;
 }
 
+message FullEstate {
+    uint32 id = 1;
+    string name = 2;
+    string description = 3;
 
+    map<uint32, mruv.objects.Object> objects = 4;
+    map<uint32, mruv.objects.RemovedBuilding> removed_buildings = 5;
+    map<uint32, mruv.entrances.Entrance> entrances = 6;
+    map<uint32, mruv.gates.Gate> gates = 7;
+    // TODO: map<uint32, mruv.plots.Plot> rooms = 8;
+
+    // TODO: mruv.economy.Product product_id = 9;
+}
 
 // Request message for rpc `CreateEstate`.
 message CreateEstateRequest {
@@ -201,4 +217,13 @@ message GetEstateEntrancesRequest {
 // Response message for rpc `GetEstateEntrances`.
 message GetEstateEntrancesResponse {
     repeated mruv.entrances.Entrance entrances = 1;
+}
+
+// Request message for rpc `FetchAll`.
+message FetchAllEstatesRequest {
+    uint32 chunk_size = 1;
+}
+// Response message for rpc `FetchAll`.
+message FetchAllEstatesResponse {
+    repeated FullEstate estates = 1;
 }

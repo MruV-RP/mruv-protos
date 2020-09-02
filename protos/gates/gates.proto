@@ -72,6 +72,9 @@ service MruVGatesService {
             get: "/v1/gates/nearest"
         };
     }
+
+    //
+    rpc FetchAll(FetchAllGatesRequest) returns (stream FetchAllGatesResponse) { }
 }
 
 message Gate {
@@ -182,3 +185,11 @@ message FindNearestGateResponse {
     float distance = 2;
 }
 
+// Request message for rpc `FetchAllGates`.
+message FetchAllGatesRequest {
+    uint32 chunk_size = 1;
+}
+// Response message for rpc `FetchAllGates`.
+message FetchAllGatesResponse {
+    map<uint32, Gate> gates = 1;
+}
