@@ -10,6 +10,7 @@ If you are searching for generated Mruv gRPC API packages, you can find them in 
 * [Web package](https://github.com/MruV-RP/mruv-pb-web)
 * [Swagger files](https://github.com/MruV-RP/mruv-pb-swagger)
 * [Documentation](https://github.com/MruV-RP/mruv-pb-docs)
+* [Swagger documentation](https://mruv-rp.github.io/mruv-pb-swagger)
 
 ## Generating protobuf files
 
