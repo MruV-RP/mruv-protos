@@ -49,6 +49,12 @@ services:
       - .:/defs
     command: "-d /defs/protos -l cpp"
 
+  generate-java:
+    image: namely/protoc-all:latest
+    volumes:
+      - .:/defs
+    command: "-d /defs/protos -l java"
+
   # descriptor
   generate-descriptor-set:
     image: namely/protoc-all:1.25_0
