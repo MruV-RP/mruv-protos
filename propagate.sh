@@ -97,8 +97,8 @@ function commitAndPush() {
   enterDir $1
 
   # Update the index
+  ls
   git update-index -q --ignore-submodules --refresh
-  err=0
 
   if ! git diff-index --quiet HEAD --; then
     git add .
