@@ -8,19 +8,19 @@ services:
       - ./gen:/gen
 
   generate-python:
-    image: namely/protoc-all:1.25_0
+    image: namely/protoc-all:1.33_0
     volumes:
       - .:/defs
     command: "-d /defs/protos -l python"
 
   generate-csharp:
-    image: namely/protoc-all:1.25_0
+    image: namely/protoc-all:1.33_0
     volumes:
       - .:/defs
     command: "-d /defs/protos -l csharp"
 
   generate-node:
-    image: namely/protoc-all:1.25_0
+    image: namely/protoc-all:1.33_0
     volumes:
       - .:/defs
     command: "--with-typescript -d /defs/protos -l node"
@@ -38,26 +38,26 @@ services:
   #   command: "-d /opt/include/google -l web"
 
   generate-web:
-    image: namely/protoc-all:1.26_1
+    image: namely/protoc-all:1.33_0
     volumes:
       - .:/defs
     command: "-d /defs/protos -l web"
 
   generate-cpp:
-    image: namely/protoc-all:latest
+    image: namely/protoc-all:1.33_0
     volumes:
       - .:/defs
     command: "-d /defs/protos -l cpp"
 
   generate-java:
-    image: namely/protoc-all:latest
+    image: namely/protoc-all:1.33_0
     volumes:
       - .:/defs
     command: "-d /defs/protos -l java"
 
   # descriptor
   generate-descriptor-set:
-    image: namely/protoc-all:1.25_0
+    image: namely/protoc-all:1.33_0
     volumes:
       - .:/defs
     command: "-d /defs/protos -l descriptor_set --descr-include-imports --descr-include-source-info --lint"
