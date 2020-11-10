@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package mruv.economy;
+package mruv.punishments;
 
 option go_package = "github.com/MruV-RP/mruv-pb-go/punishments";
 
