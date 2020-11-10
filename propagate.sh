@@ -96,9 +96,11 @@ function setupBranch() {
 function commitAndPush() {
   enterDir $1
 
-  git add -N .
+  # Update the index
+  git update-index -q --ignore-submodules --refresh
+  err=0
 
-  if ! git diff --exit-code >/dev/null; then
+  if ! git diff-index --quiet HEAD --; then
     git add .
     git commit -m "Auto Creation of Proto $VERSION"
     if [ $CURRENT_BRANCH = "master" ]; then
