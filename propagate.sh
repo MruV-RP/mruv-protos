@@ -53,6 +53,17 @@ function propagateFiles() {
     git clone git@github.com:MruV-RP/$reponame.git $REPOPATH/$reponame
     setupBranch $REPOPATH/$reponame
 
+    # Remove old generated files
+    rm -f "./$REPOPATH/$reponame/*.cs" # for mruv-pb-csharp
+    rm -f "./$REPOPATH/$reponame/*/*.js" # for mruv-pb-node & mruv-pb-web
+    rm -f "./$REPOPATH/$reponame/*/*.ts" # for mruv-pb-node & mruv-pb-web
+    rm -f "./$REPOPATH/$reponame/*/*.go" # for mruv-pb-go
+    rm -f "./$REPOPATH/$reponame/*/*.java" # for mruv-pb-java
+    rm -f "./$REPOPATH/$reponame/*/*.py" # for mruv-pb_python
+    rm -f "./$REPOPATH/$reponame/*/*.cc" # for mruv-pb-cpp
+    rm -f "./$REPOPATH/$reponame/*/*.h" # for mruv-pb-cpp
+    rm -f "./$REPOPATH/$reponame/*/*.json" # for mruv-pb-swagger
+
     # Copy the generated files into the repository
     # that we care about
     cp -R ./* $REPOPATH/$reponame/
