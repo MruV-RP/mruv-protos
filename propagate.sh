@@ -54,15 +54,16 @@ function propagateFiles() {
     setupBranch $REPOPATH/$reponame
 
     # Remove old generated files
-    rm -f "./$REPOPATH/$reponame/*.cs" # for mruv-pb-csharp
-    rm -f "./$REPOPATH/$reponame/*/*.js" # for mruv-pb-node & mruv-pb-web
-    rm -f "./$REPOPATH/$reponame/*/*.ts" # for mruv-pb-node & mruv-pb-web
-    rm -f "./$REPOPATH/$reponame/*/*.go" # for mruv-pb-go
-    rm -f "./$REPOPATH/$reponame/*/*.java" # for mruv-pb-java
-    rm -f "./$REPOPATH/$reponame/*/*.py" # for mruv-pb_python
-    rm -f "./$REPOPATH/$reponame/*/*.cc" # for mruv-pb-cpp
-    rm -f "./$REPOPATH/$reponame/*/*.h" # for mruv-pb-cpp
-    rm -f "./$REPOPATH/$reponame/*/*.json" # for mruv-pb-swagger
+    echo -e "\e[32mRemoving old files\e[0m"
+    rm -fv "./$REPOPATH/$reponame/*.cs" # for mruv-pb-csharp
+    rm -fv "./$REPOPATH/$reponame/*/*.js" # for mruv-pb-node & mruv-pb-web
+    rm -fv "./$REPOPATH/$reponame/*/*.ts" # for mruv-pb-node & mruv-pb-web
+    rm -fv "./$REPOPATH/$reponame/*/*.go" # for mruv-pb-go
+    rm -fv "./$REPOPATH/$reponame/*/*.java" # for mruv-pb-java
+    rm -fv "./$REPOPATH/$reponame/*/*.py" # for mruv-pb_python
+    rm -fv "./$REPOPATH/$reponame/*/*.cc" # for mruv-pb-cpp
+    rm -fv "./$REPOPATH/$reponame/*/*.h" # for mruv-pb-cpp
+    rm -fv "./$REPOPATH/$reponame/*/*.json" # for mruv-pb-swagger
 
     # Copy the generated files into the repository
     # that we care about
