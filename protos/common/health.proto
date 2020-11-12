@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package mruv;
+package mruv.common;
 
 option go_package = "github.com/MruV-RP/mruv-pb-go/common";
 

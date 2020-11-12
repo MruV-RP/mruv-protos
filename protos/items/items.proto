@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package mruv;
+package mruv.items;
 
 option go_package = "github.com/MruV-RP/mruv-pb-go/items";
 
@@ -167,14 +167,14 @@ service MruVItemService {
     }
 
     // Get service health status.
-    rpc GetServiceStatus (ServiceStatusRequest) returns (ServiceStatusResponse) {
+    rpc GetServiceStatus (mruv.common.ServiceStatusRequest) returns (mruv.common.ServiceStatusResponse) {
         option (google.api.http) = {
             get: "/v1/items/status"
         };
     }
 
     //Get service current version.
-    rpc GetServiceVersion (VersionRequest) returns (VersionResponse) {
+    rpc GetServiceVersion (mruv.common.VersionRequest) returns (mruv.common.VersionResponse) {
         option (google.api.http) = {
             get: "/v1/items/version"
         };
@@ -288,7 +288,7 @@ message SortItemsResponse {
 //Request message for `MruVItemsService.GetNearestItems`.
 message GetNearestItemsRequest {
     //Position from which to calculate the distance
-    Position position = 1;
+    mruv.common.Position position = 1;
     //ID of container that contains items.
     uint32 container_id = 2;
     //The distance over which the items are ignored.

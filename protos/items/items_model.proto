@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package mruv;
+package mruv.items;
 
 option go_package = "github.com/MruV-RP/mruv-pb-go/items";
 

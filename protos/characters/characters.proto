@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package mruv;
+package mruv.characters;
 
 option go_package = "github.com/MruV-RP/mruv-pb-go/characters";
 
@@ -55,12 +55,12 @@ service MruVCharactersService {
     rpc DeathsStream(DeathStreamRequest) returns (stream DeathStreamResponse) { }
 
     //Service status
-    rpc GetServiceStatus(ServiceStatusRequest) returns (ServiceStatusResponse) {
+    rpc GetServiceStatus(mruv.common.ServiceStatusRequest) returns (mruv.common.ServiceStatusResponse) {
         option (google.api.http) = {
             get: "/v1/characters/status"
         };
     }
-    rpc GetServiceVersion(VersionRequest) returns (VersionResponse) {
+    rpc GetServiceVersion(mruv.common.VersionRequest) returns (mruv.common.VersionResponse) {
         option (google.api.http) = {
             get: "/v1/characters/version"
         };
