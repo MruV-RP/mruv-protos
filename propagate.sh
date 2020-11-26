@@ -113,6 +113,15 @@ function commitAndPush() {
   git update-index -q --ignore-submodules --refresh
 
   if ! git diff-index --quiet HEAD --; then
+    # Update version for package.json
+    if [ -f "package.json" ]; then
+      sed  -i "s/\"version\":.*\"/\"version\": \"${VERSION:1}\"/" package.json
+    fi
+    if [ -f "package-lock.json" ]; then
+      sed  -i "s/\"version\":.*\"/\"version\": \"${VERSION:1}\"/" package-lock.json
+    fi
+
+    # Commit changes
     git add .
     git commit -m "Auto Creation of Proto $VERSION"
     if [ $CURRENT_BRANCH = "master" ]; then
