@@ -119,9 +119,6 @@ function commitAndPush() {
     if [ -f "package.json" ]; then
       sed  -i "s/\"version\":.*\"/\"version\": \"${VERSION:1}\"/" package.json
     fi
-    if [ -f "package-lock.json" ]; then
-      sed  -i "s/\"version\":.*\"/\"version\": \"${VERSION:1}\"/" package-lock.json
-    fi
 
     # Commit changes
     git add .
