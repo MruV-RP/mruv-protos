@@ -30,13 +30,15 @@ function leaveDir() {
 # Enters the directory and starts the propagate process
 function propagateDir() {
   currentDir="$1"
-  echo -e "\e[32mPropagating directory \e[92m\"$currentDir\"\e[0m"
+  if [ $currentDir != "pb-descriptor_set/" ]; then
+    echo -e "\e[32mPropagating directory \e[92m\"$currentDir\"\e[0m"
 
-  enterDir $currentDir
+    enterDir $currentDir
 
-  propagateFiles $currentDir
+    propagateFiles $currentDir
 
-  leaveDir
+    leaveDir
+  fi
 }
 
 function propagateFiles() {
