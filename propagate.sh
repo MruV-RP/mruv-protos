@@ -118,6 +118,8 @@ function commitAndPush() {
     # Update version for package.json
     if [ -f "package.json" ]; then
       sed  -i "s/\"version\":.*\"/\"version\": \"${VERSION:1}\"/" package.json
+      npm i
+      npm run build
     fi
 
     # Commit changes
