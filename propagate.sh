@@ -85,7 +85,7 @@ function propagateAll() {
   cd gen
   mkdir -p $REPOPATH
   for d in */; do
-    propagateDir $d
+    propagateDir $d &
   done
 }
 
@@ -111,16 +111,17 @@ function setupBranch() {
 function commitAndPush() {
   enterDir $1
 
+  # Update version for package.json
+  if [ -f "package.json" ]; then
+    sed  -i "s/\"version\":.*\"/\"version\": \"${VERSION:1}\"/" package.json
+    npm install --no-audit
+    npm run build
+  fi
+
   # Update the index
   git update-index -q --ignore-submodules --refresh
 
   if ! git diff-index --quiet HEAD --; then
-    # Update version for package.json
-    if [ -f "package.json" ]; then
-      sed  -i "s/\"version\":.*\"/\"version\": \"${VERSION:1}\"/" package.json
-      npm i
-      npm run build
-    fi
 
     # Commit changes
     git add .
@@ -141,4 +142,5 @@ function git-remote-url-reachable() {
 }
 
 propagateAll
+wait
 echo -e "\e[32mThe files has been propagated successfully\e[0m"
