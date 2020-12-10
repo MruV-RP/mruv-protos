@@ -28,6 +28,7 @@ service MruVEntrancesService {
     rpc UpdateEntrance(UpdateEntranceRequest) returns (UpdateEntranceResponse) {
         option (google.api.http) = {
             patch: "/v1/entrances/{id}"
+            body: "*"
         };
     }
 

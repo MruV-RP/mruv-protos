@@ -30,6 +30,7 @@ service MruVEstateService {
     rpc UpdateEstate(UpdateEstateRequest) returns (UpdateEstateResponse) {
         option (google.api.http) = {
             patch: "/v1/estates/{id}"
+            body: "*"
         };
     }
 

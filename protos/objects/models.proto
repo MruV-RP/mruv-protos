@@ -27,6 +27,7 @@ service MruVObjectModelsService {
     rpc UpdateObjectModel(UpdateObjectModelRequest) returns (UpdateObjectModelResponse) {
         option (google.api.http) = {
             patch: "/v1/objectTypes/{object_type.model}"
+            body: "*"
         };
     }
 

@@ -29,6 +29,7 @@ service MruVGatesService {
     rpc UpdateGate(UpdateGateRequest) returns (UpdateGateResponse) {
         option (google.api.http) = {
             patch: "/v1/gates/{id}"
+            body: "*"
         };
     }
 

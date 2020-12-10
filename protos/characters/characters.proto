@@ -28,6 +28,7 @@ service MruVCharactersService {
     rpc UpdateCharacter(UpdateCharacterRequest) returns (UpdateCharacterResponse) {
         option (google.api.http) = {
             patch: "/v1/characters/{id}"
+            body: "*"
         };
     }
 
@@ -49,6 +50,7 @@ service MruVCharactersService {
     rpc ChangeClothes(ChangeClothesRequest) returns (ChangeClothesResponse) {
         option (google.api.http) = {
             put: "/v1/character/{id}/clothes/{clothes_id}"
+            body: "*"
         };
     }
 

@@ -27,6 +27,7 @@ service MruVVehiclesService {
     rpc UpdateVehicle(UpdateVehicleRequest) returns (UpdateVehicleResponse) {
         option (google.api.http) = {
             patch: "/v1/vehicles/{id}"
+            body: "*"
         };
     }
 

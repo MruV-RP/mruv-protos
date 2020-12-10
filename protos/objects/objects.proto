@@ -27,6 +27,7 @@ service MruVObjectsService {
     rpc UpdateObject (UpdateObjectRequest) returns (UpdateObjectResponse) {
         option (google.api.http) = {
             patch: "/v1/objects/{id}"
+            body: "*"
         };
     }
 
@@ -41,6 +42,7 @@ service MruVObjectsService {
     rpc AddObjectMaterial (AddObjectMaterialRequest) returns (AddObjectMaterialResponse) {
         option (google.api.http) = {
             put: "/v1/objects/{object_id}/materials"
+            body: "*"
         };
     }
 
@@ -62,6 +64,7 @@ service MruVObjectsService {
     rpc AddObjectMaterialText (AddObjectMaterialTextRequest) returns (AddObjectMaterialTextResponse) {
         option (google.api.http) = {
             put: "/v1/objects/{object_id}/materialTexts"
+            body: "*"
         };
     }
 

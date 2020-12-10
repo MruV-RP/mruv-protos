@@ -30,6 +30,7 @@ service MruVBusinessService {
     rpc UpdateBusiness(UpdateBusinessRequest) returns (Business) {
         option (google.api.http) = {
             patch: "/v1/business/{id}"
+            body: "*"
         };
     }
 

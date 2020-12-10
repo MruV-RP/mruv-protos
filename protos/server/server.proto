@@ -35,6 +35,7 @@ service MruVServerService {
     rpc UpdateServerStatus(UpdateServerStatusRequest) returns (UpdateServerStatusResponse) {
         option (google.api.http) = {
             patch: "/v1/servers/{id}/status"
+            body: "*"
         };
     }
 

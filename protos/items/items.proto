@@ -145,6 +145,7 @@ service MruVItemService {
     rpc PutItem (PutItemRequest) returns (PutItemResponse) {
         option (google.api.http) = {
             put: "/v1/containers/{container_id}/items/{item_id}"
+            body: "*"
         };
     }
 

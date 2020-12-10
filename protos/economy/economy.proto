@@ -27,6 +27,7 @@ service MruVEconomyService {
     rpc UpdateProduct (UpdateProductRequest) returns (UpdateProductResponse) {
         option (google.api.http) = {
             patch: "/v1/economy/products/{name}"
+            body: "*"
         };
     }
 
@@ -41,6 +42,7 @@ service MruVEconomyService {
     rpc UpdatePrice (UpdatePriceRequest) returns (UpdatePriceResponse) {
         option (google.api.http) = {
             patch: "/v1/economy/products/{name}/price"
+            body: "*"
         };
     }
 

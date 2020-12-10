@@ -28,6 +28,7 @@ service MruVMovableObjectsService {
     rpc UpdateMovableObject(UpdateMovableObjectRequest) returns (UpdateMovableObjectResponse) {
         option (google.api.http) = {
             patch: "/v1/movableObjects/{id}"
+            body: "*"
         };
     }
 

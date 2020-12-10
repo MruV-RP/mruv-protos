@@ -27,6 +27,7 @@ service MruVOffersService {
     rpc UpdateOffer(UpdateOfferRequest) returns (UpdateOfferResponse) {
         option (google.api.http) = {
             patch: "/v1/offers/{id}"
+            body: "*"
         };
     }
 

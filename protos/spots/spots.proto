@@ -27,6 +27,7 @@ service MruVSpotsService {
     rpc UpdateSpot(UpdateSpotRequest) returns (UpdateSpotResponse) {
         option (google.api.http) = {
             patch: "/v1/spots/{id}"
+            body: "*"
         };
     }
 

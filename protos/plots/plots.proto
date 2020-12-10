@@ -28,6 +28,7 @@ service MruVPlotsService {
     rpc UpdatePlot(UpdatePlotRequest) returns (UpdatePlotResponse) {
         option (google.api.http) = {
             patch: "/v1/plots/{id}"
+            body: "*"
         };
     }
 

@@ -28,6 +28,7 @@ service MruVGroupsService {
     rpc UpdateGroup(UpdateGroupRequest) returns (UpdateGroupResponse) {
         option (google.api.http) = {
             patch: "/v1/groups/{group_id}"
+            body: "*"
         };
     }
 
@@ -49,6 +50,7 @@ service MruVGroupsService {
     rpc AssignOwner(AssignOwnerRequest) returns (AssignOwnerResponse) {
         option (google.api.http) = {
             put: "/v1/groups/{group_id}/owner"
+            body: "*"
         };
     }
 

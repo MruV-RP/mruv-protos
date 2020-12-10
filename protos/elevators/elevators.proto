@@ -38,6 +38,7 @@ service MruVElevatorsService {
     rpc UpdateElevator(UpdateElevatorRequest) returns (UpdateElevatorResponse) {
         option (google.api.http) = {
             patch: "/v1/elevators/{id}"
+            body: "*"
         };
     }
 

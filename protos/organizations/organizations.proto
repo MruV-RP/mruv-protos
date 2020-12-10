@@ -27,6 +27,7 @@ service MruVOrganizationsService {
     rpc UpdateOrganization(UpdateOrganizationRequest) returns (UpdateOrganizationResponse) {
         option (google.api.http) = {
             patch: "/v1/organizations/{id}"
+            body: "*"
         };
     }
 
@@ -42,6 +43,7 @@ service MruVOrganizationsService {
     rpc AssignLeader(AssignLeaderRequest) returns (AssignLeaderResponse) {
         option (google.api.http) = {
             put: "/v1/organizations/{id}/leader"
+            body: "*"
         };
     }
 

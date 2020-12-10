@@ -27,6 +27,7 @@ service MruVHousesService {
     rpc UpdateHouse(UpdateHouseRequest) returns (UpdateHouseResponse) {
         option (google.api.http) = {
             patch: "/v1/houses/{id}"
+            body: "*"
         };
     }
 

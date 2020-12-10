@@ -33,6 +33,7 @@ service TextureStudioManagerService {
     rpc TransferOwnership(TransferOwnershipRequest) returns (TransferOwnershipResponse) {
         option (google.api.http) = {
             patch: "/v1/texturestudio/servers/{server_id}"
+            body: "*"
         };
     }
 
