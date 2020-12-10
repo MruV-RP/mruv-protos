@@ -12,7 +12,9 @@ service MruVAccountsService {
     // Register a new account.
     rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse) {
         option (google.api.http) = {
-            post: "/v1/accounts/register"
+            post: "/v1/accounts/register",
+body: "*"
+
         };
     }
 
@@ -20,6 +22,7 @@ service MruVAccountsService {
     rpc LogIn(LogInRequest) returns (LogInResponse) {
         option (google.api.http) = {
             post: "/v1/accounts/login"
+body: "*"
         };
     }
 

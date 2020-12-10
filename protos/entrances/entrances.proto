@@ -13,6 +13,7 @@ service MruVEntrancesService {
     rpc CreateEntrance(CreateEntranceRequest) returns (CreateEntranceResponse) {
         option (google.api.http) = {
             post: "/v1/entrances"
+            body: "*"
         };
     }
 
@@ -41,16 +42,18 @@ service MruVEntrancesService {
     rpc Lock(LockRequest) returns (LockResponse) {
         option (google.api.http) = {
             post: "/v1/entrances/{id}/lock"
+            body: "*"
         };
     }
-    
+
     // Unload entrance.
     rpc Unlock(UnlockRequest) returns (UnlockResponse) {
         option (google.api.http) = {
             post: "/v1/entrances/{id}/unlock"
+            body: "*"
         };
     }
-    
+
     // Find gate that is closest to a specific position.
     rpc FindNearestEntrance(FindNearestEntranceRequest) returns (FindNearestEntranceResponse) {
         option (google.api.http) = {
@@ -62,6 +65,7 @@ service MruVEntrancesService {
     rpc Enter(EnterRequest) returns (EnterResponse) {
         option (google.api.http) = {
             post: "/v1/entrances/{id}/enter"
+            body: "*"
         };
     }
 
@@ -69,11 +73,12 @@ service MruVEntrancesService {
     rpc Exit(ExitRequest) returns (ExitResponse) {
         option (google.api.http) = {
             post: "/v1/entrances/{id}/exit"
+            body: "*"
         };
     }
 
     //
-    rpc FetchAll(FetchAllEntrancesRequest) returns (stream FetchAllEntrancesResponse) { }
+    rpc FetchAll(FetchAllEntrancesRequest) returns (stream FetchAllEntrancesResponse) {}
 }
 
 message Entrance {

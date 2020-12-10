@@ -11,6 +11,7 @@ service TextureStudioManagerService {
     rpc CreateServer(CreateServerRequest) returns (CreateServerResponse) {
         option (google.api.http) = {
             post: "/v1/texturestudio/servers"
+            body: "*"
         };
     }
 

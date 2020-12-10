@@ -13,6 +13,7 @@ service MruVPunishmentsService {
     rpc Ban (BanRequest) returns (BanResponse) {
         option (google.api.http) = {
             post: "/v1/punishments/ban/{player}"
+            body: "*"
         };
     }
 
@@ -20,6 +21,7 @@ service MruVPunishmentsService {
     rpc Block (BlockRequest) returns (BlockResponse) {
         option (google.api.http) = {
             post: "/v1/punishments/block/{character}"
+            body: "*"
         };
     }
 
@@ -28,6 +30,7 @@ service MruVPunishmentsService {
     rpc Warn (WarnRequest) returns (WarnResponse) {
         option (google.api.http) = {
             post: "/v1/punishments/warn/{player}"
+            body: "*"
         };
     }
 
@@ -35,6 +38,7 @@ service MruVPunishmentsService {
     rpc AdminJail (AdminJailRequest) returns (AdminJailResponse) {
         option (google.api.http) = {
             post: "/v1/punishments/aj/{character}"
+            body: "*"
         };
     }
 
@@ -42,6 +46,7 @@ service MruVPunishmentsService {
     rpc MuteGlobalChats(MuteGlobalChatsRequest) returns (MuteGlobalChatsResponse) {
         option (google.api.http) = {
             post: "/v1/punishments/mute/{account}"
+            body: "*"
         };
     }
 

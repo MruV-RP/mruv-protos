@@ -16,11 +16,12 @@ service MruVDevToolsService {
             get: "/v1/devtools/positions"
         };
     }
-    
+
     // Save position.
     rpc SavePosition(SavePositionRequest) returns (SavePositionResponse) {
         option (google.api.http) = {
             post: "/v1/devtools/positions"
+            body: "*"
         };
     }
 
@@ -42,6 +43,7 @@ service MruVDevToolsService {
     rpc SaveOutfit(SaveOutfitRequest) returns (SaveOutfitResponse) {
         option (google.api.http) = {
             post: "/v1/devtools/outfits"
+            body: "*"
         };
     }
 
@@ -63,6 +65,7 @@ service MruVDevToolsService {
     rpc SaveAnimation(SaveAnimationRequest) returns (SaveAnimationResponse) {
         option (google.api.http) = {
             post: "/v1/devtools/animations"
+            body: "*"
         };
     }
 

@@ -23,6 +23,7 @@ service MruVElevatorsService {
     rpc CreateElevator(CreateElevatorRequest) returns (CreateElevatorResponse) {
         option (google.api.http) = {
             post: "/v1/elevators"
+            body: "*"
         };
     }
 

@@ -12,6 +12,7 @@ service MruVObjectsService {
     rpc CreateObject (CreateObjectRequest) returns (CreateObjectResponse) {
         option (google.api.http) = {
             post: "/v1/objects"
+            body: "*"
         };
     }
 
@@ -82,6 +83,7 @@ service MruVObjectsService {
     rpc AddRemoveBuilding(AddRemoveBuildingRequest) returns (AddRemoveBuildingResponse) {
         option (google.api.http) = {
             post: "/v1/objects/removed"
+            body: "*"
         };
     }
 

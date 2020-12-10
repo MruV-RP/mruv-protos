@@ -12,6 +12,7 @@ service MruVHousesService {
     rpc CreateHouse(CreateHouseRequest) returns (CreateHouseResponse) {
         option (google.api.http) = {
             post: "/v1/houses"
+            body: "*"
         };
     }
 

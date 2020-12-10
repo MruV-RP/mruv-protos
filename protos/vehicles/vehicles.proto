@@ -12,6 +12,7 @@ service MruVVehiclesService {
     rpc CreateVehicle(CreateVehicleRequest) returns (CreateVehicleResponse) {
         option (google.api.http) = {
             post: "/v1/vehicles"
+            body: "*"
         };
     }
 

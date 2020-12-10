@@ -13,6 +13,7 @@ service MruVGroupsService {
     rpc CreateGroup(CreateGroupRequest) returns (CreateGroupResponse) {
         option (google.api.http) = {
             post: "/v1/groups"
+            body: "*"
         };
     }
 
@@ -63,6 +64,7 @@ service MruVGroupsService {
     rpc AddMember(AddMemberRequest) returns (AddMemberResponse) {
         option (google.api.http) = {
             post: "/v1/groups/{group_id}/members/{member_id}"
+            body: "*"
         };
     }
 
@@ -84,6 +86,7 @@ service MruVGroupsService {
     rpc AddPermission(AddPermissionRequest) returns (AddPermissionResponse) {
         option (google.api.http) = {
             post: "/v1/groups/{group_id}/permissions"
+            body: "*"
         };
     }
 
@@ -100,21 +103,22 @@ service MruVGroupsService {
             delete: "/v1/groups/{group_id}/permissions"
         };
     }
-    
+
     // Add a subgroup to a group.
     rpc AddSubgroup(AddSubgroupRequest) returns (AddSubgroupResponse) {
         option (google.api.http) = {
             post: "/v1/groups/{group_id}/subgroups/{subgroup_id}"
+            body: "*"
         };
     }
-    
+
     // Get all subgroups.
     rpc GetSubgroups(GetSubgroupsRequest) returns (GetSubgroupsResponse) {
         option (google.api.http) = {
             get: "/v1/groups/{group_id}/subgroups"
         };
     }
-    
+
     // Remove a subgroup from group.
     rpc RemoveSubgroup(RemoveSubgroupRequest) returns (RemoveSubgroupResponse) {
         option (google.api.http) = {
@@ -185,7 +189,7 @@ message UpdateGroupRequest {
 }
 // Response message for rpc `UpdateGroup`.
 message UpdateGroupResponse {
-    
+
 }
 
 // Request message for rpc `DeleteGroup`.
@@ -194,7 +198,7 @@ message DeleteGroupRequest {
 }
 // Response message for rpc `DeleteGroup`.
 message DeleteGroupResponse {
-    
+
 }
 
 // Request message for rpc `GetGroups`.
@@ -221,7 +225,7 @@ message AssignOwnerRequest {
 }
 // Response message for rpc `AssignOwner`.
 message AssignOwnerResponse {
-    
+
 }
 
 // Request message for rpc `GetOwner`.

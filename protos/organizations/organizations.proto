@@ -12,6 +12,7 @@ service MruVOrganizationsService {
     rpc CreateOrganization(CreateOrganizationRequest) returns (CreateOrganizationResponse) {
         option (google.api.http) = {
             post: "/v1/organizations"
+            body: "*"
         };
     }
 

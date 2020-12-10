@@ -13,6 +13,7 @@ service MruVPlotsService {
     rpc CreatePlot(CreatePlotRequest) returns (CreatePlotResponse) {
         option (google.api.http) = {
             post: "/v1/plots"
+            body: "*"
         };
     }
 

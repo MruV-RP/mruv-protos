@@ -12,6 +12,7 @@ service MruVJobsService {
     rpc CreateJob(CreateJobRequest) returns (CreateJobResponse) {
         option (google.api.http) = {
             post: "/v1/jobs"
+            body: "*"
         };
     }
 

@@ -12,6 +12,7 @@ service MruVObjectModelsService {
     rpc CreateObjectModel(CreateObjectModelRequest) returns (CreateObjectModelResponse) {
         option (google.api.http) = {
             post: "/v1/objectTypes"
+            body: "*"
         };
     }
 

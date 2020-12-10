@@ -15,6 +15,7 @@ service MruVBusinessService {
     rpc CreateBusiness(CreateBusinessRequest) returns (CreateBusinessResponse) {
         option (google.api.http) = {
             post: "/v1/business"
+            body: "*"
         };
     }
 
@@ -43,13 +44,15 @@ service MruVBusinessService {
     rpc AssignOwner(AssignOwnerRequest) returns (AssignOwnerResponse) {
         option (google.api.http) = {
             post: "/v1/business/{id}/owner"
+            body: "*"
         };
     }
-    
+
     // Assign an estate to a business.
     rpc AssignEstate(AssignEstateRequest) returns (AssignEstateResponse) {
         option (google.api.http) = {
             post: "/v1/business/{business_id}/estates"
+            body: "*"
         };
     }
 
@@ -64,6 +67,7 @@ service MruVBusinessService {
     rpc BuyBusiness(BuyBusinessRequest) returns (BuyBusinessResponse) {
         option (google.api.http) = {
             post: "/v1/business/{id}/buy"
+            body: "*"
         };
     }
 
@@ -120,7 +124,7 @@ message CreateBusinessResponse {
 
 // Request message for rpc `GetBusiness`.
 message GetBusinessRequest {
-    uint32 id =  1;
+    uint32 id = 1;
 }
 // Response message for rpc `GetBusiness`.
 message GetBusinessResponse {

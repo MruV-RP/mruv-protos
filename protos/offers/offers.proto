@@ -12,23 +12,24 @@ service MruVOffersService {
     rpc CreateOffer(CreateOfferRequest) returns (CreateOfferResponse) {
         option (google.api.http) = {
             post: "/v1/offers"
+            body: "*"
         };
     }
-    
+
     // Get an offer.
     rpc GetOffer(GetOfferRequest) returns (GetOfferResponse) {
         option (google.api.http) = {
             get: "/v1/offers/{id}"
         };
     }
-    
+
     // Update an offer.
     rpc UpdateOffer(UpdateOfferRequest) returns (UpdateOfferResponse) {
         option (google.api.http) = {
             patch: "/v1/offers/{id}"
         };
     }
-    
+
     // Delete an offer.
     rpc DeleteOffer(DeleteOfferRequest) returns (DeleteOfferResponse) {
         option (google.api.http) = {
@@ -40,6 +41,7 @@ service MruVOffersService {
     rpc AcceptOffer(AcceptOfferRequest) returns (AcceptOfferResponse) {
         option (google.api.http) = {
             post: "/v1/offers/{id}/accept"
+            body: "*"
         };
     }
 }

@@ -13,6 +13,7 @@ service MruVCharactersService {
     rpc CreateCharacter(CreateCharacterRequest) returns (CreateCharacterResponse) {
         option (google.api.http) = {
             post: "/v1/characters"
+            body: "*"
         };
     }
 
@@ -43,7 +44,7 @@ service MruVCharactersService {
             delete: "/v1/characters/permanentKill/{id}"
         };
     }
-    
+
     // Change player clothes.
     rpc ChangeClothes(ChangeClothesRequest) returns (ChangeClothesResponse) {
         option (google.api.http) = {
@@ -52,7 +53,7 @@ service MruVCharactersService {
     }
 
     // Stream of deaths.
-    rpc DeathsStream(DeathStreamRequest) returns (stream DeathStreamResponse) { }
+    rpc DeathsStream(DeathStreamRequest) returns (stream DeathStreamResponse) {}
 
     //Service status
     rpc GetServiceStatus(mruv.common.ServiceStatusRequest) returns (mruv.common.ServiceStatusResponse) {

@@ -12,6 +12,7 @@ service MruVSpotsService {
     rpc CreateSpot(CreateSpotRequest) returns (CreateSpotResponse) {
         option (google.api.http) = {
             post: "/v1/spots"
+            body: "*"
         };
     }
 
@@ -37,7 +38,7 @@ service MruVSpotsService {
     }
 
     // Fetch all spots.
-    rpc FetchAll(FetchAllSpotsRequest) returns (stream FetchAllSpotsResponse) { }
+    rpc FetchAll(FetchAllSpotsRequest) returns (stream FetchAllSpotsResponse) {}
 }
 
 //Spot.

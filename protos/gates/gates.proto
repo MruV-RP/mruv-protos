@@ -14,6 +14,7 @@ service MruVGatesService {
     rpc CreateGate(CreateGateRequest) returns (CreateGateResponse) {
         option (google.api.http) = {
             post: "/v1/gates"
+            body: "*"
         };
     }
 
@@ -42,6 +43,7 @@ service MruVGatesService {
     rpc Lock(LockRequest) returns (LockResponse) {
         option (google.api.http) = {
             post: "/v1/gates/{id}/lock"
+            body: "*"
         };
     }
 
@@ -49,6 +51,7 @@ service MruVGatesService {
     rpc Unlock(UnlockRequest) returns (UnlockResponse) {
         option (google.api.http) = {
             post: "/v1/gates/{id}/unlock"
+            body: "*"
         };
     }
 
@@ -56,6 +59,7 @@ service MruVGatesService {
     rpc Open(OpenRequest) returns (OpenResponse) {
         option (google.api.http) = {
             post: "/v1/gates/{id}/open"
+            body: "*"
         };
     }
 
@@ -63,6 +67,7 @@ service MruVGatesService {
     rpc Close(CloseRequest) returns (CloseResponse) {
         option (google.api.http) = {
             post: "/v1/gates/{id}/close"
+            body: "*"
         };
     }
 
@@ -74,7 +79,7 @@ service MruVGatesService {
     }
 
     //
-    rpc FetchAll(FetchAllGatesRequest) returns (stream FetchAllGatesResponse) { }
+    rpc FetchAll(FetchAllGatesRequest) returns (stream FetchAllGatesResponse) {}
 }
 
 message Gate {

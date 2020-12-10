@@ -13,6 +13,7 @@ service MruVMovableObjectsService {
     rpc CreateMovableObject(CreateMovableObjectRequest) returns (CreateMovableObjectResponse) {
         option (google.api.http) = {
             post: "/v1/movableObjects"
+            body: "*"
         };
     }
 
@@ -41,6 +42,7 @@ service MruVMovableObjectsService {
     rpc MoveObject(MoveObjectRequest) returns (MoveObjectResponse) {
         option (google.api.http) = {
             post: "/v1/movableObjects/moves"
+            body: "*"
         };
     }
 
@@ -48,6 +50,7 @@ service MruVMovableObjectsService {
     rpc MoveObjectNext(MoveObjectNextRequest) returns (MoveObjectNextResponse) {
         option (google.api.http) = {
             post: "/v1/movableObjects/moves/next"
+            body: "*"
         };
     }
 
@@ -55,11 +58,12 @@ service MruVMovableObjectsService {
     rpc MoveObjectPrevious(MoveObjectPreviousRequest) returns (MoveObjectPreviousResponse) {
         option (google.api.http) = {
             post: "/v1/movableObjects/moves/previous"
+            body: "*"
         };
     }
 
     //
-    rpc FetchAllMovableObjects(FetchAllMovableObjectsRequest) returns (stream FetchAllMovableObjectsResponse) { }
+    rpc FetchAllMovableObjects(FetchAllMovableObjectsRequest) returns (stream FetchAllMovableObjectsResponse) {}
 }
 
 // Position and rotation state of moving object.

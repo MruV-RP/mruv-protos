@@ -13,6 +13,7 @@ service MruVServerService {
     rpc RegisterServer(ServerInfo) returns (ServerID) {
         option (google.api.http) = {
             post: "/v1/servers"
+            body: "*"
         };
     }
 

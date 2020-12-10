@@ -11,6 +11,7 @@ service TextureStudioServerService {
     rpc StartServer(StartServerRequest) returns (StartServerResponse) {
         option (google.api.http) = {
             post: "/v1/texturestudio/server/{id}/start"
+            body: "*"
         };
     }
 
@@ -18,6 +19,7 @@ service TextureStudioServerService {
     rpc StopServer(StopServerRequest) returns (StopServerResponse) {
         option (google.api.http) = {
             post: "/v1/texturestudio/server/{id}/stop"
+            body: "*"
         };
     }
 
@@ -25,6 +27,7 @@ service TextureStudioServerService {
     rpc RestartServer(RestartServerRequest) returns (RestartServerResponse) {
         option (google.api.http) = {
             post: "/v1/texturestudio/server/{id}/restart"
+            body: "*"
         };
     }
 

@@ -15,6 +15,7 @@ service MruVItemService {
     rpc CreateItem (Item) returns (ItemID) {
         option (google.api.http) = {
             post: "/v1/items"
+            body: "*"
         };
     }
 
@@ -43,6 +44,7 @@ service MruVItemService {
     rpc CreateItemType (ItemType) returns (ItemTypeID) {
         option (google.api.http) = {
             post: "/v1/itemTypes"
+            body: "*"
         };
     }
 
@@ -71,6 +73,7 @@ service MruVItemService {
     rpc CreateContainer (Container) returns (ContainerID) {
         option (google.api.http) = {
             post: "/v1/containers"
+            body: "*"
         };
     }
 
@@ -99,6 +102,7 @@ service MruVItemService {
     rpc CreateContainerType (ContainerType) returns (ContainerTypeID) {
         option (google.api.http) = {
             post: "/v1/containerTypes"
+            body: "*"
         };
     }
 
