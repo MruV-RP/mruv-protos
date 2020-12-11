@@ -120,11 +120,10 @@ function commitAndPush() {
 
   # Update the index
   git update-index -q --ignore-submodules --refresh
+  git add .
 
   if ! git diff-index --quiet HEAD --; then
-
     # Commit changes
-    git add .
     git commit -m "Auto Creation of Proto $VERSION"
     if [ $CURRENT_BRANCH = "master" ]; then
       git tag -a "$VERSION" -m "Auto generated proto $VERSION"
@@ -132,6 +131,7 @@ function commitAndPush() {
     git push origin HEAD --tags
   else
     echo -e "\e[32mNo changes detected for $1\e[0m"
+    git status
   fi
 
   leaveDir
