@@ -5,7 +5,7 @@ package mruv.plots;
 option go_package = "github.com/MruV-RP/mruv-pb-go/plots";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "common/spatial.proto";
+import "mruv/common/spatial.proto";
 
 // The MruV plots service provides procedures for managing buildings plots and other areas.
 service MruVPlotsService {

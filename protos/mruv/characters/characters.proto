@@ -5,7 +5,7 @@ package mruv.characters;
 option go_package = "github.com/MruV-RP/mruv-pb-go/characters";
 
 import "google/api/annotations.proto";
-import "common/health.proto";
+import "mruv/common/health.proto";
 
 
 service MruVCharactersService {

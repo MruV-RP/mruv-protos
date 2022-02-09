@@ -5,7 +5,7 @@ package mruv.groups;
 option go_package = "github.com/MruV-RP/mruv-pb-go/groups";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "common/health.proto";
+import "mruv/common/health.proto";
 
 // The MruV groups service provides procedures for managing groups.
 service MruVGroupsService {

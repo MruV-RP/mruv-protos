@@ -5,8 +5,8 @@ package mruv.gates;
 option go_package = "github.com/MruV-RP/mruv-pb-go/gates";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "objects/movable.proto";
-import "spots/spots.proto";
+import "mruv/objects/movable.proto";
+import "mruv/spots/spots.proto";
 
 // The MruV gates service provides procedures for managing gates and moving objects groups.
 service MruVGatesService {

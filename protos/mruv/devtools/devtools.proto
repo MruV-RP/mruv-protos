@@ -5,8 +5,8 @@ package mruv.devtools;
 option go_package = "github.com/MruV-RP/mruv-pb-go/devtools";
 
 import "google/api/annotations.proto";
-import "common/health.proto";
-import "devtools/devtools_model.proto";
+import "mruv/common/health.proto";
+import "mruv/devtools/devtools_model.proto";
 
 // The MruV developer tools service for mruv-devtools package.
 service MruVDevToolsService {

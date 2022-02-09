@@ -5,7 +5,7 @@ package mruv.entrances;
 option go_package = "github.com/MruV-RP/mruv-pb-go/entrances";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "spots/spots.proto";
+import "mruv/spots/spots.proto";
 
 // The MruV entrances service provides procedures for managing an entrances to estates and teleportation to locations.
 service MruVEntrancesService {

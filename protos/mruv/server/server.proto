@@ -5,7 +5,7 @@ package mruv.server;
 option go_package = "github.com/MruV-RP/mruv-pb-go/server";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "server/server_model.proto";
+import "mruv/server/server_model.proto";
 
 // The MruV server service provides procedures for managing game platform server actions.
 service MruVServerService {

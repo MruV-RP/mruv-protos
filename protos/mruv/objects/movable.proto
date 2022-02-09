@@ -5,7 +5,7 @@ package mruv.objects;
 option go_package = "github.com/MruV-RP/mruv-pb-go/objects";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "objects/objects.proto";
+import "mruv/objects/objects.proto";
 
 //The MruV objects service provides procedures for movable game objects.
 service MruVMovableObjectsService {

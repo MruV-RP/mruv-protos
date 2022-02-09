@@ -5,9 +5,9 @@ package mruv.estates;
 option go_package = "github.com/MruV-RP/mruv-pb-go/estates";
 
 import "google/api/annotations.proto"; //from https://github.com/googleapis/googleapis
-import "objects/objects.proto";
-import "entrances/entrances.proto";
-import "gates/gates.proto";
+import "mruv/objects/objects.proto";
+import "mruv/entrances/entrances.proto";
+import "mruv/gates/gates.proto";
 
 // The MruV estate service provides procedures for managing buildings and other estates.
 service MruVEstateService {
