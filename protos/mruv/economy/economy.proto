@@ -163,11 +163,11 @@ message WatchProductRequest {
 // Response message for rpc `WatchProduct`.
 message WatchProductResponse {
     enum ProductEvent {
-        UNKNOWN = 0;
-        PRICE_CHANGED = 1;
-        PRODUCT_BOUGHT = 2;
-        PRODUCT_INFO_UPDATED = 3;
-        PRODUCT_DELETED = 4;
+        PRODUCT_EVENT_UNSPECIFIED = 0;
+        PRODUCT_EVENT_PRICE_CHANGED = 1;
+        PRODUCT_EVENT_PRODUCT_BOUGHT = 2;
+        PRODUCT_EVENT_PRODUCT_INFO_UPDATED = 3;
+        PRODUCT_EVENT_PRODUCT_DELETED = 4;
     }
     ProductEvent event = 1;
 }

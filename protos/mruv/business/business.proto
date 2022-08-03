@@ -81,10 +81,10 @@ service MruVBusinessService {
 
 // Owner type.
 enum OwnerType {
-    UNKNOWN = 0;
-    PLAYER = 1;
-    GROUP = 2;
-    SYSTEM = 3;
+    OWNER_TYPE_UNSPECIFIED = 0;
+    OWNER_TYPE_PLAYER = 1;
+    OWNER_TYPE_GROUP = 2;
+    OWNER_TYPE_SYSTEM = 3;
 }
 
 // Business data structure.

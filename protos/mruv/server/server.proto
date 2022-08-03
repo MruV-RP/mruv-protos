@@ -80,11 +80,11 @@ message ServerEventsStreamRequest {
 message ServerEvent {
     // Types of server events.
     enum ServerEventType {
-        UNKNOWN = 0;
-        REGISTERED = 1;
-        SERVER_DOWN = 2;
-        SERVER_UP = 3;
-        PLAYERS_CHANGED = 4;
+        SERVER_EVENT_TYPE_UNSPECIFIED = 0;
+        SERVER_EVENT_TYPE_REGISTERED = 1;
+        SERVER_EVENT_TYPE_SERVER_DOWN = 2;
+        SERVER_EVENT_TYPE_SERVER_UP = 3;
+        SERVER_EVENT_TYPE_PLAYERS_CHANGED = 4;
     }
 
     // Type of a server event.

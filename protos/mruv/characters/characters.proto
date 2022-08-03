@@ -90,7 +90,7 @@ message CharacterID {
 }
 
 enum DeathType {
-    DEATH_TYPE_NONE = 0;
+    DEATH_TYPE_UNSPECIFIED = 0;
     DEATH_TYPE_BW = 1;
     DEATH_TYPE_BW_KILL = 2;
     DEATH_TYPE_CK = 3;

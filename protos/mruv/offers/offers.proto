@@ -48,7 +48,7 @@ service MruVOffersService {
 }
 
 enum OfferType {
-    UNKNOWN = 0;
+    OFFER_TYPE_UNSPECIFIED = 0;
 
 }
 

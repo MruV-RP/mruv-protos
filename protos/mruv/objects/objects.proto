@@ -146,8 +146,8 @@ message Object {
     map<uint32, MaterialText> material_texts = 18;
 }
 
-enum MaterialSize {
-    OBJECT_MATERIAL_SIZE_0 = 0;
+enum ObjectMaterialSize {
+    OBJECT_MATERIAL_SIZE_UNSPECIFIED = 0;
     OBJECT_MATERIAL_SIZE_32X32 = 10;
     OBJECT_MATERIAL_SIZE_64X32 = 20;
     OBJECT_MATERIAL_SIZE_64X64 = 30;
@@ -181,7 +181,7 @@ message MaterialText {
     // The text to show on the object (MAX 2048 characters).
     string text = 1;
     // The size of the material (default: 256x128).
-    MaterialSize material_size = 2;
+    ObjectMaterialSize material_size = 2;
     // The font to use (default: Arial).
     string font_face = 3;
     // The size of the text (default: 24) (MAX 255).

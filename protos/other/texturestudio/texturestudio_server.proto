@@ -65,9 +65,9 @@ service TextureStudioServerService {
 }
 
 enum ServerStatus {
-    UNKNOWN_STATUS = 0;
-    ON = 1;
-    OFF = 2;
+    SERVER_STATUS_UNSPECIFIED = 0;
+    SERVER_STATUS_ON = 1;
+    SERVER_STATUS_OFF = 2;
 }
 
 // Request message for rpc `StartServer`.

@@ -9,9 +9,9 @@ message ServerID {
 }
 
 enum ServerStatus {
-    UNKNOWN = 0;
-    ON = 1;
-    OFF = 2;
+    SERVER_STATUS_UNSPECIFIED = 0;
+    SERVER_STATUS_ON = 1;
+    SERVER_STATUS_OFF = 2;
 }
 
 // Data that describe server.

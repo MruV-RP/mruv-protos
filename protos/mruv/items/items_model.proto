@@ -115,13 +115,13 @@ message InsideItem {
 //Sorting modes for container items.
 enum SortingMode {
     //undefined behaviour
-    UNKNOWN = 0;
+    SORTING_MODE_UNSPECIFIED = 0;
     //sort by weight descending
-    WEIGHT_DESC = 1;
+    SORTING_MODE_WEIGHT_DESC = 1;
     //sort by weight ascending
-    WEIGHT_ASC = 2;
+    SORTING_MODE_WEIGHT_ASC = 2;
     //sort by volume descending
-    VOLUME_DESC = 3;
+    SORTING_MODE_VOLUME_DESC = 3;
     //sort by volume ascending
-    VOLUME_ASC = 4;
+    SORTING_MODE_VOLUME_ASC = 4;
 }

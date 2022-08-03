@@ -177,19 +177,19 @@ service MruVPunishmentsService {
 }
 
 enum PunishmentType {
-    UNKNOWN_PUNISHMENT = 0;
-    BAN = 1;
-    BLOCK = 2;
-    WARN = 3;
-    ADMIN_JAIL = 4;
+    PUNISHMENT_TYPE_UNSPECIFIED = 0;
+    PUNISHMENT_TYPE_BAN = 1;
+    PUNISHMENT_TYPE_BLOCK = 2;
+    PUNISHMENT_TYPE_WARN = 3;
+    PUNISHMENT_TYPE_ADMIN_JAIL = 4;
 }
 
-enum AcquittalsType {
-    UNKNOWN_ACQUITAL = 0;
-    UNBAN = 1;
-    UNBLOCK = 2;
-    UNWARN = 3;
-    UN_ADMIN_JAIL = 4;
+enum AcquittalType {
+    ACQUITTAL_TYPE_UNSPECIFIED = 0;
+    ACQUITTAL_TYPE_UNBAN = 1;
+    ACQUITTAL_TYPE_UNBLOCK = 2;
+    ACQUITTAL_TYPE_UNWARN = 3;
+    ACQUITTAL_TYPE_UN_ADMIN_JAIL = 4;
 }
 
 message BanMessage {
